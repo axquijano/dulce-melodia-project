@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968e3684fb3c4c843920d0562a686a66, type: 3}
+  m_Name: ActivityOne
+  m_EditorClassIdentifier: 
+  activityId: 1
+  activityName: Ranas
+  icon: {fileID: -1540426309290004842, guid: 0871ae0cd1f1a8e41a9228bb6de44bf9, type: 3}
+  gameplaySceneName: ActivityOne
+  levels:
+  - {fileID: 11400000, guid: 1ee04dd2d1a38664497316ed629a593c, type: 2}
+  - {fileID: 11400000, guid: bc261312b80a66b4eb07194ca5903807, type: 2}
