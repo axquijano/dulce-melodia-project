@@ -28,7 +28,7 @@ public class ActivityItemButton : MonoBehaviour
         bool locked = index > profile.currentActivityIndex;
 
         // Dibujar estrellas si ya completó
-        if (completed)
+       /*  if (completed)
         {
             int totalStars = CalculateActivityStars(profile, def.activityId);
             starsText.text = Stars(totalStars);
@@ -37,7 +37,7 @@ public class ActivityItemButton : MonoBehaviour
         {
             starsText.text = "";
         }
-
+ */
         if (completed)
             SetCompleted();
         else if (unlocked)
@@ -47,7 +47,7 @@ public class ActivityItemButton : MonoBehaviour
     }
 
     // ESTRELLAS TOTAL POR ACTIVIDAD
-    private int CalculateActivityStars(ChildProfile p, string activityId)
+/*     private int CalculateActivityStars(ChildProfile p, string activityId)
     {
         if (!p.activities.ContainsKey(activityId))
             return 0;
@@ -59,7 +59,7 @@ public class ActivityItemButton : MonoBehaviour
         total = Mathf.Clamp(total, 0, 3); 
         return total;
     }
-
+ */
     private string Stars(int count)
     {
         switch (count)

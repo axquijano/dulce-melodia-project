@@ -4,19 +4,19 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
+
 public class ActivityOneManager : MonoBehaviour
 {
-    public LevelSequence sequence;              // arrástralo desde el inspector
-    public GameObject bubblePrefab;             // prefab de la bolita
-    public Transform bubbleContainer;           // un horizontal layout
-    public PianoKey[] pianoKeys;                // todas las teclas del piano
+    public LevelSequence sequence;
+    public GameObject bubblePrefab;
+    public Transform bubbleContainer;
+    public PianoKey[] pianoKeys;
 
-    private int currentIndex = 0;               // nota actual
-
+    private int currentIndex = 0;
 
     private Coroutine helpRoutine;
     public HelpConfig config;
-    
+
     void Start()
     {
         GenerateBubbles();
@@ -41,13 +41,10 @@ public class ActivityOneManager : MonoBehaviour
 
     void HighlightCurrentBubble()
     {
-        // cancelar ayuda anterior
         if (helpRoutine != null) StopCoroutine(helpRoutine);
 
-        // iniciar el temporizador de ayuda
         helpRoutine = StartCoroutine(HelpTimer());
 
-        // highlight visual de las burbujas
         for (int i = 0; i < bubbleContainer.childCount; i++)
         {
             bubbleContainer.GetChild(i)
@@ -82,21 +79,19 @@ public class ActivityOneManager : MonoBehaviour
 
     void OnKeyPressed(NoteData pressedNote)
     {
-        // cancelar ayuda
         if (helpRoutine != null)
             StopCoroutine(helpRoutine);
 
-
-        // nota correcta
+        // ✔ Correcta
         if (pressedNote.noteName == sequence.notes[currentIndex].noteName)
         {
+            ActivityConnector.Instance.RegisterHit();
             FeedbackManager.Instance.RegisterHit();
             currentIndex++;
 
             if (currentIndex >= sequence.notes.Length)
             {
                 ActivityConnector.Instance.OnWin();
-                Debug.Log("Nivel completado!");
                 return;
             }
 
@@ -104,20 +99,17 @@ public class ActivityOneManager : MonoBehaviour
         }
         else
         {
+            // ❌ Incorrecta
+            ActivityConnector.Instance.RegisterMistake();
             FeedbackManager.Instance.RegisterMistake();
             ShowHelpForCurrentKey();
-            Debug.LogWarning("Nota incorrecta");
         }
 
-        if (FeedbackManager.Instance.getMistakes() >= sequence.notes.Length)
-            {
-                ActivityConnector.Instance.OnLose();
-                Debug.Log("Nivel perdido!");
-                return;
-            }
+        // ❌ Condición de derrota
+        if (ActivityConnector.Instance.mistakes >= sequence.notes.Length)
+        {
+            ActivityConnector.Instance.OnLose();
+            return;
+        }
     }
-
-  
-
-
 }
