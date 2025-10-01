@@ -22,13 +22,13 @@ public class UserSelectUI : MonoBehaviour
         yield return null;
 
         var profiles = ProfilesManager.Instance.GetAllProfiles();
-
-        foreach (var p in profiles)
-        {
-            GameObject btn = Instantiate(userButtonPrefab, listContainer);
-            btn.GetComponent<UseItemButton>().Setup(p.childName, this);
+        if (profiles != null) {
+            foreach (var p in profiles)
+            {
+                GameObject btn = Instantiate(userButtonPrefab, listContainer);
+                btn.GetComponent<UseItemButton>().Setup(p.childName, this);
+            }
         }
-        
 
     }
 
@@ -42,6 +42,7 @@ public class UserSelectUI : MonoBehaviour
         if (string.IsNullOrEmpty(nameField.text))
             return;
 
+        
         ProfilesManager.Instance.CreateProfile(nameField.text);
         ProfilesManager.Instance.SetCurrentProfile(nameField.text);
 

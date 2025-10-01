@@ -8,10 +8,24 @@ public class ActivityConnector : MonoBehaviour
     private int mistakes = 0;
     private float timer = 0f;
     private bool playing = false;
+    private bool levelWon = false;
 
-    void Awake()
+     // Exponer lecturas públicas (solo lectura)
+    public int Hits => hits;
+    public int Mistakes => mistakes;
+    public float ElapsedTime  => timer;
+    public bool LevelWon => levelWon;
+
+    private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -25,6 +39,7 @@ public class ActivityConnector : MonoBehaviour
         hits = 0;
         mistakes = 0;
         timer = 0;
+        levelWon = false;
         playing = true;
     }
 
@@ -41,6 +56,7 @@ public class ActivityConnector : MonoBehaviour
     public void OnLose()
     {
         playing = false;
+        levelWon = false;
 
         var data = ProfilesManager.Instance.GetCurrentLevelData();
         data.retries++;
@@ -51,9 +67,10 @@ public class ActivityConnector : MonoBehaviour
     public void OnWin()
     {
         playing = false;
+        levelWon = true;
 
         ChildProfile p = ProfilesManager.Instance.currentProfile;
-        LevelProgressData d = ProfilesManager.Instance.GetCurrentLevelData();
+        LevelData d = ProfilesManager.Instance.GetCurrentLevelData();
 
         // best time
         if (d.bestTime < 0 || timer < d.bestTime)
@@ -79,5 +96,19 @@ public class ActivityConnector : MonoBehaviour
 
         // avanzar nivel/actividad
         ProfilesManager.Instance.AdvanceLevelOrActivity();
+
+        SceneLoader.Instance.LoadScene("ActivityResult");
     }
+
+    public void BackToMap()
+    {
+        if (SceneLoader.Instance != null)
+        {
+            SceneLoader.Instance.LoadScene("MapLevel");
+            return;
+        }
+
+        Debug.LogError("[ActivityConnector] No existe SceneLoader.Instance, revisa que tu escena inicial cargue el prefab.");
+    }
+
 }

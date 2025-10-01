@@ -22,44 +22,31 @@ public class ActivityItemButton : MonoBehaviour
         label.text = def.activityName;
         iconImage.sprite = def.icon;
 
-        // ¿El niño ya jugó esta actividad?
-        bool completed = index < profile.currentActivityIndex;
-        bool unlocked = index == profile.currentActivityIndex;
-        bool locked = index > profile.currentActivityIndex;
+        // Datos del perfil
+        ActivityEntry entry = profile.activities[activityIndex];
 
-        // Dibujar estrellas si ya completó
-       /*  if (completed)
-        {
-            int totalStars = CalculateActivityStars(profile, def.activityId);
-            starsText.text = Stars(totalStars);
-        }
-        else
-        {
-            starsText.text = "";
-        }
- */
-        if (completed)
+        if (AllLevelsCompleted(entry)) {
             SetCompleted();
-        else if (unlocked)
+        } else if(profile.activities[activityIndex].unlocked){
             SetUnlocked();
-        else
+        }
+        else {
             SetLocked();
+        }
+     
     }
 
-    // ESTRELLAS TOTAL POR ACTIVIDAD
-/*     private int CalculateActivityStars(ChildProfile p, string activityId)
+
+     private bool AllLevelsCompleted(ActivityEntry entry)
     {
-        if (!p.activities.ContainsKey(activityId))
-            return 0;
-
-        int total = 0;
-        foreach (var lvl in p.activities[activityId].levels)
-            total += lvl.stars;
-
-        total = Mathf.Clamp(total, 0, 3); 
-        return total;
+        foreach (var lvl in entry.value.levels)
+        {
+            if (!lvl.unlocked)
+                return false;
+        }
+        return true;
     }
- */
+
     private string Stars(int count)
     {
         switch (count)
@@ -94,6 +81,9 @@ public class ActivityItemButton : MonoBehaviour
 
     public void OnClick()
     {
+        PlayerPrefs.SetInt("CurrentActivity", activityIndex);
+        PlayerPrefs.SetInt("CurrentLevel", 0); 
+        PlayerPrefs.Save();
         GameFlowManager.Instance.SelectActivity(activityIndex);
     }
 }

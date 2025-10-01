@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 529980406}
   - component: {fileID: 529980405}
   - component: {fileID: 529980404}
+  - component: {fileID: 529980408}
+  - component: {fileID: 529980407}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -149,14 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18fa515ec112cc74086d0ca08d1ef5c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  database:
-    profiles: []
   currentProfile:
     childName: 
     currentActivityIndex: 0
     currentLevelIndex: 0
     activities: []
-  activitiesDB: {fileID: 11400000, guid: f9d50393fc856494581b268f94f12b21, type: 2}
+  db: {fileID: 11400000, guid: f9d50393fc856494581b268f94f12b21, type: 2}
 --- !u!114 &529980405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +184,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &529980407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529980403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84750b985d615b24fb7477804e51df7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedActivity: {fileID: 0}
+  selectedLevel: 0
+  database: {fileID: 11400000, guid: f9d50393fc856494581b268f94f12b21, type: 2}
+--- !u!114 &529980408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529980403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8adf18c6fe90c4fa2c4a3578174583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1548174143
 GameObject:
   m_ObjectHideFlags: 0

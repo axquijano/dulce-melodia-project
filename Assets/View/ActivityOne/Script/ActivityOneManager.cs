@@ -7,22 +7,39 @@ using System;
 
 public class ActivityOneManager : MonoBehaviour
 {
-    public LevelSequence sequence;
+    public ActivityDefinition activity;
     public GameObject bubblePrefab;
     public Transform bubbleContainer;
     public PianoKey[] pianoKeys;
 
     private int currentIndex = 0;
 
+    private LevelSequence sequence;
     private Coroutine helpRoutine;
     public HelpConfig config;
 
+
     void Start()
     {
+        ActivityConnector.Instance.StartLevel();
+        loadSequence();
         GenerateBubbles();
         HighlightCurrentBubble();
         LinkPianoKeys();
     }
+
+    void loadSequence()
+    {
+        activity = GameFlowManager.Instance.selectedActivity;
+        sequence = GameFlowManager.Instance.GetCurrentLevelSequence();
+
+        if (activity == null)
+            Debug.LogError("❌ selectedActivity está NULL — no se seleccionó actividad antes de cargar esta escena.");
+
+        if (sequence == null)
+            Debug.LogError("❌ sequence está NULL — el nivel no fue seleccionado o el índice es incorrecto.");
+    }
+
 
     void GenerateBubbles()
     {
@@ -106,10 +123,11 @@ public class ActivityOneManager : MonoBehaviour
         }
 
         // ❌ Condición de derrota
-        if (ActivityConnector.Instance.mistakes >= sequence.notes.Length)
+        if (ActivityConnector.Instance.Mistakes >= sequence.notes.Length)
         {
             ActivityConnector.Instance.OnLose();
             return;
         }
     }
+
 }

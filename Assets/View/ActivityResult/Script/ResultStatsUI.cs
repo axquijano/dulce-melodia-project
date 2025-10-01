@@ -17,8 +17,8 @@ public class ResultStatsUI : MonoBehaviour
         }
 
         // Obtenemos los datos guardados del juego
-        int hits = ActivityConnector.Instance.hits;
-        float time = ActivityConnector.Instance.time;
+        int hits = ActivityConnector.Instance.Hits;
+        float time = ActivityConnector.Instance.ElapsedTime;
 
         // Mostramos en UI
         hitsText.text = hits.ToString();

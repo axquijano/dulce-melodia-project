@@ -6,9 +6,30 @@ public class GameFlowManager : MonoBehaviour
 
     public ActivityDefinition selectedActivity;
     public int selectedLevel;
-     public ActivitiesDatabase database;
+    public ActivitiesDatabase database;
 
-    private void Awake() => Instance = this;
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // Reconstruir estado con PlayerPrefs si ya existía
+        if (PlayerPrefs.HasKey("CurrentActivity"))
+        {
+            int a = PlayerPrefs.GetInt("CurrentActivity");
+            int l = PlayerPrefs.GetInt("CurrentLevel");
+
+            selectedActivity = database.activities[a];
+            selectedLevel = l;
+        }
+    }
+
 
     public void SelectActivity(int activityIndex)
     {
