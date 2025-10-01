@@ -9,24 +9,30 @@ public class ActivityOneManager : MonoBehaviour
 {
     public ActivityDefinition activity;
     public GameObject bubblePrefab;
+    public GameObject frogPrefab;
     public Transform bubbleContainer;
     public PianoKey[] pianoKeys;
 
-    private int currentIndex = 0;
+    private int currentIndex = 1;
 
-    private LevelSequence sequence;
+    public LevelSequence sequence;
     private Coroutine helpRoutine;
     public HelpConfig config;
-
-
+    
+    private RectTransform frog;
+    
     void Start()
     {
         ActivityConnector.Instance.StartLevel();
         loadSequence();
         GenerateBubbles();
+        CreateFrog();      
+        PositionFrogAt(0);
         HighlightCurrentBubble();
         LinkPianoKeys();
     }
+
+    
 
     void loadSequence()
     {
@@ -40,6 +46,13 @@ public class ActivityOneManager : MonoBehaviour
             Debug.LogError("❌ sequence está NULL — el nivel no fue seleccionado o el índice es incorrecto.");
     }
 
+    void CreateFrog()
+    {
+        GameObject frogObj = Instantiate(frogPrefab, bubbleContainer.parent); 
+        frog = frogObj.GetComponent<RectTransform>();
+    }
+
+    
 
     void GenerateBubbles()
     {
@@ -48,7 +61,26 @@ public class ActivityOneManager : MonoBehaviour
             var b = Instantiate(bubblePrefab, bubbleContainer);
             b.GetComponent<NoteBubble>().Setup(note);
         }
+        bubbleContainer.GetChild(0).GetComponent<NoteBubble>().SetImagenColor();
     }
+
+    void PositionFrogAt(int index)
+    {
+        if (index >= bubbleContainer.childCount) return;
+
+        RectTransform bubble = bubbleContainer.GetChild(index).GetComponent<RectTransform>();
+
+        // Hacer la rana hija de la hoja
+        frog.SetParent(bubble);
+
+        // Resetear transform para quedar centrada
+        frog.anchorMin = new Vector2(0.5f, 0.5f);
+        frog.anchorMax = new Vector2(0.5f, 0.5f);
+        frog.pivot = new Vector2(0.5f, 0.5f);
+
+        frog.anchoredPosition = new Vector2(0, 13);  // Centrar justo encima
+    }
+
 
     void LinkPianoKeys()
     {
@@ -62,7 +94,7 @@ public class ActivityOneManager : MonoBehaviour
 
         helpRoutine = StartCoroutine(HelpTimer());
 
-        for (int i = 0; i < bubbleContainer.childCount; i++)
+        for (int i = 1; i < bubbleContainer.childCount; i++)
         {
             bubbleContainer.GetChild(i)
                 .GetComponent<NoteBubble>()
@@ -102,13 +134,14 @@ public class ActivityOneManager : MonoBehaviour
         // ✔ Correcta
         if (pressedNote.noteName == sequence.notes[currentIndex].noteName)
         {
-            ActivityConnector.Instance.RegisterHit();
+            ActivityConnector.Instance.RegisterHit(); 
+            PositionFrogAt(currentIndex);
             FeedbackManager.Instance.RegisterHit();
             currentIndex++;
 
             if (currentIndex >= sequence.notes.Length)
             {
-                ActivityConnector.Instance.OnWin();
+                ActivityConnector.Instance.OnWin(); 
                 return;
             }
 
@@ -117,15 +150,15 @@ public class ActivityOneManager : MonoBehaviour
         else
         {
             // ❌ Incorrecta
-            ActivityConnector.Instance.RegisterMistake();
-            FeedbackManager.Instance.RegisterMistake();
+           ActivityConnector.Instance.RegisterMistake();
+            FeedbackManager.Instance.RegisterMistake(); 
             ShowHelpForCurrentKey();
         }
 
         // ❌ Condición de derrota
         if (ActivityConnector.Instance.Mistakes >= sequence.notes.Length)
         {
-            ActivityConnector.Instance.OnLose();
+           ActivityConnector.Instance.OnLose(); 
             return;
         }
     }

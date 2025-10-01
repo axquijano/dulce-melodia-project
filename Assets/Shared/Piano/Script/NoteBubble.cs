@@ -6,15 +6,16 @@ public class NoteBubble : MonoBehaviour
 {
     public Image bubbleImage;
     public TMP_Text label;
-
+    public Sprite imagenInit;
+    private Sprite imagenCurrent;
+    private Outline outline;
 
     public void Setup(NoteData data)
     {
-        bubbleImage.color = data.noteColor;
+        bubbleImage.sprite = imagenInit;
+        imagenCurrent = data.imagen;
         label.text = data.noteName;
     }
-
-   private Outline outline;  
 
     void Awake()
     {
@@ -26,8 +27,13 @@ public class NoteBubble : MonoBehaviour
         outline.enabled = false; // apagado por defecto
     }
 
+    public void SetImagenColor (){
+        bubbleImage.sprite = imagenCurrent;
+    }
+
     public void Highlight(bool state)
     {
+        if(state) SetImagenColor();
         outline.enabled = state;
     }
 }

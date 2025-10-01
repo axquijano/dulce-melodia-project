@@ -37,9 +37,7 @@ public class ActivityEntry
 //Cada niño tiene sus datos por actividad.
 public class ChildProfile
 {
-    public string childName;
-    public int currentActivityIndex = 0;  
-    public int currentLevelIndex = 0;     
+    public string childName;   
     // Actividades:
     // Musica, Memoria, Colores, Ritmo, Atencion
     public List<ActivityEntry> activities = new List<ActivityEntry>();
@@ -47,8 +45,6 @@ public class ChildProfile
     public ChildProfile(string name)
     {
         childName = name;
-        currentActivityIndex = 0;
-        currentLevelIndex = 0;
         activities = new List<ActivityEntry>();
     }
 }

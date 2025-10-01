@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 42690d365e3bf0d4abf2bacf59b517ec
+guid: 9322a79dfce59fb448d8f7f0bfd789f5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7886108242160216701
-    second: rana jump_0
+      213: 2605739711296342379
+    second: leaves_2_0
   - first:
-      213: 3176603837381493083
-    second: rana jump_1
+      213: 1475921536519734029
+    second: leaves_2_1
   - first:
-      213: 7319342012553806818
-    second: rana jump_2
+      213: -7214488173311651191
+    second: leaves_2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,67 +119,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rana jump_0
+      name: leaves_E
       rect:
         serializedVersion: 2
-        x: 54
-        y: 100
-        width: 178
-        height: 147
+        x: 16
+        y: 185
+        width: 305
+        height: 179
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d7a6d32f9a5117d60800000000000000
-      internalID: 7886108242160216701
+      spriteID: b6982fc2672792420800000000000000
+      internalID: 2605739711296342379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rana jump_1
+      name: leaves_D
       rect:
         serializedVersion: 2
-        x: 253
-        y: 98
-        width: 192
-        height: 142
+        x: 266
+        y: 0
+        width: 316
+        height: 185
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b5144471c50951c20800000000000000
-      internalID: 3176603837381493083
+      spriteID: d038b9451d68b7410800000000000000
+      internalID: 1475921536519734029
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rana jump_2
+      name: leaves_C
       rect:
         serializedVersion: 2
-        x: 467
-        y: 100
-        width: 248
-        height: 165
+        x: 461
+        y: 183
+        width: 307
+        height: 181
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2e3ccd7e7c6839560800000000000000
-      internalID: 7319342012553806818
+      spriteID: 9829089fa3df0eb90800000000000000
+      internalID: -7214488173311651191
       vertices: []
       indices: 
       edges: []
@@ -188,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3be841d403b1ae447a577c4951c23798
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      rana jump_0: 7886108242160216701
-      rana jump_1: 3176603837381493083
-      rana jump_2: 7319342012553806818
+      leaves_C: -7214488173311651191
+      leaves_D: 1475921536519734029
+      leaves_E: 2605739711296342379
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
