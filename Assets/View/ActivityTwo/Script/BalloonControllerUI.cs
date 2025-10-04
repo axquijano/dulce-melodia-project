@@ -20,6 +20,9 @@ public class BalloonControllerUI : MonoBehaviour
     public NoteData noteData;  // la nota asociada a este globo
 
     public Sprite[] imagenes ;
+
+    public string id = System.Guid.NewGuid().ToString();
+
     void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -34,16 +37,22 @@ public class BalloonControllerUI : MonoBehaviour
 
         if (rect.anchoredPosition.y > Screen.height + 200f)
         {
-            ActivityTwoManager.Instance.RegisterBalloonMiss(noteData);
+            ActivityTwoManager.Instance.RegisterBalloonMiss(this);
             Destroy(gameObject);
         }
     }
 
-    public void Pop()
+   /*  public void Pop()
     {
         ActivityTwoManager.Instance.RegisterBalloonHit(noteData);
         Destroy(gameObject);
-    }
+    } */
+
+    public void Pop()
+{
+    Destroy(gameObject);
+}
+
 
     public void Setup(NoteData data, bool displayColor, bool displayLetter, bool isBlack)
     {

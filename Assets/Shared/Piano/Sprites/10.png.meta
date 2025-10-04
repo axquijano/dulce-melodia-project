@@ -118,11 +118,37 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 5 1_0
+      name: 5_1_0
       rect:
         serializedVersion: 2
         x: 23
@@ -130,7 +156,7 @@ TextureImporter:
         width: 147
         height: 342
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -144,7 +170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 5 1_1
+      name: 5_1_1
       rect:
         serializedVersion: 2
         x: 188
@@ -152,7 +178,7 @@ TextureImporter:
         width: 147
         height: 342
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -166,7 +192,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 5 1_2
+      name: 5_1_2
       rect:
         serializedVersion: 2
         x: 383
@@ -174,7 +200,7 @@ TextureImporter:
         width: 147
         height: 342
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -188,15 +214,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 5 1_3
+      name: 5_1_3
       rect:
         serializedVersion: 2
-        x: 548
-        y: 13
-        width: 147
-        height: 342
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 550
+        y: 15
+        width: 144
+        height: 338
+      alignment: 9
+      pivot: {x: 0.54978186, y: 0.50133735}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -213,7 +239,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f7846a7f64203c94c99ae4be9f32d230
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +249,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      5 1_0: 5986244224761071404
-      5 1_1: -3466093525992624776
-      5 1_2: -4131337892798190281
-      5 1_3: 9158312688406833585
+      5_1_0: 5986244224761071404
+      5_1_1: -3466093525992624776
+      5_1_2: -4131337892798190281
+      5_1_3: 9158312688406833585
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

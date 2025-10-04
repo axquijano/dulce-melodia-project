@@ -13,6 +13,8 @@ public class PianoKey : MonoBehaviour
     public Button keyButton;
     public Image guideCircle;
 
+    private bool pressedThisFrame = false;
+
     private Coroutine blinkRoutine;
 
     private Sprite idleSprite;
@@ -26,12 +28,11 @@ public class PianoKey : MonoBehaviour
         // Guardamos los sprites del SpriteState
         idleSprite = keyButton.image.sprite;
         pressedSprite = keyButton.spriteState.pressedSprite;
-
+    
         if (guideCircle != null)
             guideCircle.gameObject.SetActive(false);
         
-        // Conectar el botón al método PlayNote
-        keyButton.onClick.AddListener(PlayNote);
+    
     }
 
     public void PlayNote()

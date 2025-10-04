@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityId: 3
   activityName: Pajaros
-  icon: {fileID: 4394673570059883492, guid: 45ac31b681a123b44a58ed6dbfe332e9, type: 3}
+  icon: {fileID: -4532341692564154252, guid: 2c4b552fe1963ab41b3d47af9939fed1, type: 3}
+  gameplaySceneName: activityone
   levels:
-  - {fileID: 11400000, guid: 1ee04dd2d1a38664497316ed629a593c, type: 2}
+  - {fileID: 11400000, guid: 1722cfd3981cf864ba20a92e007ad325, type: 2}
   - {fileID: 11400000, guid: bc261312b80a66b4eb07194ca5903807, type: 2}
+  levelSettings: []

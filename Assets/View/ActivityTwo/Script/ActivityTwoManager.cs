@@ -69,7 +69,7 @@ public class ActivityTwoManager : MonoBehaviour
     // -------------------------
     // GOLPE A UN GLOBO
     // -------------------------
-    public void RegisterBalloonHit(NoteData note)
+   /*  public void RegisterBalloonHit(NoteData note)
     {
         hits++;
         FeedbackManager.Instance.RegisterHit();
@@ -78,12 +78,29 @@ public class ActivityTwoManager : MonoBehaviour
             Debug.Log("🏆 GANASTE");
 
         RemoveBalloon(note);
+    } */
+
+    public void RegisterBalloonHit(BalloonControllerUI balloon)
+    {
+        if (balloon == null) return;
+
+        hits++;
+        FeedbackManager.Instance.RegisterHit();
+
+        if (hits >= settings.balloonsToWin){
+            ActivityConnector.Instance.OnWin(); 
+            return;
+        }
+            /* Debug.Log("🏆 GANASTE"); */
+
+        RemoveBalloon(balloon);
     }
+
 
     // -------------------------
     // GLOBO QUE SE ESCAPA
     // -------------------------
-    public void RegisterBalloonMiss(NoteData note)
+    /* public void RegisterBalloonMiss(NoteData note)
     {
         mistakes++;
         FeedbackManager.Instance.RegisterMistake();
@@ -91,17 +108,72 @@ public class ActivityTwoManager : MonoBehaviour
             Debug.Log("❌ PERDISTE");
 
         RemoveBalloon(note);
-    }
+    } */
 
-    void RemoveBalloon(NoteData note)
+   /*  public void RegisterBalloonMiss(NoteData note)
     {
-        activeBalloons.RemoveAll(b => b == null || b.noteData == note);
-    }
+        mistakes++;
+        FeedbackManager.Instance.RegisterMistake();
+
+        // Evita que destruya globos que ya no existen
+        if (!activeBalloons.Exists(b => b != null && b.noteData == note))
+            return;
+
+        if (mistakes >= settings.allowedMistakes)
+            Debug.Log("❌ PERDISTE");
+
+        RemoveBalloon(note);
+    } */
+
+public void RegisterBalloonMiss(BalloonControllerUI balloon)
+{
+    if (balloon == null) return;
+
+    mistakes++;
+    FeedbackManager.Instance.RegisterMistake();
+
+    if (mistakes >= settings.allowedMistakes)
+        {
+            ActivityConnector.Instance.OnLose(); 
+            return;
+        }
+       /*  Debug.Log("❌ PERDISTE"); */
+
+    RemoveBalloon(balloon);
+}
+
+
+   /*  void RemoveBalloon(NoteData note)
+    {
+        // Buscar el primer globo que coincida
+        var balloon = activeBalloons.Find(b => b != null && b.noteData == note);
+
+        if (balloon != null)
+        {
+            if (balloon != null && balloon.gameObject != null)
+                balloon.Pop();
+
+            activeBalloons.Remove(balloon);
+        }
+
+    } */
+
+    void RemoveBalloon(BalloonControllerUI balloon)
+{
+    if (balloon == null) return;
+
+    if (activeBalloons.Contains(balloon))
+        activeBalloons.Remove(balloon);
+
+    balloon.Pop();
+}
+
+
 
     // -------------------------
     // TECLA PIANO PRESIONADA
     // -------------------------
-    void OnKeyPressed(NoteData pressedNote)
+    /* void OnKeyPressed(NoteData pressedNote)
     {
         bool exists = activeBalloons.Exists(b => b.noteData == pressedNote);
 
@@ -117,5 +189,24 @@ public class ActivityTwoManager : MonoBehaviour
             if (mistakes >= settings.allowedMistakes)
                 Debug.Log("❌ PERDISTE");
         }
+    } */
+    void OnKeyPressed(NoteData pressedNote)
+{
+    // Busca el PRIMER globo que salió con esa nota
+    var balloon = activeBalloons.Find(b => b.noteData == pressedNote);
+
+    if (balloon != null)
+    {
+        RegisterBalloonHit(balloon);
     }
+    else
+    {
+        mistakes++;
+        Debug.Log("❌ ERROR");
+
+        if (mistakes >= settings.allowedMistakes)
+            Debug.Log("❌ PERDISTE");
+    }
+}
+
 }

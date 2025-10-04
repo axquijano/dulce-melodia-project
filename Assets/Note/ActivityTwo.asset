@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityId: 2
   activityName: globos
-  icon: {fileID: 6771243069604559848, guid: 0871ae0cd1f1a8e41a9228bb6de44bf9, type: 3}
+  icon: {fileID: -7468510362513095688, guid: 9bd2ee47e132c8e44a592e58f9136b53, type: 3}
+  gameplaySceneName: ActivityTwo
   levels:
   - {fileID: 11400000, guid: 1ee04dd2d1a38664497316ed629a593c, type: 2}
   - {fileID: 11400000, guid: bc261312b80a66b4eb07194ca5903807, type: 2}
+  - {fileID: 11400000, guid: bc261312b80a66b4eb07194ca5903807, type: 2}
+  levelSettings: []

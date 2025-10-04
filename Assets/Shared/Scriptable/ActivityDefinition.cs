@@ -11,4 +11,6 @@ public class ActivityDefinition : ScriptableObject
     public Sprite icon;
     public string gameplaySceneName;
     public List<LevelSequence> levels;  // N niveles
+
+    public List<LevelSettings> levelSettings; // Configuraciones por nivel
 }

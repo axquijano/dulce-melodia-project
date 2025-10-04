@@ -1,11 +1,11 @@
 using UnityEngine;
-using System.Collections;
+using TMPro;
 
 public class TTSManager : MonoBehaviour
 {
     public AndroidTTS tts;
 
-    private static TTSManager instance;
+     private static TTSManager instance;
     public static TTSManager Instance => instance;
 
     void Awake()
@@ -18,27 +18,11 @@ public class TTSManager : MonoBehaviour
             return;
         }
     }
-
-    /// <summary>
-    /// Habla inmediatamente.
-    /// </summary>
-    public void Speak(string text)
+    public void Speak(string message)
     {
-        if (tts != null)
-            tts.Speak(text);
-    }
+        if (string.IsNullOrEmpty(message))
+            return;
 
-    /// <summary>
-    /// Habla después de un retardo.
-    /// </summary>
-    public void SpeakDelayed(string text, float delay)
-    {
-        StartCoroutine(DelayedSpeak(text, delay));
-    }
-
-    IEnumerator DelayedSpeak(string text, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Speak(text);
+        tts.Speak(message);
     }
 }

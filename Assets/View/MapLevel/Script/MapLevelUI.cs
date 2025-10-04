@@ -16,7 +16,6 @@ public class MapLevelUI : MonoBehaviour
     void Start()
     {
         currentActivity = GameFlowManager.Instance.selectedActivity;
-        text.text = "Actividad " + currentActivity.activityName;
         profile = ProfilesManager.Instance.currentProfile;
 
         Setup(currentActivity);
