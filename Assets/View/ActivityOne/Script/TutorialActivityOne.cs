@@ -51,10 +51,10 @@ public class TutorialActivityOne : MonoBehaviour
 
     void GenerateBubbles()
     {
-        foreach (var note in sequence.notes)
+        foreach (var data in sequence.notes)
         {
             var b = Instantiate(bubblePrefab, bubbleContainer);
-            b.GetComponent<NoteBubble>().Setup(note);
+            b.GetComponent<NoteBubble>().Setup(data);
         }
         Instantiate(flyPrefab, bubbleContainer);
         // Primera hoja en color especial
@@ -106,13 +106,13 @@ public class TutorialActivityOne : MonoBehaviour
     void HighlightCurrentBubble()
     {
         
-        var targetNote = sequence.notes[currentIndex];
+        var targetNote = sequence.notes[currentIndex].note;
 
         for (int i = 1; i < bubbleContainer.childCount-1; i++)
         {
             bubbleContainer.GetChild(i)
                 .GetComponent<NoteBubble>()
-                .Highlight(i == currentIndex);
+                .Highlight(i, currentIndex);
         }
 
         // Activar SOLO la tecla correcta
@@ -140,7 +140,7 @@ public class TutorialActivityOne : MonoBehaviour
         if (currentIndex >= sequence.notes.Length)
             return;
 
-        if (pressedNote.noteName != sequence.notes[currentIndex].noteName)
+        if (pressedNote.noteName != sequence.notes[currentIndex].note.noteName)
             return;
 
         
