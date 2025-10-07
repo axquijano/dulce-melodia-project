@@ -5,6 +5,7 @@ public class LevelSettings : ScriptableObject
 {
     [Header("Spawner")]
     public float spawnInterval = 1.5f;
+    public float balloonSpeed = 150f;
 
     [Header("Balloon Probabilities (0–1)")]
     [Range(0f, 1f)] public float pctFull = 0.5f;   // color + letra

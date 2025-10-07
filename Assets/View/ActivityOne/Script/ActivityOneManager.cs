@@ -160,7 +160,8 @@ public class ActivityOneManager : MonoBehaviour
         // ❌ Condición de derrota
         if (ActivityConnector.Instance.Mistakes >= sequence.allowedMistakes)
         {
-           ActivityConnector.Instance.OnLose(); 
+            Debug.Log("❌ Límite de errores alcanzado. Nivel perdido.");
+            ActivityConnector.Instance.OnLose(); 
             return;
         }
     }

@@ -23,6 +23,8 @@ public class BalloonControllerUI : MonoBehaviour
 
     public string id = System.Guid.NewGuid().ToString();
 
+    public ActivityTwoManager manager;
+
     void Awake()
     {
         rect = GetComponent<RectTransform>();
@@ -37,7 +39,7 @@ public class BalloonControllerUI : MonoBehaviour
 
         if (rect.anchoredPosition.y > Screen.height + 200f)
         {
-            ActivityTwoManager.Instance.RegisterBalloonMiss(this);
+            manager.RegisterBalloonMiss(this);
             Destroy(gameObject);
         }
     }
@@ -49,9 +51,10 @@ public class BalloonControllerUI : MonoBehaviour
     } */
 
     public void Pop()
-{
-    Destroy(gameObject);
-}
+    {
+       
+        Destroy(gameObject);
+    }
 
 
     public void Setup(NoteData data, bool displayColor, bool displayLetter, bool isBlack)
@@ -82,4 +85,10 @@ public class BalloonControllerUI : MonoBehaviour
             letter.gameObject.SetActive(false);
         }
     }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
+
 }

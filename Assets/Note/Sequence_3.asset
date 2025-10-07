@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Sequence_3
   m_EditorClassIdentifier: 
   notes:
+  - note: {fileID: 11400000, guid: a7ca43287352c2946ad4faca47d16044, type: 2}
+    showColor: 1
+    showLetter: 0
   - note: {fileID: 11400000, guid: 2327e3e271ce8a44fa2559bc948e38bf, type: 2}
     showColor: 0
     showLetter: 1

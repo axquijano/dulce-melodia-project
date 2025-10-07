@@ -62,6 +62,7 @@ public class ActivityConnector : MonoBehaviour
         data.retries++;
 
         ProfilesManager.Instance.UpdateCurrentLevelData(data);
+        SceneLoader.Instance.LoadScene("ActivityResult");
     }
 
     public void OnWin()
@@ -109,6 +110,11 @@ public class ActivityConnector : MonoBehaviour
         }
 
         Debug.LogError("[ActivityConnector] No existe SceneLoader.Instance, revisa que tu escena inicial cargue el prefab.");
+    }
+
+    public void RetryLevel()
+    {
+        SceneLoader.Instance.LoadScene(GameFlowManager.Instance.selectedActivity.gameplaySceneName);
     }
 
 }
