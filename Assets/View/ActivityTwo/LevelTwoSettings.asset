@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a934868281047344a320463a523a217, type: 3}
   m_Name: LevelTwoSettings
   m_EditorClassIdentifier: 
-  spawnInterval: 1.4
-  balloonSpeed: 130
+  spawnInterval: 1.5
+  balloonSpeed: 120
   pctFull: 0.6
   pctColor: 0.3
   pctLetter: 0.1
   balloonsToWin: 10
-  allowedMistakes: 4
+  allowedMistakes: 5

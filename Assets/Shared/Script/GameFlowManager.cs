@@ -30,6 +30,14 @@ public class GameFlowManager : MonoBehaviour
         }
     }
 
+    public bool IsLastLevel()
+    {
+        return selectedLevel == selectedActivity.levels.Count - 1;
+    }
+
+    public int GetLevel (){
+        return selectedLevel;
+    }
 
     public void SelectActivity(int activityIndex)
     {

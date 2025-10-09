@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee285db2c67d75345842880e50952385, type: 3}
+  m_Name: Sq2
+  m_EditorClassIdentifier: 
+  notes:
+  - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: 6f8ece7bc9d1b594eb7b485e8a50cce2, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: 3b036c10512f43c4e8b9436bc0d1a2dc, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
+    showColor: 1
+    showLetter: 1
+  allowedMistakes: 3

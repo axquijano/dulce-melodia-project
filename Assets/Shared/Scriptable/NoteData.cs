@@ -7,4 +7,5 @@ public class NoteData : ScriptableObject
     public AudioClip sound;
     public Sprite imagen;
     public Color color;
+    public Sprite imagenStar;
 }

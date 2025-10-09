@@ -22,6 +22,7 @@ public class ActivityTwoManager : MonoBehaviour
 
     void Start()
     {
+        ActivityConnector.Instance.StartLevel();
         settings = GameFlowManager.Instance.GetCurrentLevelSettings();
         foreach (var key in pianoKeys)
             key.onKeyPressed += OnKeyPressed;

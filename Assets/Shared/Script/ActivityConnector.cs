@@ -105,11 +105,14 @@ public class ActivityConnector : MonoBehaviour
     {
         if (SceneLoader.Instance != null)
         {
+            if(levelWon && GameFlowManager.Instance.IsLastLevel()){
+                SceneLoader.Instance.LoadScene("MapEmotions");
+                return;
+            }
             SceneLoader.Instance.LoadScene("MapLevel");
             return;
         }
 
-        Debug.LogError("[ActivityConnector] No existe SceneLoader.Instance, revisa que tu escena inicial cargue el prefab.");
     }
 
     public void RetryLevel()

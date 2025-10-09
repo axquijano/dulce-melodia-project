@@ -4,17 +4,17 @@ using TMPro;
 
 public class LevelItemButton : MonoBehaviour
 {
-    public TMP_Text levelText;
     public Button button;
-    public GameObject lockIcon;
     private int levelIndex;
-
-    public void Setup(int index, ChildProfile profile)
+    
+    public void Setup(int index, ChildProfile profile, Sprite spriteLevel)
     { 
         int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
         levelIndex = index;
 
-        levelText.text = "Nivel " + (index + 1);
+        if (spriteLevel != null)
+            button.image.sprite = spriteLevel;
+
 
         // Obtener perfil
         bool  unlockedLevel = profile.activities[activityIndex].value.levels[levelIndex].unlocked;
@@ -28,37 +28,29 @@ public class LevelItemButton : MonoBehaviour
     private void SetCompleted()
     {
         button.interactable = true;
-        levelText.color = Color.white;
-
-        if (lockIcon != null)
-            lockIcon.SetActive(false);
     }
 
     private void SetUnlocked()
     {
         button.interactable = true;
-        levelText.color = Color.yellow;
-
-        if (lockIcon != null)
-            lockIcon.SetActive(false);
     }
 
     private void SetLocked()
     {
         button.interactable = false;
-        levelText.color = Color.gray;
-
-        if (lockIcon != null)
-            lockIcon.SetActive(true);
     }
 
     public void OnClick()
     {
         PlayerPrefs.SetInt("CurrentLevel", levelIndex);
-    
         PlayerPrefs.Save();
-
         GameFlowManager.Instance.selectedLevel = levelIndex;
+        int actividadIndex = PlayerPrefs.GetInt("CurrentActivity");
+        Debug.Log("actividad "+actividadIndex+" nivel "+levelIndex);
+        if(actividadIndex == 2 && levelIndex == 2){
+            SceneLoader.Instance.LoadScene("ActivityThree_Music");
+            return;
+        }
         SceneLoader.Instance.LoadScene(GameFlowManager.Instance.selectedActivity.gameplaySceneName);
     }
 

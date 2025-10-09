@@ -24,7 +24,6 @@ public class ActivityItemButton : MonoBehaviour
         spriteState.pressedSprite = def.pressedIcon;
         button.spriteState = spriteState;
         
-
         // Datos del perfil
         ActivityEntry entry = profile.activities[activityIndex];
 

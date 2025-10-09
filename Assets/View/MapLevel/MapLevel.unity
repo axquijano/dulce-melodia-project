@@ -368,7 +368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1215.2043, y: -127.344925}
+  m_AnchoredPosition: {x: 1158.141, y: -127.344925}
   m_SizeDelta: {x: 0, y: 284.334}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1089695451
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 457.9, y: 210.7}
+  m_CellSize: {x: 697.608, y: 347.29}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 2
   m_ConstraintCount: 1
@@ -700,6 +700,10 @@ MonoBehaviour:
   levelsContainer: {fileID: 1089695450}
   levelButtonPrefab: {fileID: 4691672894811395186, guid: 340bbf6e7112f90409757b3b441efc50, type: 3}
   text: {fileID: 0}
+  imagesLevel:
+  - {fileID: -1469917370422211758, guid: a5b8800e4600ea244b54eb56b8ea4128, type: 3}
+  - {fileID: -2086748514353705471, guid: a5b8800e4600ea244b54eb56b8ea4128, type: 3}
+  - {fileID: -6088188415229993422, guid: a5b8800e4600ea244b54eb56b8ea4128, type: 3}
 --- !u!4 &1900920394
 Transform:
   m_ObjectHideFlags: 0

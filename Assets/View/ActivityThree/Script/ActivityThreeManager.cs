@@ -30,6 +30,7 @@ public class ActivityThreeManager : MonoBehaviour
 
     void Start()
     {
+        ActivityConnector.Instance.StartLevel();
         // Vincular piano
         foreach (var key in pianoKeys)
             key.onKeyPressed += OnKeyPressed;
