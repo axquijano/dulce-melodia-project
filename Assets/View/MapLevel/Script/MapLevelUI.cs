@@ -50,10 +50,6 @@ public class MapLevelUI : MonoBehaviour
             if (i < imagesLevel.Count)
                 levelSprite = imagesLevel[i];
 
-            Debug.Log("MapLevel, recorriendo el level " + i);
-
-            // Como LevelSequence NO tiene datos extra, usamos null
-            Debug.Log("MapLevel , recorriendo el level "+i);
             item.Setup(i, profile, levelSprite);
         }
     }

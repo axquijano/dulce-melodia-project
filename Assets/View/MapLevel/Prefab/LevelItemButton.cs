@@ -18,7 +18,6 @@ public class LevelItemButton : MonoBehaviour
 
         // Obtener perfil
         bool  unlockedLevel = profile.activities[activityIndex].value.levels[levelIndex].unlocked;
-        Debug.Log("En levelItemButton level "+ index + "desbloqueado "+unlockedLevel );
        if (unlockedLevel)
             SetUnlocked();
         else
@@ -46,7 +45,7 @@ public class LevelItemButton : MonoBehaviour
         PlayerPrefs.Save();
         GameFlowManager.Instance.selectedLevel = levelIndex;
         int actividadIndex = PlayerPrefs.GetInt("CurrentActivity");
-        Debug.Log("actividad "+actividadIndex+" nivel "+levelIndex);
+        Debug.Log("Click actividad "+actividadIndex+" nivel "+levelIndex);
         if(actividadIndex == 2 && levelIndex == 2){
             SceneLoader.Instance.LoadScene("ActivityThree_Music");
             return;
