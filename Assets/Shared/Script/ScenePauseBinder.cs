@@ -28,4 +28,9 @@ public class ScenePauseBinder : MonoBehaviour
     {
         PauseManager.Instance.ResumeGame();
     }
+
+    public void ExitGame()
+    {
+       PauseManager.Instance.ExitGame();
+    }
 }

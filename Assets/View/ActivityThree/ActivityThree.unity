@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.21176471}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1933,34 +1933,7 @@ MonoBehaviour:
   - {fileID: 643570263}
   - {fileID: 643570262}
   - {fileID: 643570261}
-  sections:
-  - referenceAudio: {fileID: 8300000, guid: a502f44959efa5b47a7ff543ff098995, type: 3}
-    row1:
-    - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
-      time: 0.3
-      isGhost: 0
-    - note: {fileID: 11400000, guid: 6f8ece7bc9d1b594eb7b485e8a50cce2, type: 2}
-      time: 0.61
-      isGhost: 0
-    - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
-      time: 1
-      isGhost: 1
-    row2:
-    - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
-      time: 1.79
-      isGhost: 0
-    - note: {fileID: 11400000, guid: 7a057d9355ff4a54593234db2406498d, type: 2}
-      time: 2
-      isGhost: 1
-    - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
-      time: 2.3
-      isGhost: 0
-    - note: {fileID: 11400000, guid: 3b036c10512f43c4e8b9436bc0d1a2dc, type: 2}
-      time: 2.47
-      isGhost: 0
-    - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
-      time: 3
-      isGhost: 1
+  songData: {fileID: 11400000, guid: 6d85d0ff9c6695c41855eb5a51b634ce, type: 2}
   audioSource: {fileID: 1482031663}
 --- !u!82 &1482031663
 AudioSource:
@@ -2845,6 +2818,34 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1482031661}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1482031661}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScenePauseBinder, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1389166673944983980, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
       propertyPath: m_SizeDelta.x
       value: 360.969

@@ -22,9 +22,12 @@ public class ActivityOneManager : MonoBehaviour
     
     private RectTransform frog;
     
+    public string childName;
+    
     void Start()
     {
         ActivityConnector.Instance.StartLevel();
+        childName = ProfilesManager.Instance.currentProfile.childName;
         loadSequence();
         GenerateBubbles();
         CreateFrog();      
@@ -33,12 +36,27 @@ public class ActivityOneManager : MonoBehaviour
         LinkPianoKeys();
     }
 
-    
+    IEnumerator welcome()
+    {
+        if(GameFlowManager.Instance.GetLevel() == 0){
+             yield return new WaitForSeconds(0.3f);
+
+            string message =
+                childName + ". " +
+                "Ayuda a René. " +
+                "Toca la nota de las hojas.";
+
+            TTSManager.Instance.Speak(message);
+        }
+    }
+
+
 
     void loadSequence()
     {
         activity = GameFlowManager.Instance.selectedActivity;
         sequence = GameFlowManager.Instance.GetCurrentLevelSequence();
+        FeedbackManager.Instance.SetMaxMistakes(sequence.allowedMistakes);
         int levelIndex = PlayerPrefs.GetInt("CurrentLevel");
 
         if (activity == null)
@@ -129,7 +147,7 @@ public class ActivityOneManager : MonoBehaviour
     }
 
     void OnKeyPressed(NoteData pressedNote)
-    {
+    {       
         if (helpRoutine != null)
             StopCoroutine(helpRoutine);
 

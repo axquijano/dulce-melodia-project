@@ -189,6 +189,7 @@ public class ProfilesManager : MonoBehaviour
             entry.key = act.activityName;
             entry.value = new ActivityData();
             entry.unlocked = false;
+            entry.value.tutorialSeen = false;
             entry.value.levels = new List<LevelData>();
 
             // Crear LevelData en blanco por cada nivel

@@ -2,52 +2,48 @@ using UnityEngine;
 
 public class FallingNote : MonoBehaviour
 {
-    public float speed = 0f;            // px/s calculado según tiempo
-    public bool isStopped = false;
-    public bool isReadyToHit = false;   // solo true cuando llega al StopPoint
+    public float speed;
     public RectTransform rect;
-    public RectTransform stopPoint;
+    public RectTransform hitZone;     // franja amarilla
     public NoteData noteData;
 
-    /* void Update()
-    {
-        if (isStopped) return;
+    public bool isReadyToHit = false;
+    public bool hasPassed = false;
 
-        rect.anchoredPosition -= new Vector2(0, speed * Time.deltaTime);
-
-        // Cuando llega al StopPoint se detiene
-        /* if (rect.anchoredPosition.y <= stopPoint.anchoredPosition.y)
-        {
-            rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, stopPoint.anchoredPosition.y);
-            isStopped = true;
-            isReadyToHit = true;
-        } */
-/*
-         if (rect.anchoredPosition.y <= stopPoint.anchoredPosition.y)
-        {
-            Destroy(gameObject);
-        }
-    } */
-
-    float destroyY = -500f; // posición fuera de pantalla
+    float destroyY = -600f;
 
     void Update()
     {
-        // Movimiento continuo (NO se detiene)
+        // Movimiento
         rect.anchoredPosition -= new Vector2(0, speed * Time.deltaTime);
 
-        // Cuando llega a la línea → permitir tocar
-        if (!isReadyToHit && rect.anchoredPosition.y <= stopPoint.anchoredPosition.y)
-        {
-            isReadyToHit = true;
-        }
+        CheckHitZone();
 
-        // Destruir cuando sale totalmente de la pantalla
+        // Destruir fuera de pantalla
         if (rect.anchoredPosition.y <= destroyY)
         {
             Destroy(gameObject);
         }
     }
+
+    void CheckHitZone()
+    {
+        float noteY = rect.anchoredPosition.y;
+
+        float zoneTop = hitZone.anchoredPosition.y + hitZone.rect.height / 2f;
+        float zoneBottom = hitZone.anchoredPosition.y - hitZone.rect.height / 2f;
+
+        if (noteY <= zoneTop && noteY >= zoneBottom)
+        {
+            isReadyToHit = true;
+        }
+        else
+        {
+            // Si ya pasó la zona
+            if (noteY < zoneBottom)
+                hasPassed = true;
+
+            isReadyToHit = false;
+        }
+    }
 }
-
-

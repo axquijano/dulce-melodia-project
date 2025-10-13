@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 public class ActivityThreeManager : MonoBehaviour
 {
+    [Header("Song")]
+    public SongData songData;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+
     [Header("Prefabs")]
     public GameObject noteCandyPrefab;
 
@@ -15,81 +21,181 @@ public class ActivityThreeManager : MonoBehaviour
     public RectTransform laneA;
     public RectTransform laneB;
 
+    [Header("UI Zona de impacto")]
+    public RectTransform hitZone;
+
+    [Header("Piano")]
     public PianoKey[] pianoKeys;
 
-    [Header("Canción (Nivel Fácil)")]
-    public List<SongNote> easySongNotes = new List<SongNote>();
-
-  
     [Header("Notas")]
     public float spawnY = 300f;
     public float noteSpeed = 300f;
 
-    private float songTimer = 0f;
-    private int nextSpawnIndex = 0;
+    // 🔹 NUEVO (mínimo necesario)
+    [Header("Ajuste visual")]
+    [Tooltip("Escala el tiempo visual sin cambiar el audio")]
+    public float timeScale = 1.5f;
 
+    [Tooltip("Tiempo mínimo entre spawns para evitar notas pegadas")]
+    public float minSpawnInterval = 0.6f;
+
+    // ---- Estado interno ----
+    private int currentSectionIndex = 0;
+    private int nextNoteIndex = 0;
+    private float sectionTimer = 0f;
+    private float lastSpawnTime = -10f; // 🔹 NUEVO
+
+    private List<FallingNote> activeNotes = new();
+
+    // --------------------------------------------------------
     void Start()
     {
         ActivityConnector.Instance.StartLevel();
-        // Vincular piano
+
         foreach (var key in pianoKeys)
             key.onKeyPressed += OnKeyPressed;
 
-        Debug.Log("---- INICIO DE SIMULACIÓN ----");
+        StartSection(0);
     }
 
+    // --------------------------------------------------------
     void Update()
     {
-        songTimer += Time.deltaTime;
+        if (currentSectionIndex >= songData.sections.Count)
+            return;
 
-        if (nextSpawnIndex < easySongNotes.Count)
+        sectionTimer += Time.deltaTime;
+
+        HandleSpawning();
+        CleanupNotes();
+        CheckSectionEnd();
+    }
+
+    // --------------------------------------------------------
+    void StartSection(int index)
+    {
+        if (index >= songData.sections.Count)
         {
-            SongNote nextNote = easySongNotes[nextSpawnIndex];
+            Debug.Log("🎉 Canción finalizada");
+            return;
+        }
 
-            RectTransform lane = GetLane(nextNote.note.noteName);
-            RectTransform stop = lane.Find("StopPoint_" + nextNote.note.noteName).GetComponent<RectTransform>();
+        currentSectionIndex = index;
+        nextNoteIndex = 0;
+        sectionTimer = 0f;
+        lastSpawnTime = -10f; // 🔹 reset
 
-            float distance = spawnY - stop.anchoredPosition.y;
-            float fallTime = distance / noteSpeed;
+        SongSection section = songData.sections[index];
 
-            float spawnTime = nextNote.time - fallTime;
+        audioSource.clip = section.referenceAudio;
+        audioSource.Play();
 
-            // Cuando llega el tiempo exacto de spawn
-            if (songTimer >= spawnTime)
-            {
-                SpawnNote(nextNote, lane, stop, fallTime);
-                nextSpawnIndex++;
-            }
+        Debug.Log($"▶ Iniciando sección {index}");
+    }
+
+    // --------------------------------------------------------
+    void HandleSpawning()
+    {
+        SongSection section = songData.sections[currentSectionIndex];
+        TimedNote[] notes = section.row1;
+
+        if (nextNoteIndex >= notes.Length)
+            return;
+
+        TimedNote nextNote = notes[nextNoteIndex];
+
+        RectTransform lane = GetLane(nextNote.note.noteName);
+
+        // Caída hasta el centro de la franja
+        float hitZoneY = hitZone.anchoredPosition.y;
+        float distance = spawnY - hitZoneY;
+        float fallTime = distance / noteSpeed;
+
+        // 🔹 TIEMPO VISUAL ESCALADO
+        float visualNoteTime = nextNote.time * timeScale;
+        float spawnTime = visualNoteTime - fallTime;
+
+        // 🔹 CONTROL DE NOTAS PEGADAS
+        if (sectionTimer >= spawnTime &&
+            sectionTimer - lastSpawnTime >= minSpawnInterval)
+        {
+            SpawnNote(nextNote, lane);
+            lastSpawnTime = sectionTimer;
+            nextNoteIndex++;
         }
     }
 
     // --------------------------------------------------------
-    void SpawnNote(SongNote songNote, RectTransform lane, RectTransform stopPoint, float fallTime)
+    void SpawnNote(TimedNote timedNote, RectTransform lane)
     {
-        // Instanciar nota
         GameObject noteObj = Instantiate(noteCandyPrefab, lane);
-        FallingNote note = noteObj.GetComponent<FallingNote>();
 
+        FallingNote note = noteObj.GetComponent<FallingNote>();
         RectTransform rect = noteObj.GetComponent<RectTransform>();
+
         rect.anchoredPosition = new Vector2(0, spawnY);
 
         note.rect = rect;
-        note.stopPoint = stopPoint;
         note.speed = noteSpeed;
+        note.hitZone = hitZone;
+        note.noteData = timedNote.note;
 
-        // ---- LOG DE VERIFICACIÓN ----
-        float expectedArrival = songNote.time;
-        float realArrival = songTimer + fallTime;
+        activeNotes.Add(note);
 
-        Debug.Log(
-            $"<color=yellow>♫ Spawn de nota {songNote.note.noteName}</color>\n" +
-            $"→ Tiempo actual: {songTimer:F2}s\n" +
-            $"→ Debe llegar en: {expectedArrival:F2}s\n" +
-            $"→ Llegará en: {realArrival:F2}s\n" +
-            $"→ Diferencia: {(realArrival - expectedArrival):F3}s\n" +
-            $"→ Distancia: {spawnY - stopPoint.anchoredPosition.y:F2}px\n" +
-            $"→ Tiempo de caída real: {fallTime:F3}s"
-        );
+#if UNITY_EDITOR
+        Debug.Log($"⭐ Spawn {timedNote.note.noteName} | t={timedNote.time:F2}");
+#endif
+    }
+
+    // --------------------------------------------------------
+    void OnKeyPressed(NoteData pressedNote)
+    {
+        foreach (var note in activeNotes)
+        {
+            if (note == null) continue;
+
+            if (note.isReadyToHit && note.noteData == pressedNote)
+            {
+                HandleCorrectHit(note);
+                return;
+            }
+        }
+
+        HandleMiss();
+    }
+
+    // --------------------------------------------------------
+    void HandleCorrectHit(FallingNote note)
+    {
+        activeNotes.Remove(note);
+        Destroy(note.gameObject);
+
+        Debug.Log("✅ Nota correcta");
+    }
+
+    // --------------------------------------------------------
+    void HandleMiss()
+    {
+        Debug.Log("ℹ️ Tecla presionada sin nota activa");
+    }
+
+    // --------------------------------------------------------
+    void CheckSectionEnd()
+    {
+        SongSection section = songData.sections[currentSectionIndex];
+
+        if (!audioSource.isPlaying &&
+            nextNoteIndex >= section.row1.Length &&
+            activeNotes.Count == 0)
+        {
+            StartSection(currentSectionIndex + 1);
+        }
+    }
+
+    // --------------------------------------------------------
+    void CleanupNotes()
+    {
+        activeNotes.RemoveAll(n => n == null);
     }
 
     // --------------------------------------------------------
@@ -106,11 +212,5 @@ public class ActivityThreeManager : MonoBehaviour
             "B" => laneB,
             _ => laneC
         };
-    }
-
-    // --------------------------------------------------------
-    void OnKeyPressed(NoteData pressedNote)
-    {
-        Debug.Log("Input deshabilitado en esta versión de debug.");
     }
 }

@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/View/ActivityOne/ActivityOne.unity
     guid: 6fdd64630daa1614fab58f3416b289ff
   - enabled: 1
+    path: Assets/View/ActivityOne/TutorialOne.unity
+    guid: 6b926d66d9ad43a4499e0096343de209
+  - enabled: 1
     path: Assets/View/ActivityResult/ActivityResult.unity
     guid: 6401b6ec492c5e04a9420439ff005894
   - enabled: 1
@@ -29,9 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/View/ActivityOne/ActivityOne.unity
     guid: 6fdd64630daa1614fab58f3416b289ff
-  - enabled: 1
-    path: Assets/View/ActivityOne/ActivityOneTutorial.unity
-    guid: e3035ce6849f12246bfb2c38c510a329
   - enabled: 1
     path: Assets/View/ActivityTwo/ActivityTwo.unity
     guid: bd055a12fbb938d40801cff9a174e873

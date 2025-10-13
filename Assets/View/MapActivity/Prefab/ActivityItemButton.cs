@@ -76,11 +76,36 @@ public class ActivityItemButton : MonoBehaviour
         
     }
 
-    public void OnClick()
+  /*   public void OnClick()
     {
         PlayerPrefs.SetInt("CurrentActivity", activityIndex);
         PlayerPrefs.SetInt("CurrentLevel", 0); 
         PlayerPrefs.Save();
         GameFlowManager.Instance.SelectActivity(activityIndex);
+    } */
+
+    public void OnClick()
+    {
+        PlayerPrefs.SetInt("CurrentActivity", activityIndex);
+        PlayerPrefs.SetInt("CurrentLevel", 0);
+        PlayerPrefs.Save();
+
+        ActivityData activityData =
+            ProfilesManager.Instance
+                .currentProfile
+                .activities[activityIndex]
+                .value;
+
+        if (!activityData.tutorialSeen)
+        {
+            SceneLoader.Instance.LoadScene(
+                activityDef.tutorialSceneName
+            );
+        }
+        else
+        {
+            GameFlowManager.Instance.SelectActivity(activityIndex);
+        }
     }
+
 }

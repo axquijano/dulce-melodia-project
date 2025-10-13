@@ -1086,10 +1086,22 @@ PrefabInstance:
     - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1482031657}
+      objectReference: {fileID: 1482031663}
     - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScenePauseBinder, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 287369326072511395, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1389166673944983980, guid: cc421b3361702e14e8b9ef639a194271, type: 3}
       propertyPath: m_AnchorMax.y
