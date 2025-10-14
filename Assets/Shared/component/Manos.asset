@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb58c107ebadec44a8fd2ff7dc0a3aae, type: 3}
+  m_Name: Manos
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: 6331702475257366169, guid: 07768891460b70b49b362b99e6d5948b, type: 3}
+  - {fileID: 823691468531193542, guid: 07768891460b70b49b362b99e6d5948b, type: 3}
+  - {fileID: 3339030459420693017, guid: 07768891460b70b49b362b99e6d5948b, type: 3}
+  - {fileID: -5757080758780287837, guid: 07768891460b70b49b362b99e6d5948b, type: 3}
+  animationSpeed: 0.2

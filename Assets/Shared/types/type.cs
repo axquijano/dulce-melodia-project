@@ -8,7 +8,8 @@ public class LevelData
     public float bestTime = -1f;
     public int bestHits = -1;
     public int bestMistakes = -1;
-    public bool unlocked = false;
+    //TODO : se cambio
+    public bool unlocked = true;
 
     public int retries = 0;
     public int stars = 0; // 0–3

@@ -46,12 +46,8 @@ public class PianoKey : MonoBehaviour
     public void SetKeyEnabled(bool enabled)
     {
         keyButton.interactable = enabled;
+        keyButton.image.color = Color.white;
 
-        if (!enabled)
-        {
-            // quitar ayuda visual
-            ResetVisualHelp();
-        }
     }
 
     public void ShowHelp()
