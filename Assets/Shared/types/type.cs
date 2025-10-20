@@ -1,27 +1,35 @@
 using System.Collections.Generic;
-using System.Collections;
 
+// Guarda datos del desempeño del niño
 [System.Serializable]
-//Guarda datos del desempeño del niño
-public class LevelData
+public class LevelAttempt
 {
-    public float bestTime = -1f;
-    public int bestHits = -1;
-    public int bestMistakes = -1;
-    //TODO : se cambio
-    public bool unlocked = true;
-
-    public int retries = 0;
-    public int stars = 0; // 0–3
+    public float time;
+    public int hits;
+    public int mistakes;
+    public bool completed;
+    public string date;
 }
 
-
-
+// Nivel: guarda todos los intentos
 [System.Serializable]
-//Cantidad de niveles variable por actividad
+public class LevelData
+{
+    public List<LevelAttempt> attempts = new List<LevelAttempt>();
+
+    public int retries => attempts.Count;
+
+    public bool CompletedAtLeastOnce()
+    {
+        return attempts.Exists(a => a.completed);
+    }
+}
+
+// Datos por actividad
+[System.Serializable]
 public class ActivityData
 {
-    public bool tutorialSeen;  // Si ya vio el tutorial
+    public bool tutorialSeen;
     public List<LevelData> levels = new List<LevelData>();
 }
 
@@ -29,22 +37,17 @@ public class ActivityData
 public class ActivityEntry
 {
     public string key;
-    public bool unlocked;
-    public string lastSelectedEmotion = ""; 
+    public bool unlocked; 
+    public string lastSelectedEmotion = "";
     public ActivityData value;
 }
 
-
-
 [System.Serializable]
-//Cada niño tiene sus datos por actividad.
 public class ChildProfile
 {
-    public string childName;   
-    // Actividades:
-    // Musica, Memoria, Colores, Ritmo, Atencion
+    public string childName;
     public List<ActivityEntry> activities = new List<ActivityEntry>();
-    
+
     public ChildProfile(string name)
     {
         childName = name;
@@ -52,9 +55,7 @@ public class ChildProfile
     }
 }
 
-
 [System.Serializable]
-//Almacena todos los perfiles en el archivo JSON.
 public class ProfilesDatabase
 {
     public List<ChildProfile> profiles = new List<ChildProfile>();

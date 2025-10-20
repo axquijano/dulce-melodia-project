@@ -538,8 +538,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activitiesDatabase: {fileID: 11400000, guid: f9d50393fc856494581b268f94f12b21, type: 2}
-  levelButtonPrefab: {fileID: 4691672894811395186, guid: 6e83b6a5d4deab54582b748f5597ebc5, type: 3}
-  levelsContainer: {fileID: 1089695450}
+  activityButtonPrefab: {fileID: 4691672894811395186, guid: 6e83b6a5d4deab54582b748f5597ebc5, type: 3}
+  container: {fileID: 1089695450}
 --- !u!1 &1963401310
 GameObject:
   m_ObjectHideFlags: 0

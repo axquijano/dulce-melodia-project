@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class ActivityConnector : MonoBehaviour
 {
@@ -10,10 +11,10 @@ public class ActivityConnector : MonoBehaviour
     private bool playing = false;
     private bool levelWon = false;
 
-     // Exponer lecturas públicas (solo lectura)
+    // Lecturas públicas
     public int Hits => hits;
     public int Mistakes => mistakes;
-    public float ElapsedTime  => timer;
+    public float ElapsedTime => timer;
     public bool LevelWon => levelWon;
 
     private void Awake()
@@ -34,11 +35,15 @@ public class ActivityConnector : MonoBehaviour
             timer += Time.deltaTime;
     }
 
+    // ---------------------------
+    // CONTROL DEL NIVEL
+    // ---------------------------
+
     public void StartLevel()
     {
         hits = 0;
         mistakes = 0;
-        timer = 0;
+        timer = 0f;
         levelWon = false;
         playing = true;
     }
@@ -53,71 +58,66 @@ public class ActivityConnector : MonoBehaviour
         mistakes++;
     }
 
-    public void OnLose()
-    {
-        playing = false;
-        levelWon = false;
-
-        var data = ProfilesManager.Instance.GetCurrentLevelData();
-        data.retries++;
-
-        ProfilesManager.Instance.UpdateCurrentLevelData(data);
-        SceneLoader.Instance.LoadScene("ActivityResult");
-    }
+    // ---------------------------
+    // RESULTADOS
+    // ---------------------------
 
     public void OnWin()
     {
+        FinishLevel(completed: true);
+    }
+
+    public void OnLose()
+    {
+        FinishLevel(completed: false);
+    }
+
+    private void FinishLevel(bool completed)
+    {
         playing = false;
-        levelWon = true;
+        levelWon = completed;
 
-        ChildProfile p = ProfilesManager.Instance.currentProfile;
-        LevelData d = ProfilesManager.Instance.GetCurrentLevelData();
+        // Crear intento
+        LevelAttempt attempt = new LevelAttempt
+        {
+            time = timer,
+            hits = hits,
+            mistakes = mistakes,
+            completed = completed,
+            date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        };
 
-        // best time
-        if (d.bestTime < 0 || timer < d.bestTime)
-            d.bestTime = timer;
+        // Guardar intento
+        LevelData levelData = ProfilesManager.Instance.GetCurrentLevelData();
+        levelData.attempts.Add(attempt);
 
-        // hits
-        if (hits > d.bestHits)
-            d.bestHits = hits;
+        ProfilesManager.Instance.UpdateCurrentLevelData(levelData);
 
-        // mistakes
-        if (d.bestMistakes < 0 || mistakes < d.bestMistakes)
-            d.bestMistakes = mistakes;
-
-        // retries suman 1 si ganó
-        d.retries++;
-
-        // estrellas
-        if (mistakes == 0) d.stars = 3;
-        else if (mistakes <= 2) d.stars = 2;
-        else d.stars = 1;
-
-        ProfilesManager.Instance.UpdateCurrentLevelData(d);
-
-        // avanzar nivel/actividad
-        ProfilesManager.Instance.AdvanceLevelOrActivity();
-
+        // Ir a resultados
         SceneLoader.Instance.LoadScene("ActivityResult");
+    }
+
+    // ---------------------------
+    // NAVEGACIÓN
+    // ---------------------------
+
+    public void RetryLevel()
+    {
+        SceneLoader.Instance.LoadScene(
+            GameFlowManager.Instance.selectedActivity.gameplaySceneName
+        );
     }
 
     public void BackToMap()
     {
-        if (SceneLoader.Instance != null)
+        // Si ganó el último nivel → emociones
+        if (levelWon && GameFlowManager.Instance.IsLastLevel())
         {
-            if(levelWon && GameFlowManager.Instance.IsLastLevel()){
-                SceneLoader.Instance.LoadScene("MapEmotions");
-                return;
-            }
-            SceneLoader.Instance.LoadScene("MapLevel");
+            SceneLoader.Instance.LoadScene("MapEmotions");
             return;
         }
 
+        // Si no, volver al mapa de actividades
+        SceneLoader.Instance.LoadScene("MapActivity");
     }
-
-    public void RetryLevel()
-    {
-        SceneLoader.Instance.LoadScene(GameFlowManager.Instance.selectedActivity.gameplaySceneName);
-    }
-
 }

@@ -143,7 +143,7 @@ public class ActivityOneManager : MonoBehaviour
             FeedbackManager.Instance.RegisterHit();
             currentIndex++;
 
-            if (currentIndex >= sequence.notes.Length)
+            if (currentIndex >= sequence.notes.Length -1 )
             {
                 ActivityConnector.Instance.OnWin(); 
                 return;

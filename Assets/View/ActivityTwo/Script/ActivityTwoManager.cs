@@ -1,11 +1,11 @@
-using UnityEngine;
+ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Collections;
 
 public class ActivityTwoManager : MonoBehaviour
 {
-
+/*
     public LevelSettings settings;
     public NoteData[] notes;
     public PianoKey[] pianoKeys;
@@ -24,7 +24,7 @@ public class ActivityTwoManager : MonoBehaviour
     {
         ActivityConnector.Instance.StartLevel();
         childName = ProfilesManager.Instance.currentProfile.childName;
-        settings = GameFlowManager.Instance.GetCurrentLevelSettings();
+       /*  settings = GameFlowManager.Instance.GetCurrentLevelSettings(); 
         foreach (var key in pianoKeys)
             key.onKeyPressed += OnKeyPressed;
         StartCoroutine(welcome());
@@ -33,7 +33,9 @@ public class ActivityTwoManager : MonoBehaviour
 
     IEnumerator welcome()
     {
-        if (GameFlowManager.Instance.GetLevel() == 0)
+        yield return new WaitForSeconds(0.3f);
+
+        /* if (GameFlowManager.Instance.GetLevel() == 0)
         {
             yield return new WaitForSeconds(0.3f);
 
@@ -43,7 +45,7 @@ public class ActivityTwoManager : MonoBehaviour
                 "Toca la nota dentro del globo.";
 
             TTSManager.Instance.Speak(message);
-        }
+        } 
     }
 
 
@@ -99,7 +101,7 @@ public class ActivityTwoManager : MonoBehaviour
             Debug.Log("🏆 GANASTE");
 
         RemoveBalloon(note);
-    } */
+    } 
 
     public void RegisterBalloonHit(BalloonControllerUI balloon)
     {
@@ -113,7 +115,7 @@ public class ActivityTwoManager : MonoBehaviour
             ActivityConnector.Instance.OnWin(); 
             return;
         }
-            /* Debug.Log("🏆 GANASTE"); */
+            /* Debug.Log("🏆 GANASTE"); 
 
         RemoveBalloon(balloon);
     }
@@ -145,7 +147,7 @@ public class ActivityTwoManager : MonoBehaviour
             Debug.Log("❌ PERDISTE");
 
         RemoveBalloon(note);
-    } */
+    } 
 
 public void RegisterBalloonMiss(BalloonControllerUI balloon)
 {
@@ -160,7 +162,7 @@ public void RegisterBalloonMiss(BalloonControllerUI balloon)
             ActivityConnector.Instance.OnLose(); 
             return;
         }
-       /*  Debug.Log("❌ PERDISTE"); */
+       /*  Debug.Log("❌ PERDISTE"); 
 
     RemoveBalloon(balloon);
 }
@@ -179,7 +181,7 @@ public void RegisterBalloonMiss(BalloonControllerUI balloon)
             activeBalloons.Remove(balloon);
         }
 
-    } */
+    } 
 
     void RemoveBalloon(BalloonControllerUI balloon)
     {
@@ -212,7 +214,7 @@ public void RegisterBalloonMiss(BalloonControllerUI balloon)
             if (mistakes >= settings.allowedMistakes)
                 Debug.Log("❌ PERDISTE");
         }
-    } */
+    } 
     void OnKeyPressed(NoteData pressedNote)
     {
         // Busca el PRIMER globo que salió con esa nota
@@ -231,5 +233,5 @@ public void RegisterBalloonMiss(BalloonControllerUI balloon)
                 Debug.Log("❌ PERDISTE");
         }
     }
-
+ */
 }

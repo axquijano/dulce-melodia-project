@@ -160,7 +160,7 @@ public class TutorialManager : MonoBehaviour
             );
         feedback.ShowNextReward();
 
-        if (currentIndex >= sequence.notes.Length)
+        if (currentIndex >= sequence.notes.Length- 1)
         {
             FinishTutorial();
             return;
@@ -196,19 +196,6 @@ public class TutorialManager : MonoBehaviour
         DisableAllKeys();
         ActivateCorrectKey();
  
-    }
-
-    void FinishTutorial()
-    {
-        tutorialGameplayActive = false;
-
-        MoveFrogTo(currentIndex);
-        bubbles[currentIndex].SetImagenColor();
-
-        frogAnimator.SetTrigger("Happy");
-        TTSManager.Instance.Speak("¡Excelente! René llegó a la comida");
-
-        DisableAllKeys();
     }
 
     #endregion
@@ -272,4 +259,20 @@ public class TutorialManager : MonoBehaviour
     }
 
     #endregion
+
+    public void FinishTutorial()
+    {
+        int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
+
+        ActivityEntry activity =
+            ProfilesManager.Instance.currentProfile.activities[activityIndex];
+
+        activity.value.tutorialSeen = true;
+        ProfilesManager.Instance.SaveProfiles();
+
+        SceneLoader.Instance.LoadScene(
+            GameFlowManager.Instance.selectedActivity.gameplaySceneName
+        );
+    }
+
 }
