@@ -9,18 +9,12 @@ public class FeedbackManager : MonoBehaviour
     
 
     [Header("UI")]
-/*     public TMP_Text hitsText; */
     public ProgressBar progressBar;
     public TMP_Text timeText;
-
-   /*  [Header("Config")]
-    public int mistakesBeforeHelp = 3;   // activar ayuda después de X errores
-    public float idleTimeBeforeHelp = 5f; // activar ayuda si pasa X segundos sin tocar */
 
     private int hits; 
     private int mistakes;
     private float maxMistakes;
-   /*  public int GetHits() => hits; */
     public float GetTime() => idleTimer;
 
 
@@ -44,41 +38,24 @@ public class FeedbackManager : MonoBehaviour
         idleTimer += Time.deltaTime;
         int minutes = Mathf.FloorToInt(idleTimer / 60f);
         int seconds = Mathf.FloorToInt(idleTimer % 60f);
-
         timeText.text = $"{minutes:00}:{seconds:00}";
-        /* 
-        if (idleTimer >= idleTimeBeforeHelp)
-        {
-            SequencePlayer.Instance.ShowHelpCurrentKey();
-            idleTimer = 0f; // reiniciar el contador 
-        }*/
     }
 
     public void RegisterHit()
     {
         hits++;
-      /*   idleTimer = 0f; */
         UpdateUI();
     } 
 
     public void RegisterMistake()
     {
         mistakes++;
-
-      /*   idleTimer = 0f; */
         UpdateUI();
-
-     /*    if (mistakes % mistakesBeforeHelp == 0)
-        {
-            SequencePlayer.Instance.ShowHelpCurrentKey();
-        } */
     }
 
     void UpdateUI()
     {
-         progressBar.UpdateProgressBar(mistakes); 
-        /* hitsText.text = hits.ToString(); */
-       /*  mistakesText.text = mistakes.ToString(); */
+        progressBar.UpdateProgressBar(mistakes); 
     }
 
     public int getMistakes() {

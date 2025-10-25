@@ -1,78 +1,63 @@
- using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using System.Collections;
 
 public class ActivityTwoManager : MonoBehaviour
 {
-/*
-    public LevelSettings settings;
+    [Header("Config")]
     public NoteData[] notes;
     public PianoKey[] pianoKeys;
 
-    [Header("References")]
+    [Header("UI")]
     public BalloonSpawnerUI spawner;
 
-    private float timer;
-    private int hits;
-    private int mistakes;
+    private LevelSettings settings;
+    private float spawnTimer;
 
-    private List<BalloonControllerUI> activeBalloons = new List<BalloonControllerUI>();
-    public string childName;
+    private readonly List<BalloonControllerUI> activeBalloons = new();
 
     void Start()
     {
         ActivityConnector.Instance.StartLevel();
-        childName = ProfilesManager.Instance.currentProfile.childName;
-       /*  settings = GameFlowManager.Instance.GetCurrentLevelSettings(); 
+
+        LoadLevelSettings();
+        LinkPianoKeys();
+    }
+
+    void LoadLevelSettings()
+    {
+        ActivityDefinition activity = GameFlowManager.Instance.selectedActivity;
+        int levelIndex = GameFlowManager.Instance.selectedLevel;
+
+        settings = activity.levelSettings[levelIndex];
+
+        FeedbackManager.Instance.SetMaxMistakes(settings.allowedMistakes);
+    }
+
+    void LinkPianoKeys()
+    {
         foreach (var key in pianoKeys)
             key.onKeyPressed += OnKeyPressed;
-        StartCoroutine(welcome());
-
     }
-
-    IEnumerator welcome()
-    {
-        yield return new WaitForSeconds(0.3f);
-
-        /* if (GameFlowManager.Instance.GetLevel() == 0)
-        {
-            yield return new WaitForSeconds(0.3f);
-
-            string message =
-                childName + ". " +
-                "Estalla los globos. " +
-                "Toca la nota dentro del globo.";
-
-            TTSManager.Instance.Speak(message);
-        } 
-    }
-
 
     void Update()
     {
-        timer += Time.deltaTime;
+        spawnTimer += Time.deltaTime;
 
-        if (timer >= settings.spawnInterval)
+        if (spawnTimer >= settings.spawnInterval)
         {
-            timer = 0;
-            SpawnLogic();
+            spawnTimer = 0f;
+            SpawnBalloon();
         }
     }
 
-    // -------------------------
-    // SPAWN DE GLOBOS
-    // -------------------------
-    void SpawnLogic()
+    // SPAWN
+    void SpawnBalloon()
     {
         var balloon = spawner.SpawnBalloon();
-
-        // ⚡ Velocidad del LevelSettings
         balloon.SetSpeed(settings.balloonSpeed);
 
-        NoteData randomNote = notes[Random.Range(0, notes.Length)];
+        NoteData note = notes[Random.Range(0, notes.Length)];
 
-        // Determinar tipo de globo según probabilidad
         float r = Random.value;
 
         bool full = r <= settings.pctFull;
@@ -80,7 +65,7 @@ public class ActivityTwoManager : MonoBehaviour
         bool onlyLetter = r > settings.pctFull + settings.pctColor;
 
         balloon.Setup(
-            randomNote,
+            note,
             displayColor: full || onlyColor,
             displayLetter: full || onlyLetter,
             isBlack: false
@@ -89,149 +74,65 @@ public class ActivityTwoManager : MonoBehaviour
         activeBalloons.Add(balloon);
     }
 
-    // -------------------------
-    // GOLPE A UN GLOBO
-    // -------------------------
-   /*  public void RegisterBalloonHit(NoteData note)
+    // INPUT
+    void OnKeyPressed(NoteData pressedNote)
     {
-        hits++;
-        FeedbackManager.Instance.RegisterHit();
-
-        if (hits >= settings.balloonsToWin)
-            Debug.Log("🏆 GANASTE");
-
-        RemoveBalloon(note);
-    } 
-
-    public void RegisterBalloonHit(BalloonControllerUI balloon)
-    {
-        if (balloon == null) return;
-
-        hits++;
-        FeedbackManager.Instance.RegisterHit();
-        ActivityConnector.Instance.RegisterHit();
-
-        if (hits >= settings.balloonsToWin){
-            ActivityConnector.Instance.OnWin(); 
-            return;
-        }
-            /* Debug.Log("🏆 GANASTE"); 
-
-        RemoveBalloon(balloon);
-    }
-
-
-    // -------------------------
-    // GLOBO QUE SE ESCAPA
-    // -------------------------
-    /* public void RegisterBalloonMiss(NoteData note)
-    {
-        mistakes++;
-        FeedbackManager.Instance.RegisterMistake();
-        if (mistakes >= settings.allowedMistakes)
-            Debug.Log("❌ PERDISTE");
-
-        RemoveBalloon(note);
-    } */
-
-   /*  public void RegisterBalloonMiss(NoteData note)
-    {
-        mistakes++;
-        FeedbackManager.Instance.RegisterMistake();
-
-        // Evita que destruya globos que ya no existen
-        if (!activeBalloons.Exists(b => b != null && b.noteData == note))
-            return;
-
-        if (mistakes >= settings.allowedMistakes)
-            Debug.Log("❌ PERDISTE");
-
-        RemoveBalloon(note);
-    } 
-
-public void RegisterBalloonMiss(BalloonControllerUI balloon)
-{
-    if (balloon == null) return;
-
-    mistakes++;
-    FeedbackManager.Instance.RegisterMistake();
-    ActivityConnector.Instance.RegisterMistake();
-
-    if (mistakes >= settings.allowedMistakes)
-        {
-            ActivityConnector.Instance.OnLose(); 
-            return;
-        }
-       /*  Debug.Log("❌ PERDISTE"); 
-
-    RemoveBalloon(balloon);
-}
-
-
-   /*  void RemoveBalloon(NoteData note)
-    {
-        // Buscar el primer globo que coincida
-        var balloon = activeBalloons.Find(b => b != null && b.noteData == note);
+        var balloon = activeBalloons.Find(b => b != null && b.noteData == pressedNote);
 
         if (balloon != null)
         {
-            if (balloon != null && balloon.gameObject != null)
-                balloon.Pop();
-
-            activeBalloons.Remove(balloon);
+            RegisterHit(balloon);
         }
+        else
+        {
+            RegisterMistake();
+        }
+    }
 
-    } 
+    // HIT / MISS
+    void RegisterHit(BalloonControllerUI balloon)
+    {
+        ActivityConnector.Instance.RegisterHit();
+        FeedbackManager.Instance.RegisterHit();
 
+        RemoveBalloon(balloon);
+
+        if (ActivityConnector.Instance.Hits >= settings.balloonsToWin)
+        {
+            ActivityConnector.Instance.OnWin();
+        }
+    }
+
+    public void RegisterBalloonMiss(BalloonControllerUI balloon)
+    {
+        if (balloon == null) return;
+
+        RegisterMistake();
+        RemoveBalloon(balloon);
+    }
+
+    void RegisterMistake()
+    {
+        ActivityConnector.Instance.RegisterMistake();
+        FeedbackManager.Instance.RegisterMistake();
+
+        CheckLoseCondition();
+    }
+
+    void CheckLoseCondition()
+    {
+        if (ActivityConnector.Instance.Mistakes >= settings.allowedMistakes)
+        {
+            ActivityConnector.Instance.OnLose();
+        }
+    }
+    
+    // CLEANUP
     void RemoveBalloon(BalloonControllerUI balloon)
     {
         if (balloon == null) return;
 
-        if (activeBalloons.Contains(balloon))
-            activeBalloons.Remove(balloon);
-
+        activeBalloons.Remove(balloon);
         balloon.Pop();
     }
-
-
-
-    // -------------------------
-    // TECLA PIANO PRESIONADA
-    // -------------------------
-    /* void OnKeyPressed(NoteData pressedNote)
-    {
-        bool exists = activeBalloons.Exists(b => b.noteData == pressedNote);
-
-        if (exists)
-        {
-            RegisterBalloonHit(pressedNote);
-        }
-        else
-        {
-            mistakes++;
-            Debug.Log("❌ ERROR");
-
-            if (mistakes >= settings.allowedMistakes)
-                Debug.Log("❌ PERDISTE");
-        }
-    } 
-    void OnKeyPressed(NoteData pressedNote)
-    {
-        // Busca el PRIMER globo que salió con esa nota
-        var balloon = activeBalloons.Find(b => b.noteData == pressedNote);
-
-        if (balloon != null)
-        {
-            RegisterBalloonHit(balloon);
-        }
-        else
-        {
-            mistakes++;
-            Debug.Log("❌ ERROR");
-
-            if (mistakes >= settings.allowedMistakes)
-                Debug.Log("❌ PERDISTE");
-        }
-    }
- */
 }
