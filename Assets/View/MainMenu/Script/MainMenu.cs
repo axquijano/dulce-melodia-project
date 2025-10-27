@@ -7,6 +7,10 @@ public class MainMenu : MonoBehaviour
         SceneLoader.Instance.LoadScene("UserSelect");
     }
 
+    public void GoToTeacherMenu(){
+        SceneLoader.Instance.LoadScene("TeacherMenu");
+    }
+
     public void ExitGame()
     {
         #if UNITY_ANDROID

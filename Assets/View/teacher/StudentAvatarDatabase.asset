@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49332dd2680e3e14b8ffeafb2043696b, type: 3}
+  m_Name: StudentAvatarDatabase
+  m_EditorClassIdentifier: 
+  avatars:
+  - {fileID: 11400000, guid: 5bde54fab9b770c47933e2fb75bc7104, type: 2}
+  - {fileID: 11400000, guid: ea2a9c01f2890f14eb4ff07c2fa38caa, type: 2}
+  - {fileID: 11400000, guid: 68c83024b2b3e3d4ab060440fa380001, type: 2}
+  - {fileID: 11400000, guid: 4b0f394b154f4fd448309e9e132bb8d9, type: 2}
+  - {fileID: 11400000, guid: 0498edecd5e38f54cb4854664a4ef843, type: 2}
+  - {fileID: 11400000, guid: fd674eaedb394564b94daef68399cb25, type: 2}

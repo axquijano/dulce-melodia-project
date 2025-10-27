@@ -27,9 +27,6 @@ EditorBuildSettings:
     path: Assets/View/ActivityResult/ActivityResult.unity
     guid: 6401b6ec492c5e04a9420439ff005894
   - enabled: 1
-    path: Assets/View/MapLevel/MapLevel.unity
-    guid: ee14914388d91a54bbb3dedf0a9d3c89
-  - enabled: 1
     path: Assets/View/ActivityOne/ActivityOne.unity
     guid: 6fdd64630daa1614fab58f3416b289ff
   - enabled: 1
@@ -44,6 +41,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/View/MapEmotions/MapEmotions.unity
     guid: 0d66f93ee22e4484bae619166ca57441
+  - enabled: 1
+    path: Assets/View/teacher/TeacherMenu.unity
+    guid: d319749808567ed4cab2cc1d6bc11ad5
+  - enabled: 1
+    path: Assets/View/teacher/CreateStudentScene.unity
+    guid: 3d9f20e4c552e0a4cbcd08de65a50912
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

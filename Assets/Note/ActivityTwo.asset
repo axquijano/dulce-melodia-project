@@ -17,8 +17,9 @@ MonoBehaviour:
   pressedIcon: {fileID: -2689385719673929582, guid: ff9962d73c868414f89be3be9ddd3aad, type: 3}
   unlockedIcon: {fileID: -6253977925051982790, guid: 4769044286513d3428ebca31bdc179c7, type: 3}
   gameplaySceneName: ActivityTwo
+  tutorialSceneName: ActivityTwo
   levels:
-  - {fileID: 11400000, guid: 1ee04dd2d1a38664497316ed629a593c, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   levelSettings:
