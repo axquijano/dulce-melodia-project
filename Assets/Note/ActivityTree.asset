@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: ActivityTree
   m_EditorClassIdentifier: 
   activityId: 3
-  activityName: Pajaros
+  activityName: Estrellas
+  icon: {fileID: 7123026365588778075, guid: 3171029d935858440a940dc6ceeccb85, type: 3}
   pressedIcon: {fileID: -7736627372309471600, guid: ff9962d73c868414f89be3be9ddd3aad, type: 3}
   unlockedIcon: {fileID: 382367578534928637, guid: 4769044286513d3428ebca31bdc179c7, type: 3}
   gameplaySceneName: ActivityThree

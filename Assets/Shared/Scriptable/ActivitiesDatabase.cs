@@ -5,4 +5,8 @@ using System.Collections.Generic;
 public class ActivitiesDatabase : ScriptableObject
 {
     public List<ActivityDefinition> activities;
+    public ActivityDefinition GetById(string id)
+    {
+        return activities.Find(a => a.activityName == id);
+    }
 }

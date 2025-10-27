@@ -142,4 +142,29 @@ public class ProfilesManager : MonoBehaviour
         return wrapper.profiles;
     }
 
+    public void ClearAllData()
+    {
+        // 1. Borrar archivo JSON si existe
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+            Debug.Log("profiles.json eliminado");
+        }
+
+        // 2. Limpiar wrapper en memoria
+        wrapper = new ProfilesDatabase();
+        wrapper.profiles = new List<ChildProfile>();
+        currentProfile = null;
+
+        // 3. Limpiar PlayerPrefs
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        // 4. Crear archivo nuevo vacío
+        SaveProfiles();
+
+        Debug.Log("Datos reiniciados completamente");
+    }
+
+
 }

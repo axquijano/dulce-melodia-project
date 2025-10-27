@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: ActivityTwo
   m_EditorClassIdentifier: 
   activityId: 2
-  activityName: globos
+  activityName: Globos
+  icon: {fileID: -2465062858953466281, guid: 3171029d935858440a940dc6ceeccb85, type: 3}
   pressedIcon: {fileID: -2689385719673929582, guid: ff9962d73c868414f89be3be9ddd3aad, type: 3}
   unlockedIcon: {fileID: -6253977925051982790, guid: 4769044286513d3428ebca31bdc179c7, type: 3}
   gameplaySceneName: ActivityTwo

@@ -12,12 +12,18 @@ public class TeacherMenuController : MonoBehaviour
     // Cargar escena para ver progresos
     public void GoToViewProgress()
     {
-        SceneManager.LoadScene("ProgressScene");
+        SceneManager.LoadScene("StudentListScene");
     }
 
-    // (Opcional) volver al menú principal
+    //volver al menú principal
     public void GoToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    //Borra todos los datos 
+    public void ClearAll()
+    {
+        ProfilesManager.Instance.ClearAllData();
     }
 }
