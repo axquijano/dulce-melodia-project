@@ -108,16 +108,27 @@ public class ActivityConnector : MonoBehaviour
         );
     }
 
-    public void BackToMap()
+
+
+     public void ContinuePlaying()
     {
-        // Si ganó el último nivel → emociones
-        if (levelWon && GameFlowManager.Instance.IsLastLevel())
+        // Repetir nivel
+        if (!levelWon)
         {
-            SceneLoader.Instance.LoadScene("MapEmotions");
+            SceneLoader.Instance.LoadScene(
+                GameFlowManager.Instance.selectedActivity.gameplaySceneName
+            );
             return;
         }
 
-        // Si no, volver al mapa de actividades
-        SceneLoader.Instance.LoadScene("MapActivity");
+        // Si gano ir al siguiente nivel
+        if (!GameFlowManager.Instance.IsLastLevel())
+        {
+            GameFlowManager.Instance.GoToNextLevel();
+            return;
+        }
+
+        // Si es el ultimo nivel de la actividad ir al mapa de emociones
+        SceneLoader.Instance.LoadScene("MapEmotions");
     }
 }

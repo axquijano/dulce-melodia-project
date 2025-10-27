@@ -42,7 +42,7 @@ public class GameFlowManager : MonoBehaviour
         PlayerPrefs.SetInt("CurrentLevel", selectedLevel);
         PlayerPrefs.Save();
 
-        SceneLoader.Instance.LoadScene(selectedActivity.gameplaySceneName);
+        LoadGameplayScene();
     }
 
     public int GetCurrentLevelIndex(ActivityEntry activity)
@@ -63,6 +63,29 @@ public class GameFlowManager : MonoBehaviour
     public bool IsLastLevel()
     {
         return selectedLevel >= selectedActivity.levels.Count - 1;
+    }
+
+    public void GoToNextLevel()
+    {
+        selectedLevel++;
+
+        PlayerPrefs.SetInt("CurrentLevel", selectedLevel);
+        PlayerPrefs.Save();
+
+        LoadGameplayScene();
+    }
+    public void LoadGameplayScene()
+    {
+        // Caso especial: tercer nivel con escena distinta
+        if (!string.IsNullOrEmpty(selectedActivity.thirdLevelSceneName)
+            && selectedLevel == 2)
+        {
+            SceneLoader.Instance.LoadScene(selectedActivity.thirdLevelSceneName);
+            return;
+        }
+
+        // Caso normal
+        SceneLoader.Instance.LoadScene(selectedActivity.gameplaySceneName);
     }
 
 }
