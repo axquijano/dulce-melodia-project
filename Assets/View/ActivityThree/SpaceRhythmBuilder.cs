@@ -3,7 +3,6 @@ using UnityEngine;
 public class SpaceRhythmBuilder : MonoBehaviour
 {
     public SongData songData;
-    public RectTransform notesRoot;
 
     [Header("Lanes")]
     public RectTransform laneC;
@@ -16,8 +15,9 @@ public class SpaceRhythmBuilder : MonoBehaviour
 
     public GameObject starNotePrefab;
 
-    [Header("Visual")]
+    [Header("Spacing")]
     public float pixelsPerSecond = 200f;
+    public float startOffset = 800f; // qué tan arriba inicia la canción
 
     void Start()
     {
@@ -46,8 +46,8 @@ public class SpaceRhythmBuilder : MonoBehaviour
         GameObject obj = Instantiate(starNotePrefab, lane);
         RectTransform rect = obj.GetComponent<RectTransform>();
 
-        // ⏱️ tiempo → posición
-        float y = timedNote.time * pixelsPerSecond;
+        // ⬆️ lo primero empieza más arriba
+        float y = startOffset + (timedNote.time * pixelsPerSecond);
         rect.anchoredPosition = new Vector2(0, y);
 
         StarNoteUI ui = obj.GetComponent<StarNoteUI>();
@@ -65,7 +65,7 @@ public class SpaceRhythmBuilder : MonoBehaviour
             "G" => laneG,
             "A" => laneA,
             "B" => laneB,
-            _   => laneC
+            _ => laneC
         };
     }
 }

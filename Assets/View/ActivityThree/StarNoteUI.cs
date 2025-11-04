@@ -11,7 +11,7 @@ public class StarNoteUI : MonoBehaviour
     void Awake()
     {
         Rect = GetComponent<RectTransform>();
-        glow.enabled = false; // 🔥 importante
+        glow.enabled = false; 
     }
 
     public void SetActive(bool active)
