@@ -7,6 +7,9 @@ public class PianoKey : MonoBehaviour
 {
     public NoteData noteData;
     private AudioSource audioSource;
+
+    public bool allowInternalSound = true; // para el nivel de ritmo, el sonido se controla desde el manager
+
     public event Action<NoteData> onKeyPressed;
 
     [Header("UI References")]
@@ -37,11 +40,17 @@ public class PianoKey : MonoBehaviour
 
     public void PlayNote()
     {
-        if (!keyButton.interactable) return; // si está desactivada no debe sonar
-        audioSource.PlayOneShot(noteData.sound);
+        if (!keyButton.interactable) return;
+
+        if (allowInternalSound && noteData.sound != null)
+        {
+            audioSource.PlayOneShot(noteData.sound);
+        }
+
         onKeyPressed?.Invoke(noteData);
         ResetVisualHelp();
     }
+
 
     public void SetKeyEnabled(bool enabled)
     {
