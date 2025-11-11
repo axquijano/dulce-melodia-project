@@ -51,6 +51,13 @@ public class PianoKey : MonoBehaviour
         ResetVisualHelp();
     }
 
+    public void PlayExternalSound(AudioClip clip)
+    {
+        if (clip == null) return;
+
+        audioSource.PlayOneShot(clip);
+    }
+
 
     public void SetKeyEnabled(bool enabled)
     {

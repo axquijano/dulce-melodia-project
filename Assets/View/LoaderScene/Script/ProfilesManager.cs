@@ -77,7 +77,7 @@ public class ProfilesManager : MonoBehaviour
                 unlocked = false,
                 value = new ActivityData
                 {
-                    tutorialSeen = true,
+                    tutorialSeen = false,
                     levels = new List<LevelData>()
                 }
             };

@@ -26,7 +26,7 @@ MonoBehaviour:
     - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
       time: 1.4
       isGhost: 1
-      overrideSound: {fileID: 0}
+      overrideSound: {fileID: 8300000, guid: 4218118bedac2ce4195c32413e58ac86, type: 3}
     row2:
     - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
       time: 2

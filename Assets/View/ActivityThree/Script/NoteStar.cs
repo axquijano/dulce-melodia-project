@@ -8,7 +8,6 @@ public class NoteStar : MonoBehaviour
     public Image bubbleImage;
     public TMP_Text label;
     public Sprite imagenInit;   // estrella gris
-    public bool isPending = false; //para el nivel de ritmo
     public bool IsPending { get; private set; }
 
     public TimedNote timedNote;
@@ -31,14 +30,22 @@ public class NoteStar : MonoBehaviour
         SetInactive();
     }
 
-    
+    public void Setup(TimedNote timedNote )
+    {
+        this.timedNote = timedNote;
+        noteData = timedNote.note;
+        isGhost = false;
+        revealed = false;
+        label.text = noteData.noteName;
+        SetInactive();
+    }
 
     // --------------------------------------------------
     // ⭐ Estado normal: bajando
     public void SetInactive()
     {
         isActive = false;
-        isPending = false;
+        IsPending = false;
 
         bubbleImage.sprite = imagenInit;
         bubbleImage.color = Color.white;
@@ -51,7 +58,7 @@ public class NoteStar : MonoBehaviour
     public void SetActive()
     {
         isActive = true;
-        isPending = true;
+        IsPending = true;
 
         bubbleImage.sprite = noteData.imagenStar;
         bubbleImage.color = Color.white;

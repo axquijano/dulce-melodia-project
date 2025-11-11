@@ -22,7 +22,7 @@ public class SpaceRhythmTimeline : MonoBehaviour
 
         foreach (var note in notes)
         {
-            if (note.isPending)
+            if (note.IsPending)
                 return true;
         }
 
