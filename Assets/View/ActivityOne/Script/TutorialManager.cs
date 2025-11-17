@@ -15,7 +15,7 @@ public class TutorialManager : MonoBehaviour
     [Header("Frog")]
     public RectTransform frog;
     public Animator frogAnimator;
-    public VisualFeedback feedback;
+    private VisualFeedback feedback;
 
     [Header("Tutorial UI")]
     public TutorialStep[] steps;
@@ -55,6 +55,12 @@ public class TutorialManager : MonoBehaviour
         // Mostrar avatar base
         if (currentAvatar != null && avatarImage != null)
             avatarImage.sprite = currentAvatar.avatarSprite;
+
+        feedback = frog.GetComponentInChildren<VisualFeedback>(true);
+        if (feedback == null)
+        {
+            Debug.LogError("No se encontró VisualFeedback dentro del prefab de la rana");
+        }
 
         InitializeBubbles();
         FeedbackManager.Instance.SetMaxMistakes(sequence.allowedMistakes);
