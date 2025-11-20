@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f722ca01a3c3ca4ab099ec3e7b4678d, type: 3}
+  m_Name: medalFrog
+  m_EditorClassIdentifier: 
+  activityKey: Ranas
+  medal_1_3: {fileID: -8964549481932372974, guid: b0ffb06cee20dbd489bd2866b3fcce6b, type: 3}
+  medal_2_3: {fileID: 6451699637212821852, guid: b0ffb06cee20dbd489bd2866b3fcce6b, type: 3}
+  medal_3_3: {fileID: 1867117485908944494, guid: b0ffb06cee20dbd489bd2866b3fcce6b, type: 3}

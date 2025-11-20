@@ -183,7 +183,7 @@ public class ActivityOneManager : MonoBehaviour
                 feedback.ShowNextReward();
 
             // 🎙️ Voz positiva
-            TTSManager.Instance.Speak("Muy bien");
+            PlayProgressFeedback();
 
             if (currentIndex >= sequence.notes.Length - 1)
             {
@@ -225,6 +225,33 @@ public class ActivityOneManager : MonoBehaviour
             Debug.Log("❌ Límite de errores alcanzado. Nivel perdido.");
             ActivityConnector.Instance.OnLose(); 
             return;
+        }
+    }
+
+    void PlayProgressFeedback()
+    {
+        string phrase = null;
+        int totalNotes = sequence.notes.Length;
+
+        // 🟢 Inicio del nivel
+        if (currentIndex == 1)
+        {
+            phrase = "¡Muy bien!";
+        }
+        // 🟡 Mitad del nivel
+        else if (currentIndex == totalNotes / 2)
+        {
+            phrase = "¡Excelente!";
+        }
+        // 🔵 Casi al final
+        else if (currentIndex == totalNotes - 2)
+        {
+            phrase = "¡Ya casi terminamos!";
+        }
+
+        if (!string.IsNullOrEmpty(phrase))
+        {
+            TTSManager.Instance.Speak(phrase);
         }
     }
 

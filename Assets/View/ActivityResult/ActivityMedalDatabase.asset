@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07563f8ddd605af4b9dfa13331a16bdf, type: 3}
+  m_Name: ActivityMedalDatabase
+  m_EditorClassIdentifier: 
+  medals:
+  - {fileID: 11400000, guid: 5ad0dcd6434e47a408de32e3bf6e8c8e, type: 2}
+  - {fileID: 11400000, guid: b04bb1c5c20ff64499a8b43b443f4fb2, type: 2}
+  - {fileID: 11400000, guid: ecedbf9c19bbd004ea7a48e1d41cbeef, type: 2}
