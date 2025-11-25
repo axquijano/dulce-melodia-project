@@ -2963,7 +2963,6 @@ MonoBehaviour:
   - {fileID: 1398083706}
   frog: {fileID: 477631930}
   frogAnimator: {fileID: 477631931}
-  feedback: {fileID: 0}
   steps:
   - message: 'Esta es la rana Rene '
     arrowToShow:

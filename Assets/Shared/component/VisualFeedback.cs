@@ -11,6 +11,8 @@ public class VisualFeedback : MonoBehaviour
     private int currentRewardIndex = 0;
     private Image displayImage;
 
+    private int lastRewardIndex = -1;
+
     void Awake()
     {
         displayImage = GetComponent<Image>();
@@ -24,14 +26,20 @@ public class VisualFeedback : MonoBehaviour
             Debug.LogWarning("No rewards assigned to VisualFeedback");
             return;
         }
+
+        int index;
+
+        do
+        {
+            index = Random.Range(0, rewards.Count);
+        }
+        while (index == lastRewardIndex && rewards.Count > 1);
+
+        lastRewardIndex = index;
+
         gameObject.SetActive(true);
         StopAllCoroutines();
-        StartCoroutine(PlayAnimation(rewards[currentRewardIndex]));
-
-        if (currentRewardIndex < rewards.Count - 1)
-        {
-            currentRewardIndex++;
-        }
+        StartCoroutine(PlayAnimation(rewards[index]));
     }
 
     public void ResetRewards()

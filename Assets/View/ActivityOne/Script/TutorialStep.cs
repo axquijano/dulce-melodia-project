@@ -12,6 +12,9 @@ public class TutorialStep
     [Tooltip("Tiempo estimado del mensaje (segundos)")]
     public float voiceDuration = 3f;
 
+    [Tooltip("Si es verdadero, el paso espera una acción del niño (ej: tocar una tecla)")]
+    public bool waitForAction = false;
+
     // Método para activar o desactivar todas las flechas
     public void SetArrowsActive(bool isActive)
     {

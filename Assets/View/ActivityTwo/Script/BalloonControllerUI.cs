@@ -1,35 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class BalloonControllerUI : MonoBehaviour
 {
     [Header("Movement")]
     public float speed = 120f;
-
     private RectTransform rect;
 
     [Header("References")]
     [SerializeField] private Image balloonImage;
     [SerializeField] private TextMeshProUGUI letter;
+    [SerializeField] private VisualFeedback visualFeedback;
 
     [Header("Settings")]
     [SerializeField] private Color blackColor = Color.black;
 
     private Color originalColor;
-    public NoteData noteData;  // la nota asociada a este globo
+    public NoteData noteData;
 
-    public Sprite[] imagenes ;
-
-    public string id = System.Guid.NewGuid().ToString();
-
+    public Sprite[] imagenes;
     public ActivityTwoManager manager;
-
     public RectTransform parentPanel;
 
     private bool wasMissRegistered = false;
-    private bool isDead = false;/*  */
-
+    private bool isDead = false;
 
     void Awake()
     {
@@ -41,6 +37,8 @@ public class BalloonControllerUI : MonoBehaviour
 
     void Update()
     {
+        if (isDead) return;
+
         rect.anchoredPosition += Vector2.up * speed * Time.deltaTime;
 
         float halfHeight = rect.rect.height * 0.5f;
@@ -51,13 +49,13 @@ public class BalloonControllerUI : MonoBehaviour
 
         Vector3 balloonTop = rect.TransformPoint(new Vector3(0, halfHeight, 0));
 
-        // Globo perdido (solo una vez)
+        // Globo perdido (una sola vez)
         if (!wasMissRegistered && balloonTop.y > worldLimitY)
         {
             wasMissRegistered = true;
-            isDead = true; // ya no es tocable
+            isDead = true;
 
-            SetMissedVisual();        
+            SetMissedVisual();
             manager.RegisterBalloonMiss(this);
         }
 
@@ -67,34 +65,33 @@ public class BalloonControllerUI : MonoBehaviour
         }
     }
 
-    public void Pop()
-    {
-       if (isDead) return;
-        isDead = true;
-        Destroy(gameObject);
-    }
-
-
+    // -------------------------
+    // SETUP
+    // -------------------------
     public void Setup(NoteData data, bool displayColor, bool displayLetter, bool isBlack)
     {
         noteData = data;
 
-        // --- Imagen aleatoria ---
+        // Imagen aleatoria
         if (imagenes != null && imagenes.Length > 0)
-        {
             balloonImage.sprite = imagenes[Random.Range(0, imagenes.Length)];
-        }
-        // --- COLOR ---
+
+        // Color
         if (isBlack)
+        {
             balloonImage.color = blackColor;
-        else if (displayColor){
+        }
+        else if (displayColor)
+        {
             balloonImage.color = data.color;
         }
-        else{
+        else
+        {
             balloonImage.color = originalColor;
             letter.color = data.color;
         }
-        // --- LETRA ---
+
+        // Letra
         if (displayLetter)
         {
             letter.gameObject.SetActive(true);
@@ -111,6 +108,37 @@ public class BalloonControllerUI : MonoBehaviour
         speed = newSpeed;
     }
 
+    // -------------------------
+    // HIT FEEDBACK (CLAVE)
+    // -------------------------
+    public void PlayHitFeedbackAndPop()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        // Ocultar globo y letra
+        if (balloonImage != null)
+            balloonImage.enabled = false;
+
+        if (letter != null)
+            letter.gameObject.SetActive(false);
+
+        // Estímulo visual
+        if (visualFeedback != null)
+            visualFeedback.ShowNextReward();
+
+        StartCoroutine(DestroyAfterFeedback());
+    }
+
+    IEnumerator DestroyAfterFeedback()
+    {
+        yield return new WaitForSeconds(0.8f);
+        Destroy(gameObject);
+    }
+
+    // -------------------------
+    // MISS
+    // -------------------------
     void SetMissedVisual()
     {
         if (balloonImage != null)
@@ -119,5 +147,4 @@ public class BalloonControllerUI : MonoBehaviour
         if (letter != null)
             letter.gameObject.SetActive(false);
     }
-
 }

@@ -62,7 +62,7 @@ public class ResultUI : MonoBehaviour
 
             avatarImage.sprite = currentAvatar.celebrationSprite;
 
-            string text = $"¡Excelente {childName}! Lo hiciste muy bien 🎉";
+            string text = $"¡Excelente {childName}! Lo hiciste muy bien. ¡Vamos por el siguiente nivel!";
             TTSManager.Instance.Speak(text);
         }
         else
