@@ -149,11 +149,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18fa515ec112cc74086d0ca08d1ef5c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  database:
+    profiles: []
   currentProfile:
     childName: 
     currentActivityIndex: 0
     currentLevelIndex: 0
-  databaseActividades: {fileID: 11400000, guid: f9d50393fc856494581b268f94f12b21, type: 2}
+    activities: []
+  activitiesDB: {fileID: 11400000, guid: f9d50393fc856494581b268f94f12b21, type: 2}
 --- !u!114 &529980405
 MonoBehaviour:
   m_ObjectHideFlags: 0

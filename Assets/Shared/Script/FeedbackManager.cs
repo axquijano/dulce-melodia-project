@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//Para registrar los acierto, el tiempo mientras el niño esta jugando
 public class FeedbackManager : MonoBehaviour
 {
     public static FeedbackManager Instance;
