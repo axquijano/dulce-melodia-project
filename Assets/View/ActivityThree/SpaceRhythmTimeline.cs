@@ -18,7 +18,8 @@ public class SpaceRhythmTimeline : MonoBehaviour
 
     bool HasPendingNote()
     {
-        NoteStar[] notes = FindObjectsOfType<NoteStar>();
+        NoteStar[] notes = FindObjectsByType<NoteStar>(FindObjectsSortMode.None);
+
 
         foreach (var note in notes)
         {

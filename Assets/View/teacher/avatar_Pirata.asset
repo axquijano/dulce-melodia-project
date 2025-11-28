@@ -15,6 +15,6 @@ MonoBehaviour:
   avatarName: Pirata
   avatarSprite: {fileID: 595777924227303117, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
   happySprite: {fileID: 595777924227303117, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
-  sadSprite: {fileID: 0}
-  celebrationSprite: {fileID: 0}
+  sadSprite: {fileID: 595777924227303117, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
+  celebrationSprite: {fileID: 595777924227303117, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
   mainColor: {r: 0, g: 0, b: 0, a: 0}

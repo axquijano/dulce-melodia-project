@@ -8,7 +8,6 @@ public class VisualFeedback : MonoBehaviour
     [Header("Rewards sequence")]
     [SerializeField] private List<RewardData> rewards;
 
-    private int currentRewardIndex = 0;
     private Image displayImage;
 
     private int lastRewardIndex = -1;
@@ -42,10 +41,6 @@ public class VisualFeedback : MonoBehaviour
         StartCoroutine(PlayAnimation(rewards[index]));
     }
 
-    public void ResetRewards()
-    {
-        currentRewardIndex = 0;
-    }
 
     private IEnumerator PlayAnimation(RewardData reward)
     {
