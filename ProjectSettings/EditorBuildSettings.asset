@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/View/MapLevel/MapLevel.unity
     guid: ee14914388d91a54bbb3dedf0a9d3c89
+  - enabled: 1
+    path: Assets/View/ActivityOne/ActivityOne Copy.unity
+    guid: a4d575dd7db771249b3a125289ff582e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

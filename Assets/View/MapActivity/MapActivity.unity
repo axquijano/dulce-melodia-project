@@ -702,7 +702,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1900920394}
   - component: {fileID: 1900920395}
-  - component: {fileID: 1900920396}
   m_Layer: 0
   m_Name: MapActivityUI
   m_TagString: Untagged
@@ -740,21 +739,6 @@ MonoBehaviour:
   activitiesDatabase: {fileID: 11400000, guid: f9d50393fc856494581b268f94f12b21, type: 2}
   levelButtonPrefab: {fileID: 4691672894811395186, guid: 6e83b6a5d4deab54582b748f5597ebc5, type: 3}
   levelsContainer: {fileID: 1089695450}
---- !u!114 &1900920396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900920392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84750b985d615b24fb7477804e51df7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedActivity: {fileID: 0}
-  selectedLevel: 0
-  database: {fileID: 11400000, guid: f9d50393fc856494581b268f94f12b21, type: 2}
 --- !u!1 &1963401310
 GameObject:
   m_ObjectHideFlags: 0

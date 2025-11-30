@@ -7,29 +7,19 @@ public class LevelItemButton : MonoBehaviour
     public TMP_Text levelText;
     public Button button;
     public GameObject lockIcon;
-
-    private ActivityDefinition activityDef;
     private int levelIndex;
 
-    public void Setup(int index, object unusedData, ActivityDefinition def)
+    public void Setup(int index, ChildProfile profile)
     {
-        activityDef = def;
+        int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
         levelIndex = index;
 
         levelText.text = "Nivel " + (index + 1);
 
         // Obtener perfil
-        var profile = ProfilesManager.Instance.currentProfile;
+        bool  unlockedLevel = profile.activities[activityIndex].value.levels[levelIndex].unlocked;
 
-        int unlockedLevel = profile.currentLevelIndex;
-
-        bool completed = index < unlockedLevel;
-        bool unlocked = index == unlockedLevel;
-        bool locked = index > unlockedLevel;
-
-        if (completed)
-            SetCompleted();
-        else if (unlocked)
+       if (unlockedLevel)
             SetUnlocked();
         else
             SetLocked();
@@ -62,8 +52,13 @@ public class LevelItemButton : MonoBehaviour
             lockIcon.SetActive(true);
     }
 
-     public void OnClick()
+    public void OnClick()
     {
-        GameFlowManager.Instance.SelectLevel(levelIndex);
+        PlayerPrefs.SetInt("CurrentLevel", levelIndex);
+        PlayerPrefs.Save();
+
+        GameFlowManager.Instance.selectedLevel = levelIndex;
+        SceneLoader.Instance.LoadScene(GameFlowManager.Instance.selectedActivity.gameplaySceneName);
     }
+
 }

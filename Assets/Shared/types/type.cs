@@ -8,6 +8,7 @@ public class LevelData
     public float bestTime = -1f;
     public int bestHits = -1;
     public int bestMistakes = -1;
+    public bool unlocked = false;
 
     public int retries = 0;
     public int stars = 0; // 0–3
@@ -26,6 +27,7 @@ public class ActivityData
 public class ActivityEntry
 {
     public string key;
+    public bool unlocked;
     public ActivityData value;
 }
 
@@ -41,6 +43,14 @@ public class ChildProfile
     // Actividades:
     // Musica, Memoria, Colores, Ritmo, Atencion
     public List<ActivityEntry> activities = new List<ActivityEntry>();
+    
+    public ChildProfile(string name)
+    {
+        childName = name;
+        currentActivityIndex = 0;
+        currentLevelIndex = 0;
+        activities = new List<ActivityEntry>();
+    }
 }
 
 
@@ -50,4 +60,3 @@ public class ProfilesDatabase
 {
     public List<ChildProfile> profiles = new List<ChildProfile>();
 }
-

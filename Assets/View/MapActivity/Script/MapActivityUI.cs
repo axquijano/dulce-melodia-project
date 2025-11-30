@@ -21,6 +21,7 @@ public class MapActivityUI : MonoBehaviour
 
     void GenerateActivityButtons()
     {
+        //Limpiar el contenedor para poner los nuevos elementos
         foreach (Transform t in levelsContainer)
             Destroy(t.gameObject);
 
@@ -28,12 +29,12 @@ public class MapActivityUI : MonoBehaviour
         for (int i = 0; i < activitiesDatabase.activities.Count; i++)
         {
             ActivityDefinition def = activitiesDatabase.activities[i];
-
+            //Instanciar un boton para cada actividad
             GameObject btn = Instantiate(levelButtonPrefab, levelsContainer);
-
+        
             ActivityItemButton item = btn.GetComponent<ActivityItemButton>();
 
-            // ESTA ES LA LLAMADA CORRECTA
+            // Config bloquear/desbloquear la actividad
             item.Setup(def, i, profile);
         }
     }

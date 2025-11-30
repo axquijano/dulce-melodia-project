@@ -10,7 +10,7 @@ public class ResultUI : MonoBehaviour
 
     void Start()
     {
-        if (ActivityConnector.Instance.levelWon)
+        if (ActivityConnector.Instance.LevelWon)
         {
             winPanel.SetActive(true);
             losePanel.SetActive(false);

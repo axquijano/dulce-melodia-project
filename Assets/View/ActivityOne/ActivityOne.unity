@@ -3544,7 +3544,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1482031659}
   - component: {fileID: 1482031658}
-  - component: {fileID: 1482031660}
   m_Layer: 0
   m_Name: GameLevelManager
   m_TagString: Untagged
@@ -3564,7 +3563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d8fa407cac7b0d44a5a5c0185f894a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sequence: {fileID: 11400000, guid: 1ee04dd2d1a38664497316ed629a593c, type: 2}
+  activity: {fileID: 11400000, guid: 66eeef9a0cb317d4da2630b36141f042, type: 2}
   bubblePrefab: {fileID: 6329239051228271283, guid: f0252af3cc42bf349a6cd8d37ff66344, type: 3}
   bubbleContainer: {fileID: 1395130227}
   pianoKeys:
@@ -3591,22 +3590,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1482031660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482031657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab8adf18c6fe90c4fa2c4a3578174583, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hits: 0
-  mistakes: 0
-  time: 0
-  levelWon: 0
 --- !u!1001 &1597564736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4868,5 +4851,5 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 547588966}
-  - {fileID: 2101816237}
   - {fileID: 1482031659}
+  - {fileID: 2101816237}

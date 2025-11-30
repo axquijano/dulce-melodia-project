@@ -37,7 +37,7 @@ public class MapLevelUI : MonoBehaviour
             LevelItemButton item = btn.GetComponent<LevelItemButton>();
 
             // Como LevelSequence NO tiene datos extra, usamos null
-            item.Setup(i, null, currentActivity);
+            item.Setup(i, profile);
         }
     }
  
