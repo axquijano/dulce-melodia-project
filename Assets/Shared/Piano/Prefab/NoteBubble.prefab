@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3609754129978504188, guid: ed3351270df8fd04e9412498cceb1874, type: 3}
+  m_Sprite: {fileID: -105285669390315463, guid: 1e1d8bda47a78974981d51e002105fef, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectColor: {r: 1, g: 0.82948864, b: 0.0627451, a: 1}
   m_EffectDistance: {x: 4.9, y: 2.86}
   m_UseGraphicAlpha: 1
 --- !u!1 &2088447556972180410
@@ -252,7 +252,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6329239051228271283}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.4617488, y: -0, z: -0, w: -0.8870108}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -260,7 +260,7 @@ RectTransform:
   - {fileID: 6021378858231592093}
   - {fileID: 6221175960832419469}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 305, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -385.16663, y: 161.50623}
@@ -280,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleImage: {fileID: 4323727032768637397}
   label: {fileID: 3109864355082143489}
+  imagenInit: {fileID: 4183730061383555592, guid: 19e4ed503f429724aaf92e8dfc568f4e, type: 3}
 --- !u!114 &4774165720752982705
 MonoBehaviour:
   m_ObjectHideFlags: 0

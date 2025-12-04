@@ -29,13 +29,28 @@ public class PianoKey : MonoBehaviour
 
         if (guideCircle != null)
             guideCircle.gameObject.SetActive(false);
+        
+        // Conectar el botón al método PlayNote
+        keyButton.onClick.AddListener(PlayNote);
     }
 
     public void PlayNote()
     {
+        if (!keyButton.interactable) return; // si está desactivada no debe sonar
         audioSource.PlayOneShot(noteData.sound);
         onKeyPressed?.Invoke(noteData);
         ResetVisualHelp();
+    }
+
+    public void SetKeyEnabled(bool enabled)
+    {
+        keyButton.interactable = enabled;
+
+        if (!enabled)
+        {
+            // quitar ayuda visual
+            ResetVisualHelp();
+        }
     }
 
     public void ShowHelp()

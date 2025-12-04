@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Note_empty
   m_EditorClassIdentifier: 
   noteName: 
-  noteColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
-  sound: {fileID: 8300000, guid: faa4ba1aacdb212499b8794f432c5c01, type: 3}
+  sound: {fileID: 0}
+  imagen: {fileID: -105285669390315463, guid: 1e1d8bda47a78974981d51e002105fef, type: 3}
+  color: {r: 0.22352943, g: 0.227451, b: 0.22352943, a: 1}

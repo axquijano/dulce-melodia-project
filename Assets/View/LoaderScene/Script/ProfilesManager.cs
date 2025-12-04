@@ -90,76 +90,87 @@ public class ProfilesManager : MonoBehaviour
 
     public LevelData GetCurrentLevelData()
     {
-        var act = currentProfile.activities[currentProfile.currentActivityIndex];
-        return act.value.levels[currentProfile.currentLevelIndex];
+        int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
+        int levelIndex = PlayerPrefs.GetInt("CurrentLevel");
+        var act = currentProfile.activities[activityIndex];
+        return act.value.levels[levelIndex];
     }
 
     public void UpdateCurrentLevelData(LevelData data)
     {
-        var act = currentProfile.activities[currentProfile.currentActivityIndex];
-        act.value.levels[currentProfile.currentLevelIndex] = data;
+        int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
+        int levelIndex = PlayerPrefs.GetInt("CurrentLevel");
+        var act = currentProfile.activities[activityIndex];
+        act.value.levels[levelIndex] = data;
         SaveProfiles();
     }
 
-    public void AdvanceLevelOrActivity()
+   public void AdvanceLevelOrActivity()
+{
+    ChildProfile p = currentProfile;
+
+    // -----------------------------
+    // Leer índices desde PlayerPrefs
+    // -----------------------------
+    int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
+    int levelIndex = PlayerPrefs.GetInt("CurrentLevel");
+
+    ActivityEntry currentActivity = p.activities[activityIndex];
+    ActivityDefinition dbActivity = db.activities[activityIndex];
+
+    int maxLevels = dbActivity.levels.Count - 1;
+
+    // ----------------------------
+    // 1. SI HAY SIGUIENTE NIVEL
+    // ----------------------------
+    if (levelIndex < maxLevels)
     {
-        ChildProfile p = currentProfile;
+        int nextLevel = levelIndex + 1;
 
-        ActivityEntry currentActivity = p.activities[p.currentActivityIndex];
+        // Desbloquear siguiente nivel
+        currentActivity.value.levels[nextLevel].unlocked = true;
 
-        // Actividad definida en el database (para contar niveles)
-        ActivityDefinition dbActivity = db.activities[p.currentActivityIndex];
+        // Guardar el nuevo level en PlayerPrefs
+       /*  PlayerPrefs.SetInt("CurrentLevel", nextLevel); */
+        PlayerPrefs.Save();
 
-        int maxLevels = dbActivity.levels.Count - 1;  // index del último nivel
-        LevelData currentLevel = currentActivity.value.levels[p.currentLevelIndex];
-
-        // ----------------------------
-        // 1. SI HAY SIGUIENTE NIVEL
-        // ----------------------------
-        if (p.currentLevelIndex < maxLevels)
-        {
-            // Desbloquear SIGUIENTE nivel
-            int nextLevel = p.currentLevelIndex + 1;
-            currentActivity.value.levels[nextLevel].unlocked = true;
-
-            // Avanza al siguiente nivel
-            p.currentLevelIndex = nextLevel;
-
-            SaveProfiles();
-            return;
-        }
-
-        // -------------------------------------
-        // 2. SI NO HAY MÁS NIVELES → ACTIVIDAD
-        // -------------------------------------
-
-        // Reiniciar level index para la nueva actividad
-        p.currentLevelIndex = 0;
-
-        // Si se puede avanzar a otra actividad
-        if (p.currentActivityIndex < p.activities.Count - 1)
-        {
-            int nextActivity = p.currentActivityIndex + 1;
-
-            // Desbloquear la siguiente actividad
-            p.activities[nextActivity].unlocked = true;
-
-            // Desbloquear su primer nivel
-            p.activities[nextActivity].value.levels[0].unlocked = true;
-
-            // Cambiar actividad
-            p.currentActivityIndex = nextActivity;
-
-            SaveProfiles();
-            return;
-        }
-
-        // -------------------------------------
-        // 3. NO HAY MÁS ACTIVIDADES
-        // -------------------------------------
-        // Simplemente queda en la última actividad / nivel
         SaveProfiles();
+        return;
     }
+
+    // -------------------------------------
+    // 2. SI NO HAY MÁS NIVELES → ACTIVIDAD
+    // -------------------------------------
+
+    // Resetea el nivel para la siguiente actividad
+    /* PlayerPrefs.SetInt("CurrentLevel", 0); */
+
+    // Si se puede avanzar a otra actividad
+    if (activityIndex < p.activities.Count - 1)
+    {
+        int nextActivity = activityIndex + 1;
+
+        // Desbloquear actividad
+        p.activities[nextActivity].unlocked = true;
+
+        // Desbloquear primer nivel de esa actividad
+        p.activities[nextActivity].value.levels[0].unlocked = true;
+
+        // Guardar nuevo activity en PlayerPrefs
+        /* PlayerPrefs.SetInt("CurrentActivity", nextActivity); */
+        PlayerPrefs.Save();
+
+        SaveProfiles();
+        return;
+    }
+
+    // -------------------------------------
+    // 3. NO HAY MÁS ACTIVIDADES
+    // -------------------------------------
+    // No cambia nada, solo guardamos
+    SaveProfiles();
+}
+
 
 
     public void CreateProfile(string name)

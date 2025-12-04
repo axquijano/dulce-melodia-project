@@ -4,6 +4,6 @@ public class BootLoader : MonoBehaviour
 {
     void Awake()
     {
-        SceneLoader.Instance.LoadScene("MainMenu");
+        SceneLoader.Instance.LoadScene("ActivityOneTutorial");
     }
 }

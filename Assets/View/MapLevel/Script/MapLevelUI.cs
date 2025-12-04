@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class MapLevelUI : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class MapLevelUI : MonoBehaviour
 
     private ActivityDefinition currentActivity;
     private ChildProfile profile;
+    public TMP_Text text;
 
     void Start()
     {
         currentActivity = GameFlowManager.Instance.selectedActivity;
+        text.text = "Actividad " + currentActivity.activityName;
         profile = ProfilesManager.Instance.currentProfile;
 
         Setup(currentActivity);
@@ -37,6 +40,7 @@ public class MapLevelUI : MonoBehaviour
             LevelItemButton item = btn.GetComponent<LevelItemButton>();
 
             // Como LevelSequence NO tiene datos extra, usamos null
+            Debug.Log("MapLevel , recorriendo el level "+i);
             item.Setup(i, profile);
         }
     }
