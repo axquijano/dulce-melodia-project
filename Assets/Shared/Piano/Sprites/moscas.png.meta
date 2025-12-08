@@ -1,0 +1,400 @@
+fileFormatVersion: 2
+guid: 95a40eeeb37dda54fb57becb0a0eb426
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7305670370617397160
+    second: moscas_0
+  - first:
+      213: -6765133031789553893
+    second: moscas_1
+  - first:
+      213: -3572168220659778823
+    second: moscas_2
+  - first:
+      213: -4781574753080161236
+    second: moscas_3
+  - first:
+      213: 4126309888961915523
+    second: moscas_4
+  - first:
+      213: 9053476618161591888
+    second: moscas_5
+  - first:
+      213: -8914239964161726916
+    second: moscas_6
+  - first:
+      213: -2553849275961389577
+    second: moscas_7
+  - first:
+      213: -1999473795648511612
+    second: moscas_8
+  - first:
+      213: -7906216735329427888
+    second: moscas_9
+  - first:
+      213: -155711589606472386
+    second: moscas_10
+  - first:
+      213: -4956766373259429162
+    second: moscas_11
+  - first:
+      213: 6760957259134824346
+    second: moscas_12
+  - first:
+      213: -2868292805877312973
+    second: moscas_13
+  - first:
+      213: 7093915618772535497
+    second: moscas_14
+  - first:
+      213: 6947825162846041925
+    second: moscas_15
+  - first:
+      213: 5997236577522125456
+    second: moscas_16
+  - first:
+      213: -3012935560300449142
+    second: moscas_17
+  - first:
+      213: 7661682563186980108
+    second: moscas_18
+  - first:
+      213: -556615364607334080
+    second: moscas_19
+  - first:
+      213: -1208623241856811506
+    second: moscas_20
+  - first:
+      213: -5321220153458661477
+    second: moscas_21
+  - first:
+      213: 4053517013522527615
+    second: moscas_22
+  - first:
+      213: -4764209583242593098
+    second: moscas_23
+  - first:
+      213: 4990221325305261609
+    second: moscas_24
+  - first:
+      213: 2699404325982356073
+    second: moscas_25
+  - first:
+      213: 8462254386309796602
+    second: moscas_26
+  - first:
+      213: 5468878882956928030
+    second: moscas_27
+  - first:
+      213: 7610230415799487379
+    second: moscas_28
+  - first:
+      213: 2109301925744583639
+    second: moscas_29
+  - first:
+      213: -839939174140790486
+    second: moscas_30
+  - first:
+      213: 2663586538588278287
+    second: moscas_31
+  - first:
+      213: -5689141177274408682
+    second: moscas_32
+  - first:
+      213: -4894110635480084499
+    second: moscas_33
+  - first:
+      213: -2102702035777451434
+    second: moscas_34
+  - first:
+      213: -7900118570392981849
+    second: moscas_35
+  - first:
+      213: -3696841626333449938
+    second: moscas_36
+  - first:
+      213: 3317524014088113171
+    second: moscas_37
+  - first:
+      213: -5503527444744672837
+    second: moscas_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: moscas_11
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 358
+        width: 324
+        height: 364
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6da354fde37063bb0800000000000000
+      internalID: -4956766373259429162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moscas_18
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 362
+        width: 329
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c057098a2b3c35a60800000000000000
+      internalID: 7661682563186980108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moscas_24
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 363
+        width: 328
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92e26652bd3d04540800000000000000
+      internalID: 4990221325305261609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: moscas_31
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 358
+        width: 327
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e011538d5f6f420800000000000000
+      internalID: 2663586538588278287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 15e6d02eeecceac4a93e57830dde8f30
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      moscas_0: -7305670370617397160
+      moscas_1: -6765133031789553893
+      moscas_10: -155711589606472386
+      moscas_11: -4956766373259429162
+      moscas_12: 6760957259134824346
+      moscas_13: -2868292805877312973
+      moscas_14: 7093915618772535497
+      moscas_15: 6947825162846041925
+      moscas_16: 5997236577522125456
+      moscas_17: -3012935560300449142
+      moscas_18: 7661682563186980108
+      moscas_19: -556615364607334080
+      moscas_2: -3572168220659778823
+      moscas_20: -1208623241856811506
+      moscas_21: -5321220153458661477
+      moscas_22: 4053517013522527615
+      moscas_23: -4764209583242593098
+      moscas_24: 4990221325305261609
+      moscas_25: 2699404325982356073
+      moscas_26: 8462254386309796602
+      moscas_27: 5468878882956928030
+      moscas_28: 7610230415799487379
+      moscas_29: 2109301925744583639
+      moscas_3: -4781574753080161236
+      moscas_30: -839939174140790486
+      moscas_31: 2663586538588278287
+      moscas_32: -5689141177274408682
+      moscas_33: -4894110635480084499
+      moscas_34: -2102702035777451434
+      moscas_35: -7900118570392981849
+      moscas_36: -3696841626333449938
+      moscas_37: 3317524014088113171
+      moscas_38: -5503527444744672837
+      moscas_4: 4126309888961915523
+      moscas_5: 9053476618161591888
+      moscas_6: -8914239964161726916
+      moscas_7: -2553849275961389577
+      moscas_8: -1999473795648511612
+      moscas_9: -7906216735329427888
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

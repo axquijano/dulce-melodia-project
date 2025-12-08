@@ -21,6 +21,7 @@ public class ActivityItemButton : MonoBehaviour
         // Texto e icono
         label.text = def.activityName;
         iconImage.sprite = def.icon;
+        
 
         // Datos del perfil
         ActivityEntry entry = profile.activities[activityIndex];

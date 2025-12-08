@@ -34,6 +34,6 @@ public class NoteBubble : MonoBehaviour
     public void Highlight(bool state)
     {
         if(state) SetImagenColor();
-        outline.enabled = state;
+       /*  outline.enabled = state; */
     }
 }

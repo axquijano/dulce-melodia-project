@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/View/LoaderScene/LoaderScene.unity
     guid: 564174b2abe572441a8ca269909a9d9e
   - enabled: 0
@@ -32,9 +32,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/View/ActivityTwo/ActivityTwo.unity
     guid: bd055a12fbb938d40801cff9a174e873
-  - enabled: 1
+  - enabled: 0
     path: Assets/View/ActivityOne/ActivityOneTutorial.unity
     guid: e3035ce6849f12246bfb2c38c510a329
+  - enabled: 1
+    path: Assets/View/ActivityThree/ActivityThree.unity
+    guid: 70d133d2e41600444aafd7f4022893c9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
