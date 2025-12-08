@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Note_E
   m_EditorClassIdentifier: 
   noteName: E
-  sound: {fileID: 8300000, guid: 01fcb0de0c0b73a46baf28d56d2ac221, type: 3}
+  sound: {fileID: 8300000, guid: 8f25d18f404899d48b2c23e091730659, type: 3}
   imagen: {fileID: -2224474878120320963, guid: 30591af49781bae4db3f6e24685bb154, type: 3}
   color: {r: 0.14117648, g: 0.54901963, b: 0.8980393, a: 1}
   imagenStar: {fileID: -5979042432758432178, guid: e1263bfdb718c324caf2de6cea4154fe, type: 3}

@@ -1,75 +1,86 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using System.Collections;
 
 public class ActivityMemory : MonoBehaviour
 {
-    // ---------------------------------------------------------
-    // UI
-    // ---------------------------------------------------------
-    [Header("UI")]
+    [Header("UI Stars")]
     public Transform row1Container;
     public Transform row2Container;
     public GameObject starPrefab;
 
-    // ---------------------------------------------------------
-    // INPUT
-    // ---------------------------------------------------------
-    [Header("Input")]
+    [Header("Piano")]
     public PianoKey[] pianoKeys;
 
-    // ---------------------------------------------------------
-    // SONG DATA
-    // ---------------------------------------------------------
     [Header("Song")]
     public SongData songData;
 
-    // ---------------------------------------------------------
-    // AUDIO
-    // ---------------------------------------------------------
     [Header("Audio")]
     public AudioSource audioSource;
 
-    // ---------------------------------------------------------
-    // RULES
-    // ---------------------------------------------------------
-    [Header("Rules")]
-    public int maxMistakesPerRepeat = 3;
+    [Header("Avatar")]
+    public StudentAvatarDatabase avatarDatabase;
+    public Image avatarImage;
+    public TMP_Text messageText;
 
-    // ---------------------------------------------------------
-    // STATE
-    // ---------------------------------------------------------
+    [Header("Rules")]
+    public int maxMistakes = 2;
+
     int currentSection = 0;
-    int currentRepeat = 0;
     int playerNoteIndex = 0;
     int totalNotes = 0;
-    int mistakesThisRepeat = 0;
+    int mistakeCount = 0;
 
     bool waitingForInput = false;
 
     enum LevelPhase { None, AutoPlay, PlayerRepeat }
     LevelPhase phase = LevelPhase.None;
 
-    // ---------------------------------------------------------
-    // LEVEL FLAGS
-    // ---------------------------------------------------------
-    bool isIntroLevel => GameFlowManager.Instance.selectedLevel == 0; // Nivel 1
-    bool isMemoryLevel => GameFlowManager.Instance.selectedLevel == 1; // Nivel 2
+    StudentAvatarData currentAvatar;
+    string childName;
 
-    bool isFirstAttempt => currentRepeat == 0;
-    bool isSecondAttempt => currentRepeat == 1;
+    bool isMemoryLevel => GameFlowManager.Instance.selectedLevel == 1;
 
-    // ---------------------------------------------------------
-    // START
     // ---------------------------------------------------------
     void Start()
     {
+        FeedbackManager.Instance.EnableManualTimerMode();
+        FeedbackManager.Instance.ResetTimer();
+        FeedbackManager.Instance.ResetStats();
+
+        SetupAvatar();
         ActivityConnector.Instance.StartLevel();
         LinkKeys();
-        StartCoroutine(StartSection());
+
+        StartCoroutine(IntroSequence());
+    }
+
+    void SetupAvatar()
+    {
+        var profile = ProfilesManager.Instance.currentProfile;
+        childName = profile.childName;
+
+        currentAvatar = avatarDatabase.GetById(profile.avatarId);
+
+        if (avatarImage != null)
+            avatarImage.sprite = currentAvatar.avatarSprite;
     }
 
     // ---------------------------------------------------------
-    // GENERAR ESTRELLAS
+    IEnumerator IntroSequence()
+    {
+        GenerateStarsForSection(currentSection);
+
+        yield return Speak(
+            $"Hola {childName}, vamos a escuchar la música juntos.",
+            currentAvatar.happySprite,
+            3f
+        );
+
+        StartCoroutine(StartSection());
+    }
+
     // ---------------------------------------------------------
     void GenerateStarsForSection(int sectionIndex)
     {
@@ -79,50 +90,85 @@ public class ActivityMemory : MonoBehaviour
         var section = songData.sections[sectionIndex];
 
         foreach (var timed in section.row1)
-        {
             Instantiate(starPrefab, row1Container)
-                .GetComponent<NoteStar>()
+                .GetComponent<MemoryNoteView>()
                 .Setup(timed.note, timed.isGhost);
-        }
 
         foreach (var timed in section.row2)
-        {
             Instantiate(starPrefab, row2Container)
-                .GetComponent<NoteStar>()
+                .GetComponent<MemoryNoteView>()
                 .Setup(timed.note, timed.isGhost);
-        }
     }
 
-    // ---------------------------------------------------------
-    // CONTROL DE SECCIÓN
     // ---------------------------------------------------------
     IEnumerator StartSection()
     {
-        GenerateStarsForSection(currentSection);
+        if (!isMemoryLevel)
+        {
+            // 🔵 NIVEL 1
 
-        yield return new WaitForSeconds(0.6f);
-        TTSManager.Instance.Speak("Escucha con atención.");
-        yield return new WaitForSeconds(1.2f);
+            yield return Speak(
+                "Escucha con atención.",
+                currentAvatar.avatarSprite,
+                2f
+            );
 
-        yield return StartCoroutine(PlayReferenceAudio());
+            yield return StartCoroutine(PlayReferenceAudio());
 
-        yield return new WaitForSeconds(0.5f);
-        TTSManager.Instance.Speak("Ahora tú.");
+            ResetAllStars();
 
-        yield return new WaitForSeconds(0.8f);
+            yield return Speak(
+                "Ahora es tu turno.",
+                currentAvatar.happySprite,
+                2f
+            );
 
-        currentRepeat = 0;
-        StartPlayerRepeat();
+            StartPlayerRepeat();
+        }
+        else
+        {
+            // 🟣 NIVEL 2 NUEVO DISEÑO
+
+            yield return Speak(
+                "Escucha con mucha atención.",
+                currentAvatar.avatarSprite,
+                2.5f
+            );
+
+            yield return StartCoroutine(PlayReferenceAudio());
+
+            yield return Speak(
+                "Vamos a escuchar una vez más.",
+                currentAvatar.avatarSprite,
+                2.5f
+            );
+
+            yield return StartCoroutine(PlayReferenceAudio());
+
+            yield return Speak(
+                "Ahora algunas notas desaparecerán. Trata de recordarlas.",
+                currentAvatar.avatarSprite,
+                3f
+            );
+
+            ResetAllStars();
+            ActivateGhosts();
+
+            StartPlayerRepeat();
+        }
     }
 
-    // ---------------------------------------------------------
-    // AUTOPLAY (GUÍA)
     // ---------------------------------------------------------
     IEnumerator PlayReferenceAudio()
     {
         phase = LevelPhase.AutoPlay;
         waitingForInput = false;
+
+        FeedbackManager.Instance.StopTimer();
         DisableAllKeys();
+
+        // 🔥 Limpiar antes de empezar
+        ResetAllStars();
 
         var section = songData.sections[currentSection];
         audioSource.clip = section.referenceAudio;
@@ -132,228 +178,187 @@ public class ActivityMemory : MonoBehaviour
 
         for (int i = 0; i < section.row1.Length; i++)
         {
-            var timed = section.row1[i];
-            float wait = startTime + timed.time - Time.time;
+            float wait = startTime + section.row1[i].time - Time.time;
             if (wait > 0) yield return new WaitForSeconds(wait);
 
-            row1Container.GetChild(i).GetComponent<NoteStar>().ShowColor();
+            row1Container.GetChild(i)
+                .GetComponent<MemoryNoteView>()
+                .ShowListening();
         }
 
         for (int i = 0; i < section.row2.Length; i++)
         {
-            var timed = section.row2[i];
-            float wait = startTime + timed.time - Time.time;
+            float wait = startTime + section.row2[i].time - Time.time;
             if (wait > 0) yield return new WaitForSeconds(wait);
 
-            row2Container.GetChild(i).GetComponent<NoteStar>().ShowColor();
+            row2Container.GetChild(i)
+                .GetComponent<MemoryNoteView>()
+                .ShowListening();
         }
 
         yield return new WaitUntil(() => !audioSource.isPlaying);
-        ClearStars();
+
+        // 🔥 MUY IMPORTANTE: limpiar al terminar
+        ResetAllStars();
     }
 
-    // ---------------------------------------------------------
-    // TURNO DEL NIÑO
+
     // ---------------------------------------------------------
     void StartPlayerRepeat()
     {
         phase = LevelPhase.PlayerRepeat;
         waitingForInput = true;
+        mistakeCount = 0;
         playerNoteIndex = 0;
-        mistakesThisRepeat = 0;
 
         totalNotes =
             songData.sections[currentSection].row1.Length +
             songData.sections[currentSection].row2.Length;
 
-        if (isMemoryLevel && isSecondAttempt)
-            ShowGhosts();
-
         HighlightStar(playerNoteIndex);
-        EnableOnlyCorrectKey();
+        EnableAllKeys();
+
+        FeedbackManager.Instance.StartTimer();
     }
 
     void OnKeyPressed(NoteData pressed)
     {
-        if (!waitingForInput || phase != LevelPhase.PlayerRepeat)
-            return;
+        if (!waitingForInput) return;
 
         var expected = GetExpectedNote(playerNoteIndex);
 
-        if (pressed.noteName == expected.note.noteName)
+        if (pressed == expected.note)
         {
             FeedbackManager.Instance.RegisterHit();
-            ActivityConnector.Instance.RegisterHit();
-
             PaintStar(playerNoteIndex);
+
             playerNoteIndex++;
 
             if (playerNoteIndex >= totalNotes)
             {
                 waitingForInput = false;
-                StartCoroutine(HandleRepeatEnd());
+                FeedbackManager.Instance.StopTimer();
+                StartCoroutine(HandleSectionEnd());
             }
             else
             {
                 HighlightStar(playerNoteIndex);
-                EnableOnlyCorrectKey();
             }
         }
         else
         {
+            mistakeCount++;
             FeedbackManager.Instance.RegisterMistake();
+            GetStarByIndex(playerNoteIndex).ShowError();
 
-            if (isMemoryLevel)
+            if (isMemoryLevel && mistakeCount > maxMistakes)
             {
-                ActivityConnector.Instance.RegisterMistake();
-                mistakesThisRepeat++;
-
-                if (mistakesThisRepeat >= maxMistakesPerRepeat)
-                {
-                    waitingForInput = false;
-                    StartCoroutine(HandleRepeatFail());
-                }
+                waitingForInput = false;
+                FeedbackManager.Instance.StopTimer();
+                StartCoroutine(RestartWithReference());
             }
         }
     }
 
     // ---------------------------------------------------------
-    // REPETICIONES
-    // ---------------------------------------------------------
-    IEnumerator HandleRepeatEnd()
+    IEnumerator RestartWithReference()
     {
-        currentRepeat++;
-        yield return new WaitForSeconds(0.8f);
+        yield return Speak(
+            "Escuchemos la secuencia otra vez.",
+            currentAvatar.avatarSprite,
+            3f
+        );
 
-        if (isMemoryLevel && currentRepeat == 1)
-        {
-            ClearStars();
-            ShowGhosts();
-            yield return new WaitForSeconds(0.6f);
-        }
+        yield return StartCoroutine(PlayReferenceAudio());
 
-        if (currentRepeat < 2)
-        {
-            if (!(isMemoryLevel && currentRepeat == 1))
-                ClearStars();
+        ResetAllStars();
+        ActivateGhosts();
 
-            StartPlayerRepeat();
-        }
-        else
-        {
-            currentSection++;
-
-            if (currentSection < songData.sections.Count)
-                StartCoroutine(StartSection());
-            else
-                ActivityConnector.Instance.OnWin();
-        }
-    }
-
-    IEnumerator HandleRepeatFail()
-    {
-        DisableAllKeys();
-        yield return new WaitForSeconds(0.8f);
-
-        currentRepeat++;
-
-        if (currentRepeat < 2)
-        {
-            ClearStars();
-            StartPlayerRepeat();
-        }
-        else
-        {
-            ActivityConnector.Instance.OnLose();
-        }
+        StartPlayerRepeat();
     }
 
     // ---------------------------------------------------------
-    // UTILIDADES
-    // ---------------------------------------------------------
-    TimedNote GetExpectedNote(int index)
+    IEnumerator HandleSectionEnd()
     {
-        var section = songData.sections[currentSection];
+        yield return new WaitForSeconds(1f);
 
-        if (index < section.row1.Length)
-            return section.row1[index];
+        currentSection++;
+
+        if (currentSection < songData.sections.Count)
+        {
+            yield return Speak(
+                "Excelente, vamos a la siguiente parte.",
+                currentAvatar.celebrationSprite,
+                3f
+            );
+
+            GenerateStarsForSection(currentSection);
+            StartCoroutine(StartSection());
+        }
         else
-            return section.row2[index - section.row1.Length];
+        {
+            yield return Speak(
+                $"Muy bien {childName}, completaste este nivel.",
+                currentAvatar.celebrationSprite,
+                3f
+            );
+
+            Debug.Log("Tiempo total: " + FeedbackManager.Instance.GetTime());
+            Debug.Log("Errores: " + FeedbackManager.Instance.GetMistakes());
+
+            ActivityConnector.Instance.OnWin();
+        }
     }
 
     // ---------------------------------------------------------
-    // VISUALES
-    // ---------------------------------------------------------
+    void ActivateGhosts()
+    {
+        foreach (Transform t in row1Container)
+            t.GetComponent<MemoryNoteView>().ActivateGhost();
+
+        foreach (Transform t in row2Container)
+            t.GetComponent<MemoryNoteView>().ActivateGhost();
+    }
+
     void HighlightStar(int index)
     {
-        GetStarByIndex(index).ShowColor();
+        GetStarByIndex(index).ShowTurn();
     }
 
     void PaintStar(int index)
     {
-        var star = GetStarByIndex(index);
-        var expected = GetExpectedNote(index);
-
-        star.RevealGhost(expected.note.noteName);
-        star.ShowColor();
+        GetStarByIndex(index).ShowCorrect();
     }
 
-    NoteStar GetStarByIndex(int index)
+    void ResetAllStars()
+    {
+        foreach (Transform t in row1Container)
+            t.GetComponent<MemoryNoteView>().ResetVisual();
+
+        foreach (Transform t in row2Container)
+            t.GetComponent<MemoryNoteView>().ResetVisual();
+    }
+
+    MemoryNoteView GetStarByIndex(int index)
     {
         if (index < row1Container.childCount)
-            return row1Container.GetChild(index).GetComponent<NoteStar>();
+            return row1Container.GetChild(index).GetComponent<MemoryNoteView>();
         else
             return row2Container
                 .GetChild(index - row1Container.childCount)
-                .GetComponent<NoteStar>();
+                .GetComponent<MemoryNoteView>();
     }
 
-    void ClearStars()
+    void EnableAllKeys()
     {
-        foreach (Transform t in row1Container)
-            t.GetComponent<NoteStar>().ResetToInitial();
-
-        foreach (Transform t in row2Container)
-            t.GetComponent<NoteStar>().ResetToInitial();
-    }
-
-    void ShowGhosts()
-    {
-        foreach (Transform t in row1Container)
-            t.GetComponent<NoteStar>().SetGhostVisible(true);
-
-        foreach (Transform t in row2Container)
-            t.GetComponent<NoteStar>().SetGhostVisible(true);
-    }
-
-    // ---------------------------------------------------------
-    // TECLADO
-    // ---------------------------------------------------------
-    void EnableOnlyCorrectKey()
-    {
-        var expected = GetExpectedNote(playerNoteIndex);
-
-        bool allowKeyboardHelp = isIntroLevel && isFirstAttempt;
-
         foreach (var key in pianoKeys)
-        {
-            bool ok = key.noteData.noteName == expected.note.noteName;
-            key.SetKeyEnabled(ok);
-
-            if (allowKeyboardHelp && ok)
-                key.ShowHelp();
-            else
-                key.ResetVisualHelp();
-        }
+            key.SetKeyEnabled(true);
     }
 
     void DisableAllKeys()
     {
         foreach (var key in pianoKeys)
-        {
             key.SetKeyEnabled(false);
-            key.ResetVisualHelp();
-        }
     }
 
     void LinkKeys()
@@ -362,33 +367,28 @@ public class ActivityMemory : MonoBehaviour
             key.onKeyPressed += OnKeyPressed;
     }
 
-    // ---------------------------------------------------------
-    // BOTÓN REPETIR
-    // ---------------------------------------------------------
-    public void OnRepeatButtonPressed()
+    IEnumerator Speak(string text, Sprite sprite, float wait)
     {
-        if (phase == LevelPhase.AutoPlay)
-            return;
+        FeedbackManager.Instance.StopTimer();
 
-        StopAllCoroutines();
-        audioSource.Stop();
+        if (avatarImage != null && sprite != null)
+            avatarImage.sprite = sprite;
 
-        waitingForInput = false;
-        DisableAllKeys();
-        ClearStars();
+        messageText.text = text;
+        TTSManager.Instance.Speak(text);
 
-        StartCoroutine(RepeatReference());
+        yield return new WaitForSeconds(wait);
+
+        messageText.text = "";
     }
 
-    IEnumerator RepeatReference()
+    TimedNote GetExpectedNote(int index)
     {
-        yield return new WaitForSeconds(0.3f);
-        yield return StartCoroutine(PlayReferenceAudio());
+        var section = songData.sections[currentSection];
 
-        yield return new WaitForSeconds(0.5f);
-        TTSManager.Instance.Speak("Ahora tú.");
-
-        yield return new WaitForSeconds(0.8f);
-        StartPlayerRepeat();
+        if (index < section.row1.Length)
+            return section.row1[index];
+        else
+            return section.row2[index - section.row1.Length];
     }
 }

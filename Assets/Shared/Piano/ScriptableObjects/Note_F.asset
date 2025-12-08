@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Note_F
   m_EditorClassIdentifier: 
   noteName: F
-  sound: {fileID: 8300000, guid: 7f9edb918a0f834419a6c043a4273d39, type: 3}
+  sound: {fileID: 8300000, guid: f3f3c346a4ace7c498143d3f6974610d, type: 3}
   imagen: {fileID: -3687348052613884379, guid: aa4639426cfc9564f9fd06b9059a559d, type: 3}
   color: {r: 0.6117647, g: 0.30588236, b: 0.9960785, a: 1}
   imagenStar: {fileID: 5474451704887532338, guid: f073fce873c47c143a29faf0db2f921f, type: 3}

@@ -50,9 +50,10 @@ public class ResultUI : MonoBehaviour
         winPanel.SetActive(won);
         losePanel.SetActive(!won);
 
-        int hits = connector.Hits;
-        int mistakes = connector.Mistakes;
-        float time = connector.ElapsedTime;
+        // 🔥 AHORA TODO SALE DEL FEEDBACK MANAGER
+        int hits = FeedbackManager.Instance.GetHits();
+        int mistakes = FeedbackManager.Instance.GetMistakes();
+        float time = FeedbackManager.Instance.GetTime();
 
         if (won)
         {
@@ -77,7 +78,6 @@ public class ResultUI : MonoBehaviour
             TTSManager.Instance.Speak(text);
         }
 
-        // 🏅 Mostrar medalla según progreso de la actividad
         ShowActivityMedal();
     }
 
@@ -90,12 +90,10 @@ public class ResultUI : MonoBehaviour
         int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
         var activity = ProfilesManager.Instance.currentProfile.activities[activityIndex];
 
-        // Obtener medalla correspondiente a la actividad
         var medalData = medalDatabase.GetByActivityKey(activity.key);
 
         if (medalData == null)
         {
-            Debug.LogWarning("No se encontró medalla para la actividad: " + activity.key);
             medalImage.gameObject.SetActive(false);
             return;
         }

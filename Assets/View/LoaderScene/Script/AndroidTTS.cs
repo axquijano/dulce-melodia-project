@@ -118,4 +118,13 @@ public class AndroidTTS : MonoBehaviour
         }
     }
 #endif
+
+    public void Stop()
+    {
+    #if UNITY_ANDROID && !UNITY_EDITOR
+        if (ttsObject != null)
+            ttsObject.Call("stop");
+    #endif
+    }
+
 }

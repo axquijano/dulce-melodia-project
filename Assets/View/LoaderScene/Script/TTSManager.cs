@@ -23,4 +23,11 @@ public class TTSManager : MonoBehaviour
     {
         tts.Speak(message);
     }
+
+    public void Stop()
+    {
+        if (tts != null)
+            tts.Stop();
+    }
+
 }

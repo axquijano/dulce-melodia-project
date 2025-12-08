@@ -1,24 +1,29 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-//Para registrar los acierto, el tiempo mientras el niño esta jugando
 public class FeedbackManager : MonoBehaviour
 {
     public static FeedbackManager Instance;
-    
 
     [Header("UI")]
     public ProgressBar progressBar;
     public TMP_Text timeText;
 
-    private int hits; 
+    private int hits;
     private int mistakes;
     private float maxMistakes;
-    public float GetTime() => idleTimer;
 
+    // ---------------------------
+    // TIMER
+    // ---------------------------
+    private float playTimer = 0f;
 
-    private float idleTimer = 0f;
+    private bool manualTimerMode = false;   // 🔹 Nuevo
+    private bool timerRunning = true;       // 🔹 Por defecto corre (modo automático)
+
+    public float GetTime() => playTimer;
+    public int GetHits() => hits;
+    public int GetMistakes() => mistakes;
 
     void Awake()
     {
@@ -26,26 +31,87 @@ public class FeedbackManager : MonoBehaviour
             Instance = this;
     }
 
-    public void SetMaxMistakes (float value) {
-        maxMistakes = value;
-
-        if(progressBar == null) return ;
-        progressBar.SetMaxMistakes(value);
-    }
-
     void Update()
     {
-        idleTimer += Time.deltaTime;
-        int minutes = Mathf.FloorToInt(idleTimer / 60f);
-        int seconds = Mathf.FloorToInt(idleTimer % 60f);
+        // 🔹 Si está en modo manual, solo corre cuando se active
+        if (manualTimerMode)
+        {
+            if (!timerRunning) return;
+        }
+
+        playTimer += Time.deltaTime;
+
+        UpdateTimeUI();
+    }
+
+    void UpdateTimeUI()
+    {
+        if (timeText == null) return;
+
+        int minutes = Mathf.FloorToInt(playTimer / 60f);
+        int seconds = Mathf.FloorToInt(playTimer % 60f);
+
         timeText.text = $"{minutes:00}:{seconds:00}";
+        Debug.Log($"Tiempo real: {minutes:00}:{seconds:00}");
+    }
+
+    // =========================================================
+    // TIMER CONTROL (NUEVO SISTEMA)
+    // =========================================================
+
+    /// <summary>
+    /// Activa el modo manual (el tiempo deja de correr automáticamente)
+    /// </summary>
+    public void EnableManualTimerMode()
+    {
+        manualTimerMode = true;
+        timerRunning = false;
+    }
+
+    /// <summary>
+    /// Vuelve al modo automático (compatibilidad con juegos anteriores)
+    /// </summary>
+    public void EnableAutomaticTimerMode()
+    {
+        manualTimerMode = false;
+        timerRunning = true;
+    }
+
+    public void StartTimer()
+    {
+        if (manualTimerMode)
+            timerRunning = true;
+    }
+
+    public void StopTimer()
+    {
+        if (manualTimerMode)
+            timerRunning = false;
+    }
+
+    public void ResetTimer()
+    {
+        playTimer = 0f;
+        UpdateTimeUI();
+    }
+
+    // =========================================================
+    // PROGRESO
+    // =========================================================
+
+    public void SetMaxMistakes(float value)
+    {
+        maxMistakes = value;
+
+        if (progressBar != null)
+            progressBar.SetMaxMistakes(value);
     }
 
     public void RegisterHit()
     {
         hits++;
         UpdateUI();
-    } 
+    }
 
     public void RegisterMistake()
     {
@@ -55,12 +121,16 @@ public class FeedbackManager : MonoBehaviour
 
     void UpdateUI()
     {
-        progressBar.UpdateProgressBar(mistakes); 
+        if (progressBar != null)
+            progressBar.UpdateProgressBar(mistakes);
     }
 
-    public int getMistakes() {
-        return mistakes;
+    public void ResetStats()
+    {
+        hits = 0;
+        mistakes = 0;
+        playTimer = 0f;
+        timerRunning = !manualTimerMode;
+        UpdateTimeUI();
     }
-
-
 }

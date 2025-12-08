@@ -18,55 +18,72 @@ MonoBehaviour:
     - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
       time: 0.3
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 6f8ece7bc9d1b594eb7b485e8a50cce2, type: 2}
       time: 0.61
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
       time: 1
       isGhost: 1
+      overrideSound: {fileID: 0}
     row2:
     - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
       time: 1.79
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 7a057d9355ff4a54593234db2406498d, type: 2}
       time: 2
       isGhost: 1
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
       time: 2.3
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 3b036c10512f43c4e8b9436bc0d1a2dc, type: 2}
       time: 2.47
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
       time: 3
       isGhost: 1
+      overrideSound: {fileID: 0}
   - referenceAudio: {fileID: 8300000, guid: 512d8456354961a45a7a9b99e658d50c, type: 3}
     row1:
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
       time: 0.8
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 3b036c10512f43c4e8b9436bc0d1a2dc, type: 2}
       time: 1.22
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
       time: 1.39
       isGhost: 1
+      overrideSound: {fileID: 0}
     row2:
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
       time: 2.38
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 2327e3e271ce8a44fa2559bc948e38bf, type: 2}
       time: 2.58
       isGhost: 1
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
       time: 2.84
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
       time: 3.18
       isGhost: 0
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 6f8ece7bc9d1b594eb7b485e8a50cce2, type: 2}
       time: 3.61
       isGhost: 1
+      overrideSound: {fileID: 0}
     - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
       time: 3.78
-      isGhost: 1
+      isGhost: 0
+      overrideSound: {fileID: 0}

@@ -24,6 +24,10 @@ public class TutorialActivityTwoManager : MonoBehaviour
     [Header("Energy Arrow")]
     public GameObject energyArrow;
 
+    [Header("Skip Button")]
+    public Button skipButton;
+    private bool tutorialSkipped = false;
+
     private StudentAvatarData avatar;
     private string childName;
 
@@ -47,6 +51,9 @@ public class TutorialActivityTwoManager : MonoBehaviour
         if (energyArrow != null)
             energyArrow.SetActive(false);
 
+        if (skipButton != null)
+            skipButton.gameObject.SetActive(true);
+
         StartCoroutine(IntroGreeting());
     }
 
@@ -61,6 +68,8 @@ public class TutorialActivityTwoManager : MonoBehaviour
 
     void ShowStep()
     {
+        if (tutorialSkipped) return;
+
         if (currentStep >= steps.Length)
         {
             EndTutorial();
@@ -122,7 +131,6 @@ public class TutorialActivityTwoManager : MonoBehaviour
     IEnumerator AfterCorrect()
     {
         yield return new WaitForSeconds(1.5f);
-
         yield return StartCoroutine(ShowMissExample());
 
         currentStep++;
@@ -195,15 +203,37 @@ public class TutorialActivityTwoManager : MonoBehaviour
 
     void EndTutorial()
     {
+        if (skipButton != null)
+            skipButton.gameObject.SetActive(false);
+
         tutorialText.text = $"¡Muy bien {childName}! Ahora sí vamos a jugar";
 
         if (avatar != null && avatarImage != null)
             avatarImage.sprite = avatar.celebrationSprite;
 
         TTSManager.Instance.Speak(tutorialText.text);
+
         MarkTutorialAsSeen();
 
         StartCoroutine(GoToGame());
+    }
+
+    public void SkipTutorial()
+    {
+        if (tutorialSkipped) return;
+
+        tutorialSkipped = true;
+
+        StopAllCoroutines();
+        TTSManager.Instance.Stop();
+
+        tutorialText.text = "";
+
+        MarkTutorialAsSeen();
+
+        SceneLoader.Instance.LoadScene(
+            GameFlowManager.Instance.selectedActivity.gameplaySceneName
+        );
     }
 
     void MarkTutorialAsSeen()

@@ -7,14 +7,10 @@ public class ActivityConnector : MonoBehaviour
 
     private int hits = 0;
     private int mistakes = 0;
-    private float timer = 0f;
-    private bool playing = false;
     private bool levelWon = false;
 
-    // Lecturas públicas
     public int Hits => hits;
     public int Mistakes => mistakes;
-    public float ElapsedTime => timer;
     public bool LevelWon => levelWon;
 
     private void Awake()
@@ -29,12 +25,6 @@ public class ActivityConnector : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Update()
-    {
-        if (playing)
-            timer += Time.deltaTime;
-    }
-
     // ---------------------------
     // CONTROL DEL NIVEL
     // ---------------------------
@@ -43,9 +33,7 @@ public class ActivityConnector : MonoBehaviour
     {
         hits = 0;
         mistakes = 0;
-        timer = 0f;
         levelWon = false;
-        playing = true;
     }
 
     public void RegisterHit()
@@ -74,26 +62,25 @@ public class ActivityConnector : MonoBehaviour
 
     private void FinishLevel(bool completed)
     {
-        playing = false;
         levelWon = completed;
 
-        // Crear intento
+        // 🔥 USAMOS EL TIEMPO REAL DEL FEEDBACK MANAGER
+        float finalTime = FeedbackManager.Instance.GetTime();
+
         LevelAttempt attempt = new LevelAttempt
         {
-            time = timer,
-            hits = hits,
-            mistakes = mistakes,
+            time = finalTime,
+            hits = FeedbackManager.Instance.GetHits(),
+            mistakes = FeedbackManager.Instance.GetMistakes(),
             completed = completed,
             date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
         };
 
-        // Guardar intento
         LevelData levelData = ProfilesManager.Instance.GetCurrentLevelData();
         levelData.attempts.Add(attempt);
 
         ProfilesManager.Instance.UpdateCurrentLevelData(levelData);
 
-        // Ir a resultados
         SceneLoader.Instance.LoadScene("ActivityResult");
     }
 
@@ -108,11 +95,8 @@ public class ActivityConnector : MonoBehaviour
         );
     }
 
-
-
-     public void ContinuePlaying()
+    public void ContinuePlaying()
     {
-        // Repetir nivel
         if (!levelWon)
         {
             SceneLoader.Instance.LoadScene(
@@ -121,14 +105,12 @@ public class ActivityConnector : MonoBehaviour
             return;
         }
 
-        // Si gano ir al siguiente nivel
         if (!GameFlowManager.Instance.IsLastLevel())
         {
             GameFlowManager.Instance.GoToNextLevel();
             return;
         }
 
-        // Si es el ultimo nivel de la actividad ir al mapa de emociones
         SceneLoader.Instance.LoadScene("MapEmotions");
     }
 }

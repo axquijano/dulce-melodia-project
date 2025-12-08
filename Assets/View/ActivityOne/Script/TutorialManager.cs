@@ -80,7 +80,7 @@ public class TutorialManager : MonoBehaviour
         TTSManager.Instance.Speak(
             $"Hola {childName}, me alegra verte. Vamos a aprender música juntos"
         );
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(6.5f);
         tutorialText.text = "";
 
         //Comenzar con el tutorial
