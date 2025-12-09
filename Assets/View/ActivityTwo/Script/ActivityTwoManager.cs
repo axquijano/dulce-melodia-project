@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using System.Collections;
 
 public class ActivityTwoManager : MonoBehaviour
 {
-    public static ActivityTwoManager Instance;
 
     public LevelSettings settings;
     public NoteData[] notes;
@@ -18,13 +19,10 @@ public class ActivityTwoManager : MonoBehaviour
 
     private List<BalloonControllerUI> activeBalloons = new List<BalloonControllerUI>();
 
-    void Awake()
-    {
-        Instance = this;
-    }
 
     void Start()
     {
+        settings = GameFlowManager.Instance.GetCurrentLevelSettings();
         foreach (var key in pianoKeys)
             key.onKeyPressed += OnKeyPressed;
     }
@@ -46,6 +44,9 @@ public class ActivityTwoManager : MonoBehaviour
     void SpawnLogic()
     {
         var balloon = spawner.SpawnBalloon();
+
+        // ⚡ Velocidad del LevelSettings
+        balloon.SetSpeed(settings.balloonSpeed);
 
         NoteData randomNote = notes[Random.Range(0, notes.Length)];
 
@@ -86,6 +87,7 @@ public class ActivityTwoManager : MonoBehaviour
 
         hits++;
         FeedbackManager.Instance.RegisterHit();
+        ActivityConnector.Instance.RegisterHit();
 
         if (hits >= settings.balloonsToWin){
             ActivityConnector.Instance.OnWin(); 
@@ -131,6 +133,7 @@ public void RegisterBalloonMiss(BalloonControllerUI balloon)
 
     mistakes++;
     FeedbackManager.Instance.RegisterMistake();
+    ActivityConnector.Instance.RegisterMistake();
 
     if (mistakes >= settings.allowedMistakes)
         {
@@ -159,14 +162,14 @@ public void RegisterBalloonMiss(BalloonControllerUI balloon)
     } */
 
     void RemoveBalloon(BalloonControllerUI balloon)
-{
-    if (balloon == null) return;
+    {
+        if (balloon == null) return;
 
-    if (activeBalloons.Contains(balloon))
-        activeBalloons.Remove(balloon);
+        if (activeBalloons.Contains(balloon))
+            activeBalloons.Remove(balloon);
 
-    balloon.Pop();
-}
+        balloon.Pop();
+    }
 
 
 
@@ -191,22 +194,22 @@ public void RegisterBalloonMiss(BalloonControllerUI balloon)
         }
     } */
     void OnKeyPressed(NoteData pressedNote)
-{
-    // Busca el PRIMER globo que salió con esa nota
-    var balloon = activeBalloons.Find(b => b.noteData == pressedNote);
-
-    if (balloon != null)
     {
-        RegisterBalloonHit(balloon);
-    }
-    else
-    {
-        mistakes++;
-        Debug.Log("❌ ERROR");
+        // Busca el PRIMER globo que salió con esa nota
+        var balloon = activeBalloons.Find(b => b.noteData == pressedNote);
 
-        if (mistakes >= settings.allowedMistakes)
-            Debug.Log("❌ PERDISTE");
+        if (balloon != null)
+        {
+            RegisterBalloonHit(balloon);
+        }
+        else
+        {
+            mistakes++;
+            Debug.Log("❌ ERROR");
+
+            if (mistakes >= settings.allowedMistakes)
+                Debug.Log("❌ PERDISTE");
+        }
     }
-}
 
 }

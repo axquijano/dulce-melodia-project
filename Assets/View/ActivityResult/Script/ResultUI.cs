@@ -30,4 +30,15 @@ public class ResultUI : MonoBehaviour
     {
         ActivityConnector.Instance.BackToMap();
     }
+
+    public void RetryLevel()
+    {
+        ActivityConnector.Instance.RetryLevel();
+    }
+
+    public void GoToMenu()
+    {
+        SceneLoader.Instance.LoadScene("MapActivity");
+    }
+
 }

@@ -6,11 +6,15 @@ public class BalloonSpawnerUI : MonoBehaviour
     public BalloonControllerUI balloonPrefab;
     public RectTransform spawnPanel;
 
+    [Header("Manager Reference")]
+    public ActivityTwoManager activityTwoManager; 
     public BalloonControllerUI SpawnBalloon()
     {
         BalloonControllerUI balloon = Instantiate(balloonPrefab, spawnPanel);
 
         RectTransform rect = balloon.GetComponent<RectTransform>();
+
+        balloon.manager = activityTwoManager;
 
         float halfWidth = spawnPanel.rect.width * 0.5f;
         float x = Random.Range(-halfWidth, halfWidth);

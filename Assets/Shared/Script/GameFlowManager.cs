@@ -47,4 +47,9 @@ public class GameFlowManager : MonoBehaviour
     {
         return selectedActivity.levels[selectedLevel];
     }
+
+    public LevelSettings GetCurrentLevelSettings()
+    {
+        return selectedActivity.levelSettings[selectedLevel];
+    }
 }

@@ -12,7 +12,7 @@ public class IntroController : MonoBehaviour
     public GameObject introPanel;
     public GameObject gamePanel;
 
-    public GameObject gameLevelManager;
+    public GameObject gameLevelOneManager;
 
     public Button nextButton;
     public Button audioButton;
@@ -21,7 +21,7 @@ public class IntroController : MonoBehaviour
     void Start()
     {
         gamePanel.SetActive(false);
-        gameLevelManager.SetActive(false);
+        gameLevelOneManager.SetActive(false);
         ShowStep(0);
     }
 
@@ -64,7 +64,7 @@ public class IntroController : MonoBehaviour
     {
         introPanel.SetActive(false);
         gamePanel.SetActive(true);
-        gameLevelManager.SetActive(true);
+        gameLevelOneManager.SetActive(true);
     }
 
     public void OnTTSStepFinished()

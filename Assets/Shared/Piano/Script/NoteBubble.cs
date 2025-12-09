@@ -9,6 +9,8 @@ public class NoteBubble : MonoBehaviour
     public Sprite imagenInit;
     private Sprite imagenCurrent;
     private Outline outline;
+    private Color labelOriginalColor;
+
 
    /*  public void Setup(NoteData data)
     {
@@ -35,6 +37,7 @@ public class NoteBubble : MonoBehaviour
         // Ocultar según configuración
         label.enabled = item.showLetter;
         
+        labelOriginalColor = label.color;
         // El color (imagenCurrent) solo se usa cuando se llame a SetImagenColor()
         // así que no lo mostramos hasta highlight
     }
@@ -48,6 +51,7 @@ public class NoteBubble : MonoBehaviour
             outline = bubbleImage.gameObject.AddComponent<Outline>();
 
         outline.enabled = false; // apagado por defecto
+        
     }
 
     public void SetImagenColor (){
@@ -79,7 +83,7 @@ public class NoteBubble : MonoBehaviour
         }
     } */
 
-    public void Highlight(int bubbleIndex, int currentIndex)
+    /* public void Highlight(int bubbleIndex, int currentIndex)
     {
         // Ya pasada → mantener color
         if (bubbleIndex < currentIndex)
@@ -100,6 +104,77 @@ public class NoteBubble : MonoBehaviour
         // Futuras → gris
         bubbleImage.sprite = imagenInit;
         label.enabled = item.showLetter;
+    } */
+
+    public void Highlight(int bubbleIndex, int currentIndex)
+    {
+        bool isPast = bubbleIndex < currentIndex;
+        bool isCurrent = bubbleIndex == currentIndex;
+        bool isFuture = bubbleIndex > currentIndex;
+
+        // ---- PASADA ----
+        if (isPast)
+        {
+            bubbleImage.sprite = imagenCurrent;
+
+            if (item.showLetter)
+            {
+                label.enabled = true;
+                label.color = labelOriginalColor; // Regresa al color original
+            }
+            else
+            {
+                label.enabled = false;
+            }
+
+            return;
+        }
+
+        // ---- ACTUAL ----
+        if (isCurrent)
+        {
+            if (item.showColor)
+            {
+                SetImagenColor();
+            }
+            else
+            {
+                bubbleImage.sprite = imagenInit;
+            }
+
+            if (item.showLetter)
+            {
+                label.enabled = true;
+                if(item.showColor)
+                    label.color = Color.white; // Letra blanca si muestra color
+                else
+                    label.color = Color.black; // Letra negra cuando es la actual
+            }
+            else
+            {
+                label.enabled = false;
+            }
+
+            return;
+        }
+
+        // ---- FUTURA ----
+        if (isFuture)
+        {
+            bubbleImage.sprite = imagenInit;
+
+            if (item.showLetter)
+            {
+                label.enabled = true;
+                label.color = labelOriginalColor;
+            }
+            else
+            {
+                label.enabled = false;
+            }
+
+            return;
+        }
     }
 
 

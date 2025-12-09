@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a934868281047344a320463a523a217, type: 3}
-  m_Name: LevelSettings
+  m_Name: LevelTwoSettings
   m_EditorClassIdentifier: 
-  spawnInterval: 2
-  pctFull: 0.5
-  pctColor: 0
-  pctLetter: 0
+  spawnInterval: 1.4
+  balloonSpeed: 130
+  pctFull: 0.6
+  pctColor: 0.3
+  pctLetter: 0.1
   balloonsToWin: 10
-  allowedMistakes: 3
+  allowedMistakes: 4
