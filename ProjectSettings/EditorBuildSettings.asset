@@ -5,34 +5,34 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/LoaderScene/LoaderScene.unity
     guid: 564174b2abe572441a8ca269909a9d9e
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/MainMenu/MainMenu.unity
     guid: b17fde8674361484db273613b9759a13
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/UserSelect/UserSelect.unity
     guid: e8fe2e69bfc030942a8da8f8983ca8c2
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/MapActivity/MapActivity.unity
     guid: da072b605df13884b8ea119daae9944f
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/ActivityOne/ActivityOne.unity
     guid: 6fdd64630daa1614fab58f3416b289ff
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/ActivityResult/ActivityResult.unity
     guid: 6401b6ec492c5e04a9420439ff005894
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/MapLevel/MapLevel.unity
     guid: ee14914388d91a54bbb3dedf0a9d3c89
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/ActivityOne/ActivityOne.unity
     guid: 6fdd64630daa1614fab58f3416b289ff
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/ActivityTwo/ActivityTwo.unity
     guid: bd055a12fbb938d40801cff9a174e873
-  - enabled: 0
+  - enabled: 1
     path: Assets/View/ActivityOne/ActivityOneTutorial.unity
     guid: e3035ce6849f12246bfb2c38c510a329
   - enabled: 1

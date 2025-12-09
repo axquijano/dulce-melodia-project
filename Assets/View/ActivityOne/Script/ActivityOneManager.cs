@@ -11,6 +11,7 @@ public class ActivityOneManager : MonoBehaviour
     public GameObject bubblePrefab;
     public GameObject frogPrefab;
     public Transform bubbleContainer;
+
     public PianoKey[] pianoKeys;
 
     private int currentIndex = 1;
@@ -38,6 +39,7 @@ public class ActivityOneManager : MonoBehaviour
     {
         activity = GameFlowManager.Instance.selectedActivity;
         sequence = GameFlowManager.Instance.GetCurrentLevelSequence();
+        int levelIndex = PlayerPrefs.GetInt("CurrentLevel");
 
         if (activity == null)
             Debug.LogError("❌ selectedActivity está NULL — no se seleccionó actividad antes de cargar esta escena.");
@@ -56,10 +58,10 @@ public class ActivityOneManager : MonoBehaviour
 
     void GenerateBubbles()
     {
-        foreach (var note in sequence.notes)
+        foreach (var data in sequence.notes)
         {
             var b = Instantiate(bubblePrefab, bubbleContainer);
-            b.GetComponent<NoteBubble>().Setup(note);
+            b.GetComponent<NoteBubble>().Setup(data);
         }
         bubbleContainer.GetChild(0).GetComponent<NoteBubble>().SetImagenColor();
     }
@@ -98,7 +100,7 @@ public class ActivityOneManager : MonoBehaviour
         {
             bubbleContainer.GetChild(i)
                 .GetComponent<NoteBubble>()
-                .Highlight(i == currentIndex);
+                .Highlight(i, currentIndex);
         }
     }
 
@@ -114,7 +116,7 @@ public class ActivityOneManager : MonoBehaviour
 
     void ShowHelpForCurrentKey()
     {
-        var targetNote = sequence.notes[currentIndex];
+        var targetNote = sequence.notes[currentIndex].note;
 
         foreach (var key in pianoKeys)
         {
@@ -132,7 +134,7 @@ public class ActivityOneManager : MonoBehaviour
             StopCoroutine(helpRoutine);
 
         // ✔ Correcta
-        if (pressedNote.noteName == sequence.notes[currentIndex].noteName)
+        if (pressedNote.noteName == sequence.notes[currentIndex].note.noteName)
         {
             ActivityConnector.Instance.RegisterHit(); 
             PositionFrogAt(currentIndex);
@@ -156,7 +158,7 @@ public class ActivityOneManager : MonoBehaviour
         }
 
         // ❌ Condición de derrota
-        if (ActivityConnector.Instance.Mistakes >= sequence.notes.Length)
+        if (ActivityConnector.Instance.Mistakes >= sequence.allowedMistakes)
         {
            ActivityConnector.Instance.OnLose(); 
             return;

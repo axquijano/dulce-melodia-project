@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityId: 1
   activityName: Ranas
-  icon: {fileID: 3620146518864737411, guid: 672b20b23ccaa324d930968e907b5680, type: 3}
+  pressedIcon: {fileID: 8229875565756365111, guid: ff9962d73c868414f89be3be9ddd3aad, type: 3}
+  unlockedIcon: {fileID: 1294308938065853907, guid: 4769044286513d3428ebca31bdc179c7, type: 3}
   gameplaySceneName: ActivityOne
   levels:
   - {fileID: 11400000, guid: 1722cfd3981cf864ba20a92e007ad325, type: 2}

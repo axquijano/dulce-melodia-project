@@ -5,9 +5,7 @@ using TMPro;
 public class ActivityItemButton : MonoBehaviour
 {
     [Header("UI")]
-    public TMP_Text label;
-    public Image iconImage;
-    public TMP_Text starsText;
+    
     public Button button;
 
     private int activityIndex;
@@ -18,9 +16,13 @@ public class ActivityItemButton : MonoBehaviour
         activityDef = def;
         activityIndex = index;
 
-        // Texto e icono
-        label.text = def.activityName;
-        iconImage.sprite = def.icon;
+        //Sprite normal
+        button.image.sprite = def.unlockedIcon;
+        
+        // Set pressed sprite (sprite swap)
+        var spriteState = button.spriteState;
+        spriteState.pressedSprite = def.pressedIcon;
+        button.spriteState = spriteState;
         
 
         // Datos del perfil
@@ -62,22 +64,17 @@ public class ActivityItemButton : MonoBehaviour
     private void SetCompleted()
     {
         button.interactable = true;
-        label.color = Color.white;
-        iconImage.color = Color.white;
     }
 
     private void SetUnlocked()
     {
         button.interactable = true;
-        label.color = Color.yellow;
-        iconImage.color = Color.yellow;
     }
 
     private void SetLocked()
     {
         button.interactable = false;
-        label.color = Color.gray;
-        iconImage.color = Color.gray;
+        
     }
 
     public void OnClick()
