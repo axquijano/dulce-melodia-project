@@ -25,12 +25,14 @@ public class ActivityMemory : MonoBehaviour
     public TMP_Text messageText;
 
     [Header("Rules")]
-    public int maxMistakes = 2;
+    public int maxMistakes = 12; // 🔵 Barra máximo 12
 
     int currentSection = 0;
     int playerNoteIndex = 0;
     int totalNotes = 0;
     int mistakeCount = 0;
+
+    private int helpMistakeCount = 0; // 🟣 SOLO para activar ayuda
 
     bool waitingForInput = false;
 
@@ -48,6 +50,7 @@ public class ActivityMemory : MonoBehaviour
         FeedbackManager.Instance.EnableManualTimerMode();
         FeedbackManager.Instance.ResetTimer();
         FeedbackManager.Instance.ResetStats();
+        FeedbackManager.Instance.SetMaxMistakes(maxMistakes); // 🔵 barra 12
 
         SetupAvatar();
         ActivityConnector.Instance.StartLevel();
@@ -105,51 +108,33 @@ public class ActivityMemory : MonoBehaviour
     {
         if (!isMemoryLevel)
         {
-            // 🔵 NIVEL 1
-
-            yield return Speak(
-                "Escucha con atención.",
-                currentAvatar.avatarSprite,
-                2f
-            );
+            yield return Speak("Escucha con atención.",
+                currentAvatar.avatarSprite, 2f);
 
             yield return StartCoroutine(PlayReferenceAudio());
 
             ResetAllStars();
 
-            yield return Speak(
-                "Ahora es tu turno.",
-                currentAvatar.happySprite,
-                2f
-            );
+            yield return Speak("Ahora es tu turno.",
+                currentAvatar.happySprite, 2f);
 
             StartPlayerRepeat();
         }
         else
         {
-            // 🟣 NIVEL 2 NUEVO DISEÑO
-
-            yield return Speak(
-                "Escucha con mucha atención.",
-                currentAvatar.avatarSprite,
-                2.5f
-            );
+            yield return Speak("Escucha con mucha atención.",
+                currentAvatar.avatarSprite, 2.5f);
 
             yield return StartCoroutine(PlayReferenceAudio());
 
-            yield return Speak(
-                "Vamos a escuchar una vez más.",
-                currentAvatar.avatarSprite,
-                2.5f
-            );
+            yield return Speak("Vamos a escuchar una vez más.",
+                currentAvatar.avatarSprite, 2.5f);
 
             yield return StartCoroutine(PlayReferenceAudio());
 
             yield return Speak(
                 "Ahora algunas notas desaparecerán. Trata de recordarlas.",
-                currentAvatar.avatarSprite,
-                3f
-            );
+                currentAvatar.avatarSprite, 3f);
 
             ResetAllStars();
             ActivateGhosts();
@@ -166,8 +151,6 @@ public class ActivityMemory : MonoBehaviour
 
         FeedbackManager.Instance.StopTimer();
         DisableAllKeys();
-
-        // 🔥 Limpiar antes de empezar
         ResetAllStars();
 
         var section = songData.sections[currentSection];
@@ -198,10 +181,8 @@ public class ActivityMemory : MonoBehaviour
 
         yield return new WaitUntil(() => !audioSource.isPlaying);
 
-        // 🔥 MUY IMPORTANTE: limpiar al terminar
         ResetAllStars();
     }
-
 
     // ---------------------------------------------------------
     void StartPlayerRepeat()
@@ -209,6 +190,7 @@ public class ActivityMemory : MonoBehaviour
         phase = LevelPhase.PlayerRepeat;
         waitingForInput = true;
         mistakeCount = 0;
+        helpMistakeCount = 0; // 🔥 reiniciar ayuda
         playerNoteIndex = 0;
 
         totalNotes =
@@ -229,10 +211,13 @@ public class ActivityMemory : MonoBehaviour
 
         if (pressed == expected.note)
         {
+            // ✅ registrar acierto
             FeedbackManager.Instance.RegisterHit();
+
             PaintStar(playerNoteIndex);
 
             playerNoteIndex++;
+            helpMistakeCount = 0; // 🔥 reset ayuda
 
             if (playerNoteIndex >= totalNotes)
             {
@@ -248,14 +233,20 @@ public class ActivityMemory : MonoBehaviour
         else
         {
             mistakeCount++;
+            helpMistakeCount++;
+
+            // ❌ registrar error (barra baja aquí)
             FeedbackManager.Instance.RegisterMistake();
+
             GetStarByIndex(playerNoteIndex).ShowError();
 
-            if (isMemoryLevel && mistakeCount > maxMistakes)
+            // 🟣 AYUDA después de 2 errores seguidos
+            if (isMemoryLevel && helpMistakeCount >= 2)
             {
                 waitingForInput = false;
                 FeedbackManager.Instance.StopTimer();
                 StartCoroutine(RestartWithReference());
+                return;
             }
         }
     }
@@ -263,6 +254,8 @@ public class ActivityMemory : MonoBehaviour
     // ---------------------------------------------------------
     IEnumerator RestartWithReference()
     {
+        helpMistakeCount = 0;
+
         yield return Speak(
             "Escuchemos la secuencia otra vez.",
             currentAvatar.avatarSprite,
@@ -305,6 +298,7 @@ public class ActivityMemory : MonoBehaviour
 
             Debug.Log("Tiempo total: " + FeedbackManager.Instance.GetTime());
             Debug.Log("Errores: " + FeedbackManager.Instance.GetMistakes());
+            Debug.Log("Aciertos: " + FeedbackManager.Instance.GetHits());
 
             ActivityConnector.Instance.OnWin();
         }
@@ -369,6 +363,7 @@ public class ActivityMemory : MonoBehaviour
 
     IEnumerator Speak(string text, Sprite sprite, float wait)
     {
+        DisableAllKeys();
         FeedbackManager.Instance.StopTimer();
 
         if (avatarImage != null && sprite != null)
