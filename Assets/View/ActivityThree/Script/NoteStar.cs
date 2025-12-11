@@ -9,7 +9,7 @@ public class NoteStar : MonoBehaviour
     public TMP_Text label;
     public Sprite imagenInit;   // estrella gris
     public bool IsPending { get; private set; }
-
+ 
     public TimedNote timedNote;
 
     // 🔹 Data de la nota

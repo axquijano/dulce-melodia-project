@@ -31,7 +31,7 @@ MonoBehaviour:
     - note: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
       time: 2
       isGhost: 0
-      overrideSound: {fileID: 0}
+      overrideSound: {fileID: 8300000, guid: 4218118bedac2ce4195c32413e58ac86, type: 3}
     - note: {fileID: 11400000, guid: 7a057d9355ff4a54593234db2406498d, type: 2}
       time: 3
       isGhost: 1
@@ -39,7 +39,7 @@ MonoBehaviour:
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
       time: 4
       isGhost: 0
-      overrideSound: {fileID: 0}
+      overrideSound: {fileID: 8300000, guid: 10e8621e99fc9874c8cd0f60b305cf38, type: 3}
     - note: {fileID: 11400000, guid: 3b036c10512f43c4e8b9436bc0d1a2dc, type: 2}
       time: 5
       isGhost: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
       time: 6
       isGhost: 1
-      overrideSound: {fileID: 0}
+      overrideSound: {fileID: 8300000, guid: 10e8621e99fc9874c8cd0f60b305cf38, type: 3}
   - referenceAudio: {fileID: 8300000, guid: 512d8456354961a45a7a9b99e658d50c, type: 3}
     row1:
     - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}

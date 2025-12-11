@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8640268862012440639}
   - component: {fileID: 9059513804104622774}
-  - component: {fileID: 508304758324915098}
   - component: {fileID: 4489005039497941473}
   m_Layer: 5
   m_Name: starImage
@@ -46,21 +45,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301937714715389673}
   m_CullTransparentMesh: 1
---- !u!114 &508304758324915098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301937714715389673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 0.82948864, b: 0.0627451, a: 1}
-  m_EffectDistance: {x: 7.25, y: 3.34}
-  m_UseGraphicAlpha: 1
 --- !u!114 &4489005039497941473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,9 +84,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1931455380755543210}
-  - component: {fileID: 522175740536365195}
   - component: {fileID: 3531990799987556933}
-  - component: {fileID: 2978422097699929543}
+  - component: {fileID: 4630992009001890170}
   m_Layer: 5
   m_Name: StarNoteUI
   m_TagString: Untagged
@@ -131,21 +114,6 @@ RectTransform:
   m_AnchoredPosition: {x: -244.4, y: 119.353}
   m_SizeDelta: {x: 95.472, y: 94.942}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &522175740536365195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3672977951814371306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636d2b6e3bc076448b21fa626cc81f59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bubbleImage: {fileID: 4489005039497941473}
-  label: {fileID: 5424840065544965137}
-  imagenInit: {fileID: 5912329662750558367, guid: 19e4ed503f429724aaf92e8dfc568f4e, type: 3}
 --- !u!114 &3531990799987556933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +134,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &2978422097699929543
+--- !u!114 &4630992009001890170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,12 +143,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3672977951814371306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab252797094ad674d9d289c697aea489, type: 3}
+  m_Script: {fileID: 11500000, guid: c0237583b54655347b41f4801afc10c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleImage: {fileID: 4489005039497941473}
   label: {fileID: 5424840065544965137}
-  imagenInit: {fileID: 4815476061570213978, guid: 03c0d3d3b0d0f714f81a8bf487b3ba94, type: 3}
+  defaultSprite: {fileID: 4815476061570213978, guid: 03c0d3d3b0d0f714f81a8bf487b3ba94, type: 3}
+  timedNote:
+    note: {fileID: 0}
+    time: 0
+    isGhost: 0
+    overrideSound: {fileID: 0}
 --- !u!1 &6859357610835943712
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,7 +51,7 @@ public class SpaceRhythmBuilder : MonoBehaviour
         rect.anchoredPosition = new Vector2(0, y);
 
         // ⭐ Inicializamos NoteStar
-        NoteStar noteStar = obj.GetComponent<NoteStar>();
+        RhythmNoteView noteStar = obj.GetComponent<RhythmNoteView>();
         noteStar.Setup(timedNote);
     }
 

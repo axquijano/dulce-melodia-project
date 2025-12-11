@@ -11,6 +11,10 @@ public class MainMenu : MonoBehaviour
         SceneLoader.Instance.LoadScene("TeacherMenu");
     }
 
+    public void GoToPiano(){
+        SceneLoader.Instance.LoadScene("Piano");
+    }
+
     public void ExitGame()
     {
         #if UNITY_ANDROID

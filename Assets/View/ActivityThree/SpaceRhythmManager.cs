@@ -5,10 +5,13 @@ public class SpaceRhythmManager : MonoBehaviour
     public static SpaceRhythmManager Instance;
 
     [Header("Audio")]
-    public AudioSource audioSource; 
+    public AudioSource audioSource;
 
     [Header("Piano")]
     public PianoKey[] pianoKeys;
+
+    private int totalNotes;
+    private int consumedNotes;
 
     void Awake()
     {
@@ -17,49 +20,90 @@ public class SpaceRhythmManager : MonoBehaviour
 
     void Start()
     {
+        FeedbackManager.Instance.ResetStats();
+        FeedbackManager.Instance.SetMaxMistakes(12); // 🔵 barra máxima
+        ActivityConnector.Instance.StartLevel();
+
         LinkPianoKeys();
         DisableInternalKeySounds();
+
+        totalNotes = FindObjectsByType<RhythmNoteView>(
+            FindObjectsSortMode.None
+        ).Length;
+
+        consumedNotes = 0;
     }
 
     void DisableInternalKeySounds()
     {
         foreach (var key in pianoKeys)
-        {
             key.allowInternalSound = false;
-        }
     }
-
 
     void LinkPianoKeys()
     {
         foreach (var key in pianoKeys)
-        {
             key.onKeyPressed += OnKeyPressed;
-        }
     }
 
-     void OnKeyPressed(NoteData pressedNote)
+    void OnKeyPressed(NoteData pressedNote)
     {
-        NoteStar pending = GetPendingNote();
+        RhythmNoteView pending = GetPendingNote();
 
+        // ❌ Si no hay nota en zona → error
         if (pending == null)
-            return;
-
-        if (pending.noteData == pressedNote)
         {
+            RegisterMistake();
+            return;
+        }
+
+        // ✅ Nota correcta
+        if (pending.timedNote.note == pressedNote)
+        {
+            RegisterHit();
+
             PlayTimedNoteSound(pending.timedNote);
-            pending.Consume(); // 🔓 libera la cinta
+            pending.Consume();
+
+            consumedNotes++;
+
+            CheckGameEnd();
+        }
+        else
+        {
+            RegisterMistake();
         }
     }
 
-    NoteStar GetPendingNote()
+    RhythmNoteView GetPendingNote()
     {
-        foreach (var note in FindObjectsByType<NoteStar>(FindObjectsSortMode.None))
+        foreach (var note in FindObjectsByType<RhythmNoteView>(
+            FindObjectsSortMode.None))
         {
             if (note.IsPending)
                 return note;
         }
+
         return null;
+    }
+
+    void RegisterHit()
+    {
+        FeedbackManager.Instance.RegisterHit();
+        ActivityConnector.Instance.RegisterHit();
+    }
+
+    void RegisterMistake()
+    {
+        FeedbackManager.Instance.RegisterMistake();
+        ActivityConnector.Instance.RegisterMistake();
+
+        // 🔴 Si se acabó la barra → pierde
+        if (ActivityConnector.Instance.Mistakes >= 12)
+        {
+            Debug.Log("❌ Nivel perdido");
+            ActivityConnector.Instance.OnLose();
+        }
     }
 
     void PlayTimedNoteSound(TimedNote timedNote)
@@ -71,5 +115,18 @@ public class SpaceRhythmManager : MonoBehaviour
 
         if (clip != null)
             audioSource.PlayOneShot(clip);
+    }
+
+    void CheckGameEnd()
+    {
+        if (consumedNotes >= totalNotes)
+        {
+            Debug.Log("🎉 Nivel completado");
+
+            Debug.Log("Aciertos: " + FeedbackManager.Instance.GetHits());
+            Debug.Log("Errores: " + FeedbackManager.Instance.GetMistakes());
+
+            ActivityConnector.Instance.OnWin();
+        }
     }
 }

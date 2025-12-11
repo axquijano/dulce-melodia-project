@@ -50,11 +50,15 @@ public class ActivityMemory : MonoBehaviour
         FeedbackManager.Instance.EnableManualTimerMode();
         FeedbackManager.Instance.ResetTimer();
         FeedbackManager.Instance.ResetStats();
-        FeedbackManager.Instance.SetMaxMistakes(maxMistakes); // 🔵 barra 12
+        FeedbackManager.Instance.SetMaxMistakes(maxMistakes);
 
         SetupAvatar();
         ActivityConnector.Instance.StartLevel();
         LinkKeys();
+
+        // 🔊 Desactivar sonido interno de teclas
+        foreach (var key in pianoKeys)
+            key.allowInternalSound = false;
 
         StartCoroutine(IntroSequence());
     }
@@ -190,7 +194,7 @@ public class ActivityMemory : MonoBehaviour
         phase = LevelPhase.PlayerRepeat;
         waitingForInput = true;
         mistakeCount = 0;
-        helpMistakeCount = 0; // 🔥 reiniciar ayuda
+        helpMistakeCount = 0;
         playerNoteIndex = 0;
 
         totalNotes =
@@ -211,13 +215,15 @@ public class ActivityMemory : MonoBehaviour
 
         if (pressed == expected.note)
         {
-            // ✅ registrar acierto
             FeedbackManager.Instance.RegisterHit();
+
+            // 🔊 Reproducir sonido correcto
+            PlayTimedNoteSound(expected);
 
             PaintStar(playerNoteIndex);
 
             playerNoteIndex++;
-            helpMistakeCount = 0; // 🔥 reset ayuda
+            helpMistakeCount = 0;
 
             if (playerNoteIndex >= totalNotes)
             {
@@ -235,20 +241,28 @@ public class ActivityMemory : MonoBehaviour
             mistakeCount++;
             helpMistakeCount++;
 
-            // ❌ registrar error (barra baja aquí)
             FeedbackManager.Instance.RegisterMistake();
-
             GetStarByIndex(playerNoteIndex).ShowError();
 
-            // 🟣 AYUDA después de 2 errores seguidos
             if (isMemoryLevel && helpMistakeCount >= 2)
             {
                 waitingForInput = false;
                 FeedbackManager.Instance.StopTimer();
                 StartCoroutine(RestartWithReference());
-                return;
             }
         }
+    }
+
+    // ---------------------------------------------------------
+    void PlayTimedNoteSound(TimedNote timedNote)
+    {
+        AudioClip clip =
+            timedNote.overrideSound != null
+            ? timedNote.overrideSound
+            : timedNote.note.sound;
+
+        if (clip != null)
+            audioSource.PlayOneShot(clip);
     }
 
     // ---------------------------------------------------------
