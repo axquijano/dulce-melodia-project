@@ -4,71 +4,77 @@ using TMPro;
 
 public class NoteStar : MonoBehaviour
 {
+    [Header("UI")]
     public Image bubbleImage;
     public TMP_Text label;
     public Sprite imagenInit;
 
-    private Sprite imagenCurrent;
-    private Color originalLabelColor;
+    Sprite imagenCurrent;
+    Color originalLabelColor;
 
-    /* private bool showColor;
-    private bool showLetter; */
+    bool isGhost;
+    bool revealed = false;
 
-    public void Setup(NoteData item)
+    public void Setup(NoteData item, bool ghost)
     {
+        isGhost = ghost;
+        revealed = false;
         imagenCurrent = item.imagenStar;
-        label.text = item.noteName;
-
-        /* showColor = item.showColor;
-        showLetter = item.showLetter; */
 
         bubbleImage.sprite = imagenInit;
-        /* label.enabled = showLetter; */
-
         originalLabelColor = label.color;
+
+        label.text = item.noteName;
+        label.color = originalLabelColor;
+        label.enabled = true;
     }
 
+    // Se usa en autoplay y cuando es el turno del niño
     public void ShowColor()
     {
+
+        if (label.text == "?" && !revealed) return;
         bubbleImage.sprite = imagenCurrent;
-    } 
+    }
+
+    public void RevealGhost(string noteName)
+    {
+        if (!isGhost || revealed) return;
+
+        revealed = true;
+        label.text = noteName;
+        label.color = originalLabelColor;
+        bubbleImage.sprite = imagenCurrent;
+    }
 
     public void ResetToInitial()
     {
         bubbleImage.sprite = imagenInit;
+        revealed = false;
 
-       /*  if (showLetter)
+        label.enabled = true;
+        label.color = originalLabelColor;
+        /* label.text = ""; */
+    }
+
+
+    public void SetGhostVisible(bool visible)
+    {
+        if (!isGhost) return;
+
+        if (visible)
         {
+            Debug.Log("Se esta escribiendo el gost");
+            revealed = false;
+            label.text = "?";
+            label.color = Color.black;
             label.enabled = true;
-            label.color = originalLabelColor;
+            bubbleImage.sprite = imagenInit;
         }
         else
         {
             label.enabled = false;
-        } */
-    }
-
-    public void HideLetter()
-    {
-        label.enabled = false;
-    }
-
-    public void ShowAsGhost()
-    {
-        bubbleImage.sprite = imagenInit; 
-        label.enabled = false;
-    }
-
-    public void ShowAsCompleted()
-    {
-        // Mantiene la imagen de la nota (estrella "encendida")
-        bubbleImage.sprite = imagenCurrent;
-
-        // Asegura que la letra sea visible
-        label.enabled = true;
-
-        // Cambia el color de la letra como refuerzo positivo
-        //label.color = Color.green;
+        }
     }
 
 }
