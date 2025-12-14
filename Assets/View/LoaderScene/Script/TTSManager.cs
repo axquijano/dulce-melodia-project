@@ -5,24 +5,23 @@ public class TTSManager : MonoBehaviour
 {
     public AndroidTTS tts;
 
-     private static TTSManager instance;
-    public static TTSManager Instance => instance;
+    public static TTSManager Instance;
 
-    void Awake()
+    private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+
+
     public void Speak(string message)
     {
-        if (string.IsNullOrEmpty(message))
-            return;
-
         tts.Speak(message);
     }
 }

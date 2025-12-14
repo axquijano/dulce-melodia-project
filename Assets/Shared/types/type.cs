@@ -28,6 +28,7 @@ public class ActivityEntry
 {
     public string key;
     public bool unlocked;
+    public string lastSelectedEmotion = ""; 
     public ActivityData value;
 }
 

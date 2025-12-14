@@ -152,7 +152,7 @@ public class ActivityOneManager : MonoBehaviour
         else
         {
             // ❌ Incorrecta
-           ActivityConnector.Instance.RegisterMistake();
+            ActivityConnector.Instance.RegisterMistake();
             FeedbackManager.Instance.RegisterMistake(); 
             ShowHelpForCurrentKey();
         }

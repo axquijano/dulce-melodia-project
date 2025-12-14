@@ -16,3 +16,4 @@ MonoBehaviour:
   sound: {fileID: 8300000, guid: da25e083d3f25bf44b059439c8f16940, type: 3}
   imagen: {fileID: -962488092458481032, guid: 449b6baff65b62f44bc0053110771a40, type: 3}
   color: {r: 0.9960785, g: 0.25882354, b: 0.2509804, a: 1}
+  imagenStar: {fileID: 3640145800890383293, guid: 5da8bc3f64f57794b892f65077f3ce76, type: 3}

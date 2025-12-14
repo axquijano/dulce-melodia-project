@@ -1,0 +1,300 @@
+fileFormatVersion: 2
+guid: c50e93ab9ea361b42b9bdee8d5f86b70
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6579987851858273896
+    second: emociones_0
+  - first:
+      213: 2288703934844156047
+    second: emociones_1
+  - first:
+      213: 3829229042970318184
+    second: emociones_2
+  - first:
+      213: 5204704406677731352
+    second: emociones_3
+  - first:
+      213: 8828204580562433496
+    second: emociones_4
+  - first:
+      213: -2727998925588031159
+    second: emociones_5
+  - first:
+      213: -6384878201900119415
+    second: emociones_6
+  - first:
+      213: -2390422375951195333
+    second: emociones_7
+  - first:
+      213: -9096872280451300862
+    second: emociones_8
+  - first:
+      213: 8180489086958843261
+    second: emociones_9
+  - first:
+      213: 4399024295643564581
+    second: emociones_10
+  - first:
+      213: 2445398077132971199
+    second: emociones_11
+  - first:
+      213: 693516559983644861
+    second: emociones_12
+  - first:
+      213: -3833136188139668208
+    second: emociones_13
+  - first:
+      213: 6503956945494722650
+    second: emociones_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: emociones_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 301
+        width: 307
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f88bc684a1c13cf10800000000000000
+      internalID: 2288703934844156047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emociones_6
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 299
+        width: 308
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98acb999a1b5467a0800000000000000
+      internalID: -6384878201900119415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emociones_9
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 38
+        width: 160
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7534258b7fe68170800000000000000
+      internalID: 8180489086958843261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emociones_10
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 37
+        width: 163
+        height: 202
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52ac5243a497c0d30800000000000000
+      internalID: 4399024295643564581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emociones_11
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 39
+        width: 158
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbc1fe9489ccfe120800000000000000
+      internalID: 2445398077132971199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 1abc560981bae3f46ad5f7b52b13f718
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      emociones_0: -6579987851858273896
+      emociones_1: 2288703934844156047
+      emociones_10: 4399024295643564581
+      emociones_11: 2445398077132971199
+      emociones_12: 693516559983644861
+      emociones_13: -3833136188139668208
+      emociones_14: 6503956945494722650
+      emociones_2: 3829229042970318184
+      emociones_3: 5204704406677731352
+      emociones_4: 8828204580562433496
+      emociones_5: -2727998925588031159
+      emociones_6: -6384878201900119415
+      emociones_7: -2390422375951195333
+      emociones_8: -9096872280451300862
+      emociones_9: 8180489086958843261
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

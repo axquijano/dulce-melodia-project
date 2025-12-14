@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelOneSettings
   m_EditorClassIdentifier: 
   spawnInterval: 1.6
-  balloonSpeed: 110
+  balloonSpeed: 100
   pctFull: 1
   pctColor: 0
   pctLetter: 0

@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Collections;
 using TMPro;
 
 public class MapLevelUI : MonoBehaviour
@@ -12,6 +15,10 @@ public class MapLevelUI : MonoBehaviour
     private ActivityDefinition currentActivity;
     private ChildProfile profile;
     public TMP_Text text;
+
+    [Header("Images")]
+    public List<Sprite> imagesLevel ; 
+
 
     void Start()
     {
@@ -38,9 +45,16 @@ public class MapLevelUI : MonoBehaviour
             GameObject btn = Instantiate(levelButtonPrefab, levelsContainer);
             LevelItemButton item = btn.GetComponent<LevelItemButton>();
 
+            // Verificar si hay imagen disponible para este nivel
+            Sprite levelSprite = null;
+            if (i < imagesLevel.Count)
+                levelSprite = imagesLevel[i];
+
+            Debug.Log("MapLevel, recorriendo el level " + i);
+
             // Como LevelSequence NO tiene datos extra, usamos null
             Debug.Log("MapLevel , recorriendo el level "+i);
-            item.Setup(i, profile);
+            item.Setup(i, profile, levelSprite);
         }
     }
  
