@@ -7,41 +7,48 @@ public class RhythmNoteView : NoteView
     public bool IsPending { get; private set; }
     public TimedNote timedNote;
 
-    bool isActive = false;
-
+    // ================================
+    // Inicialización
+    // ================================
     public void Setup(TimedNote timed)
     {
         timedNote = timed;
         base.Init(timed.note);
-        SetInactive();
+
+        // ⭐ Comienza con estrella visible
+        SetSprite(noteData.imagenStar);
+
+        // 🎨 Comienza con su color real
+        SetLabelColor(noteData.color);
+
+        IsPending = false; // 🔥 NO comienza pendiente
     }
 
-    public void SetActive()
+    // ================================
+    // Cuando entra al Hit Zone
+    // ================================
+    public void EnterHitZone()
     {
-        isActive = true;
         IsPending = true;
-        SetSprite(noteData.imagenStar);
+
+        // Se ilumina
         SetLabelColor(Color.white);
     }
 
-    public void SetInactive()
+    // ================================
+    // Cuando sale del Hit Zone
+    // ================================
+    public void ExitHitZone()
     {
-        isActive = false;
         IsPending = false;
-        SetSprite(defaultSprite);
+
+        // Vuelve a su color original
         SetLabelColor(noteData.color);
     }
 
-    public void EnterHitZone()
-    {
-        SetActive();
-    }
-
-    public void ExitHitZone()
-    {
-        SetInactive();
-    }
-
+    // ================================
+    // Cuando el jugador acierta
+    // ================================
     public void Consume()
     {
         IsPending = false;

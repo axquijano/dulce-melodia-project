@@ -46,11 +46,9 @@ public class SpaceRhythmBuilder : MonoBehaviour
         GameObject obj = Instantiate(starNotePrefab, lane);
         RectTransform rect = obj.GetComponent<RectTransform>();
 
-        // ⬆️ Las primeras notas quedan más arriba
         float y = startOffset + (timedNote.time * pixelsPerSecond);
         rect.anchoredPosition = new Vector2(0, y);
 
-        // ⭐ Inicializamos NoteStar
         RhythmNoteView noteStar = obj.GetComponent<RhythmNoteView>();
         noteStar.Setup(timedNote);
     }

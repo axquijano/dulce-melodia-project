@@ -322,6 +322,7 @@ public class TutorialManager : MonoBehaviour
 
         activity.value.tutorialSeen = true;
         ProfilesManager.Instance.SaveProfiles();
+        GameFlowManager.Instance.selectedLevel = 0;
 
         SceneLoader.Instance.LoadScene(
             "ActivityOne"

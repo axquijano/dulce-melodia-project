@@ -12,6 +12,7 @@ public class TutorialActivityTwoManager : MonoBehaviour
 
     private int currentStep = 0;
     private bool waitingForAction = false;
+    private bool tutorialSkipped = false;
 
     [Header("Avatar")]
     public StudentAvatarDatabase avatarDatabase;
@@ -26,7 +27,6 @@ public class TutorialActivityTwoManager : MonoBehaviour
 
     [Header("Skip Button")]
     public Button skipButton;
-    private bool tutorialSkipped = false;
 
     private StudentAvatarData avatar;
     private string childName;
@@ -52,7 +52,11 @@ public class TutorialActivityTwoManager : MonoBehaviour
             energyArrow.SetActive(false);
 
         if (skipButton != null)
+        {
             skipButton.gameObject.SetActive(true);
+            skipButton.onClick.RemoveAllListeners();
+            skipButton.onClick.AddListener(OnSkipButtonPressed);
+        }
 
         StartCoroutine(IntroGreeting());
     }
@@ -116,7 +120,7 @@ public class TutorialActivityTwoManager : MonoBehaviour
 
     void OnKeyPressed(NoteData note)
     {
-        if (!waitingForAction) return;
+        if (!waitingForAction || tutorialSkipped) return;
 
         bool exploded = demoBalloon.TryExplode(note);
         if (!exploded) return;
@@ -131,7 +135,9 @@ public class TutorialActivityTwoManager : MonoBehaviour
     IEnumerator AfterCorrect()
     {
         yield return new WaitForSeconds(1.5f);
-        yield return StartCoroutine(ShowMissExample());
+
+        if (!tutorialSkipped)
+            yield return StartCoroutine(ShowMissExample());
 
         currentStep++;
         ShowStep();
@@ -139,6 +145,8 @@ public class TutorialActivityTwoManager : MonoBehaviour
 
     IEnumerator ShowMissExample()
     {
+        if (tutorialSkipped) yield break;
+
         demoBalloon.ResetBalloon(demoBalloon.expectedNote);
         demoBalloon.transform.localPosition = new Vector3(0, -250f, 0);
 
@@ -201,6 +209,26 @@ public class TutorialActivityTwoManager : MonoBehaviour
             s.SetArrowsActive(false);
     }
 
+    public void OnSkipButtonPressed()
+    {
+        tutorialSkipped = true;
+
+        StopAllCoroutines();
+        waitingForAction = false;
+
+        DisableAllKeys();
+        HideAllArrows();
+
+        GameFlowManager.Instance.selectedLevel = 0;
+        
+        MarkTutorialAsSeen();
+
+        SceneLoader.Instance.LoadScene(
+            GameFlowManager.Instance.selectedActivity.gameplaySceneName
+        );
+    }
+
+
     void EndTutorial()
     {
         if (skipButton != null)
@@ -218,25 +246,7 @@ public class TutorialActivityTwoManager : MonoBehaviour
         StartCoroutine(GoToGame());
     }
 
-    public void SkipTutorial()
-    {
-        if (tutorialSkipped) return;
-
-        tutorialSkipped = true;
-
-        StopAllCoroutines();
-        TTSManager.Instance.Stop();
-
-        tutorialText.text = "";
-
-        MarkTutorialAsSeen();
-
-        SceneLoader.Instance.LoadScene(
-            GameFlowManager.Instance.selectedActivity.gameplaySceneName
-        );
-    }
-
-    void MarkTutorialAsSeen()
+    public void MarkTutorialAsSeen()
     {
         int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
 

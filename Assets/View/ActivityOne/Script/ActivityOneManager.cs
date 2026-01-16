@@ -50,6 +50,8 @@ public class ActivityOneManager : MonoBehaviour
         PositionFrogAt(0);
         HighlightCurrentBubble();
         LinkPianoKeys();
+        Debug.Log("Nivel actual: " + GameFlowManager.Instance.selectedLevel);
+
     }
 
     void loadSequence()

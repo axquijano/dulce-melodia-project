@@ -20,6 +20,8 @@ public class ActivityTwoManager : MonoBehaviour
         ActivityConnector.Instance.StartLevel();
         LoadLevelSettings();
         LinkPianoKeys();
+        Debug.Log("Nivel actual: " + GameFlowManager.Instance.selectedLevel);
+
     }
 
     void LoadLevelSettings()
