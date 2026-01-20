@@ -148,7 +148,7 @@ public class NoteBubble : MonoBehaviour
                 if(item.showColor)
                     label.color = Color.white; // Letra blanca si muestra color
                 else
-                    label.color = Color.black; // Letra negra cuando es la actual
+                    label.color = item.note.color; // Letra negra cuando es la actual
             }
             else
             {

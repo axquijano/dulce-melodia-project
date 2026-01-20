@@ -18,15 +18,34 @@ public class ActivityTwoManager : MonoBehaviour
     private int mistakes;
 
     private List<BalloonControllerUI> activeBalloons = new List<BalloonControllerUI>();
-
+    public string childName;
 
     void Start()
     {
         ActivityConnector.Instance.StartLevel();
+        childName = ProfilesManager.Instance.currentProfile.childName;
         settings = GameFlowManager.Instance.GetCurrentLevelSettings();
         foreach (var key in pianoKeys)
             key.onKeyPressed += OnKeyPressed;
+        StartCoroutine(welcome());
+
     }
+
+    IEnumerator welcome()
+    {
+        if (GameFlowManager.Instance.GetLevel() == 0)
+        {
+            yield return new WaitForSeconds(0.3f);
+
+            string message =
+                childName + ". " +
+                "Estalla los globos. " +
+                "Toca la nota dentro del globo.";
+
+            TTSManager.Instance.Speak(message);
+        }
+    }
+
 
     void Update()
     {

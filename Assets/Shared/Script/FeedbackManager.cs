@@ -6,20 +6,21 @@ using TMPro;
 public class FeedbackManager : MonoBehaviour
 {
     public static FeedbackManager Instance;
+    
 
     [Header("UI")]
-    public TMP_Text hitsText;
-    public TMP_Text mistakesText;
+/*     public TMP_Text hitsText; */
+    public ProgressBar progressBar;
     public TMP_Text timeText;
 
    /*  [Header("Config")]
     public int mistakesBeforeHelp = 3;   // activar ayuda después de X errores
     public float idleTimeBeforeHelp = 5f; // activar ayuda si pasa X segundos sin tocar */
 
-    private int hits;
+    private int hits; 
     private int mistakes;
-
-    public int GetHits() => hits;
+    private float maxMistakes;
+   /*  public int GetHits() => hits; */
     public float GetTime() => idleTimer;
 
 
@@ -29,6 +30,13 @@ public class FeedbackManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+    }
+
+    public void SetMaxMistakes (float value) {
+        maxMistakes = value;
+
+        if(progressBar == null) return ;
+        progressBar.SetMaxMistakes(value);
     }
 
     void Update()
@@ -51,11 +59,12 @@ public class FeedbackManager : MonoBehaviour
         hits++;
       /*   idleTimer = 0f; */
         UpdateUI();
-    }
+    } 
 
     public void RegisterMistake()
     {
         mistakes++;
+
       /*   idleTimer = 0f; */
         UpdateUI();
 
@@ -67,8 +76,9 @@ public class FeedbackManager : MonoBehaviour
 
     void UpdateUI()
     {
-        hitsText.text = hits.ToString();
-        mistakesText.text = mistakes.ToString();
+        progressBar.UpdateProgressBar(mistakes);
+        /* hitsText.text = hits.ToString(); */
+       /*  mistakesText.text = mistakes.ToString(); */
     }
 
     public int getMistakes() {

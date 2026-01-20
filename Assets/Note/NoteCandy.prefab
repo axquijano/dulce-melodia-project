@@ -50,11 +50,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 400
-  isStopped: 0
-  isReadyToHit: 0
   rect: {fileID: 537629957613135186}
-  stopPoint: {fileID: 0}
+  hitZone: {fileID: 0}
   noteData: {fileID: 0}
+  isReadyToHit: 0
+  hasPassed: 0
 --- !u!1 &9176490179439448766
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7287789, g: 0.8415094, b: 0.7305542, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

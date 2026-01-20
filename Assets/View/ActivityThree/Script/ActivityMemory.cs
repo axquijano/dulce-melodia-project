@@ -21,7 +21,7 @@ public class ActivityMemory : MonoBehaviour
     // SONG DATA
     // ---------------------------------------------------------
     [Header("Song")]
-    public SongSection[] sections;
+    public SongData songData;
 
     // ---------------------------------------------------------
     // AUDIO
@@ -64,7 +64,7 @@ public class ActivityMemory : MonoBehaviour
         foreach (Transform t in row1Container) Destroy(t.gameObject);
         foreach (Transform t in row2Container) Destroy(t.gameObject);
 
-        var section = sections[sectionIndex];
+        var section = songData.sections[sectionIndex];
 
         // Fila 1
         foreach (var timed in section.row1)
@@ -101,7 +101,7 @@ public class ActivityMemory : MonoBehaviour
         yield return StartCoroutine(PlayReferenceAudio());
 
         yield return new WaitForSeconds(0.5f);
-        TTSManager.Instance.Speak("Ahora tú.");
+        TTSManager.Instance.Speak("Ahora tú. Toca las notas.");
 
         yield return new WaitForSeconds(1f);
 
@@ -118,7 +118,7 @@ public class ActivityMemory : MonoBehaviour
         waitingForInput = false;
         DisableAllKeys();
 
-        var section = sections[currentSection];
+        var section = songData.sections[currentSection];
         audioSource.clip = section.referenceAudio;
         audioSource.Play();
 
@@ -155,8 +155,8 @@ public class ActivityMemory : MonoBehaviour
         waitingForInput = true;
         playerNoteIndex = 0;
 
-        totalNotes = sections[currentSection].row1.Length +
-                     sections[currentSection].row2.Length;
+        totalNotes = songData.sections[currentSection].row1.Length +
+                     songData.sections[currentSection].row2.Length;
 
         if (isLevel2 && isSecondAttempt)
             ShowGhosts();
@@ -244,7 +244,7 @@ public class ActivityMemory : MonoBehaviour
         {
             currentSection++;
 
-            if (currentSection < sections.Length)
+            if (currentSection < songData.sections.Count)
                 StartCoroutine(StartSection());
             else
                 ActivityConnector.Instance.OnWin();
@@ -256,7 +256,7 @@ public class ActivityMemory : MonoBehaviour
     // ---------------------------------------------------------
     TimedNote GetExpectedNote(int index)
     {
-        var section = sections[currentSection];
+        var section = songData.sections[currentSection];
 
         if (index < section.row1.Length)
             return section.row1[index];

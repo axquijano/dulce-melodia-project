@@ -11,7 +11,7 @@ public class ActivityDefinition : ScriptableObject
     public Sprite pressedIcon;     // Actividad seleccionada/presionada
     public Sprite unlockedIcon;    // Opcional si quieres ícono especial para desbloqueado    public string gameplaySceneName;
     public string gameplaySceneName;
+    public string tutorialSceneName; // Nombre del tutorial
     public List<LevelSequence> levels;  // N niveles
-
     public List<LevelSettings> levelSettings; // Configuraciones por nivel
 }

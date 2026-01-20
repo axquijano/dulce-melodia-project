@@ -20,6 +20,7 @@ public class LevelData
 //Cantidad de niveles variable por actividad
 public class ActivityData
 {
+    public bool tutorialSeen;  // Si ya vio el tutorial
     public List<LevelData> levels = new List<LevelData>();
 }
 

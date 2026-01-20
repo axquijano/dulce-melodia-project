@@ -1,0 +1,362 @@
+fileFormatVersion: 2
+guid: 4a764fe629875c740974d7cd37b1928f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8596402497524844085
+    second: rana_aplaudiendo_2_0
+  - first:
+      213: 7472985337761386487
+    second: rana_aplaudiendo_2_1
+  - first:
+      213: -5995893105647103619
+    second: rana_aplaudiendo_2_2
+  - first:
+      213: 7510233375721721873
+    second: rana_aplaudiendo_2_3
+  - first:
+      213: -490099340241045366
+    second: rana_aplaudiendo_2_4
+  - first:
+      213: 6815476865773566945
+    second: rana_aplaudiendo_2_5
+  - first:
+      213: -6416450080124000736
+    second: rana_aplaudiendo_2_6
+  - first:
+      213: 3306295456993837645
+    second: rana_aplaudiendo_2_7
+  - first:
+      213: 2813456704049640007
+    second: rana_aplaudiendo_2_8
+  - first:
+      213: 6824468657193467441
+    second: rana_aplaudiendo_2_9
+  - first:
+      213: -3757716086241034832
+    second: rana_aplaudiendo_2_10
+  - first:
+      213: 930870504372328771
+    second: rana_aplaudiendo_2_11
+  - first:
+      213: 8202000597829171016
+    second: rana_aplaudiendo_2_12
+  - first:
+      213: -3658687693447693527
+    second: rana_aplaudiendo_2_13
+  - first:
+      213: 2437304073387382097
+    second: rana_aplaudiendo_2_14
+  - first:
+      213: 3915046299886529062
+    second: rana_aplaudiendo_2_15
+  - first:
+      213: 3179562925274756559
+    second: rana_aplaudiendo_2_16
+  - first:
+      213: 5488851207427605299
+    second: rana_aplaudiendo_2_17
+  - first:
+      213: -5214679535349174736
+    second: rana_aplaudiendo_2_18
+  - first:
+      213: 5072390268156300599
+    second: rana_aplaudiendo_2_19
+  - first:
+      213: 7756153195348193563
+    second: rana_aplaudiendo_2_20
+  - first:
+      213: 7433893890241667743
+    second: rana_aplaudiendo_2_21
+  - first:
+      213: 3660091345989112287
+    second: rana_aplaudiendo_2_22
+  - first:
+      213: -7587040888032993631
+    second: rana_aplaudiendo_2_23
+  - first:
+      213: -3313325699914500068
+    second: rana_aplaudiendo_2_24
+  - first:
+      213: 5566706180999550359
+    second: rana_aplaudiendo_2_25
+  - first:
+      213: 7129937968679141029
+    second: rana_aplaudiendo_2_26
+  - first:
+      213: -8776292701560313085
+    second: rana_aplaudiendo_2_27
+  - first:
+      213: 91870108950583710
+    second: rana_aplaudiendo_2_28
+  - first:
+      213: -3229168742062738460
+    second: rana_aplaudiendo_2_29
+  - first:
+      213: 8796276830517068644
+    second: rana_aplaudiendo_2_30
+  - first:
+      213: -7803132366773450794
+    second: rana_aplaudiendo_2_31
+  - first:
+      213: 4238110472592221463
+    second: rana_aplaudiendo_2_32
+  - first:
+      213: -993035274630298271
+    second: rana_aplaudiendo_2_33
+  - first:
+      213: -3683086150513078093
+    second: rana_aplaudiendo_2_34
+  - first:
+      213: -315343306903713312
+    second: rana_aplaudiendo_2_35
+  - first:
+      213: 3441936440125675147
+    second: rana_aplaudiendo_2_36
+  - first:
+      213: -8691861474006696332
+    second: rana_aplaudiendo_2_37
+  - first:
+      213: 1101021458008409823
+    second: rana_aplaudiendo_2_38
+  - first:
+      213: 2961169698143796750
+    second: rana_aplaudiendo_2_39
+  - first:
+      213: -2673290295878894380
+    second: rana_aplaudiendo_2_40
+  - first:
+      213: 4197138198748262563
+    second: rana_aplaudiendo_2_41
+  - first:
+      213: -5914924291825259725
+    second: rana_aplaudiendo_2_42
+  - first:
+      213: 1040480575525044911
+    second: rana_aplaudiendo_2_43
+  - first:
+      213: 2527907510852932163
+    second: rana_aplaudiendo_2_44
+  - first:
+      213: 8637672536185060282
+    second: rana_aplaudiendo_2_45
+  - first:
+      213: 8287556825041491277
+    second: rana_aplaudiendo_2_46
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rana_aplaudiendo_2_7
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 54
+        width: 248
+        height: 284
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d420b9c533252ed20800000000000000
+      internalID: 3306295456993837645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rana_aplaudiendo_2_12
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 48
+        width: 248
+        height: 284
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8473621761c53d170800000000000000
+      internalID: 8202000597829171016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c16af0076d6310e4db2f28914870d919
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      rana_aplaudiendo_2_0: 8596402497524844085
+      rana_aplaudiendo_2_1: 7472985337761386487
+      rana_aplaudiendo_2_10: -3757716086241034832
+      rana_aplaudiendo_2_11: 930870504372328771
+      rana_aplaudiendo_2_12: 8202000597829171016
+      rana_aplaudiendo_2_13: -3658687693447693527
+      rana_aplaudiendo_2_14: 2437304073387382097
+      rana_aplaudiendo_2_15: 3915046299886529062
+      rana_aplaudiendo_2_16: 3179562925274756559
+      rana_aplaudiendo_2_17: 5488851207427605299
+      rana_aplaudiendo_2_18: -5214679535349174736
+      rana_aplaudiendo_2_19: 5072390268156300599
+      rana_aplaudiendo_2_2: -5995893105647103619
+      rana_aplaudiendo_2_20: 7756153195348193563
+      rana_aplaudiendo_2_21: 7433893890241667743
+      rana_aplaudiendo_2_22: 3660091345989112287
+      rana_aplaudiendo_2_23: -7587040888032993631
+      rana_aplaudiendo_2_24: -3313325699914500068
+      rana_aplaudiendo_2_25: 5566706180999550359
+      rana_aplaudiendo_2_26: 7129937968679141029
+      rana_aplaudiendo_2_27: -8776292701560313085
+      rana_aplaudiendo_2_28: 91870108950583710
+      rana_aplaudiendo_2_29: -3229168742062738460
+      rana_aplaudiendo_2_3: 7510233375721721873
+      rana_aplaudiendo_2_30: 8796276830517068644
+      rana_aplaudiendo_2_31: -7803132366773450794
+      rana_aplaudiendo_2_32: 4238110472592221463
+      rana_aplaudiendo_2_33: -993035274630298271
+      rana_aplaudiendo_2_34: -3683086150513078093
+      rana_aplaudiendo_2_35: -315343306903713312
+      rana_aplaudiendo_2_36: 3441936440125675147
+      rana_aplaudiendo_2_37: -8691861474006696332
+      rana_aplaudiendo_2_38: 1101021458008409823
+      rana_aplaudiendo_2_39: 2961169698143796750
+      rana_aplaudiendo_2_4: -490099340241045366
+      rana_aplaudiendo_2_40: -2673290295878894380
+      rana_aplaudiendo_2_41: 4197138198748262563
+      rana_aplaudiendo_2_42: -5914924291825259725
+      rana_aplaudiendo_2_43: 1040480575525044911
+      rana_aplaudiendo_2_44: 2527907510852932163
+      rana_aplaudiendo_2_45: 8637672536185060282
+      rana_aplaudiendo_2_46: 8287556825041491277
+      rana_aplaudiendo_2_5: 6815476865773566945
+      rana_aplaudiendo_2_6: -6416450080124000736
+      rana_aplaudiendo_2_7: 3306295456993837645
+      rana_aplaudiendo_2_8: 2813456704049640007
+      rana_aplaudiendo_2_9: 6824468657193467441
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
