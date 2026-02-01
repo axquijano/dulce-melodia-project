@@ -1,0 +1,396 @@
+fileFormatVersion: 2
+guid: 55bc01583a93dfa41a85c7abceff07de
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 424582114697731820
+    second: cara_0
+  - first:
+      213: -4606091228285611295
+    second: cara_1
+  - first:
+      213: -8865206294045612008
+    second: cara_2
+  - first:
+      213: -4953246554001527208
+    second: cara_3
+  - first:
+      213: 5996214899755668391
+    second: cara_4
+  - first:
+      213: -6376197604767582900
+    second: cara_5
+  - first:
+      213: -5906428944277052179
+    second: cara_6
+  - first:
+      213: -5013587035818365781
+    second: cara_7
+  - first:
+      213: -3777427760219333183
+    second: cara_8
+  - first:
+      213: -8248915576227407002
+    second: cara_9
+  - first:
+      213: 8902560801218178820
+    second: cara_10
+  - first:
+      213: 3103166215356238993
+    second: cara_11
+  - first:
+      213: -833881382041887440
+    second: cara_12
+  - first:
+      213: -3940631112927060994
+    second: cara_13
+  - first:
+      213: 6477886438452519485
+    second: cara_14
+  - first:
+      213: -4732018500339465696
+    second: cara_15
+  - first:
+      213: 5581605795603400781
+    second: cara_16
+  - first:
+      213: 2114950925836076001
+    second: cara_17
+  - first:
+      213: 8501731835487958499
+    second: cara_18
+  - first:
+      213: 1718500168889919923
+    second: cara_19
+  - first:
+      213: -8653373371635195090
+    second: cara_20
+  - first:
+      213: -1900036602426749668
+    second: cara_21
+  - first:
+      213: -7094804957754801479
+    second: cara_22
+  - first:
+      213: -585856089752067486
+    second: cara_23
+  - first:
+      213: 303599667888384163
+    second: cara_24
+  - first:
+      213: -161147014741204478
+    second: cara_25
+  - first:
+      213: 5445861827325220785
+    second: cara_26
+  - first:
+      213: 5314096819645689617
+    second: cara_27
+  - first:
+      213: -8057270536860020343
+    second: cara_28
+  - first:
+      213: 5381868224821725216
+    second: cara_29
+  - first:
+      213: -7579273984522158434
+    second: cara_30
+  - first:
+      213: 6497332342244745370
+    second: cara_31
+  - first:
+      213: 1048442541891780150
+    second: cara_32
+  - first:
+      213: 2682438582057537966
+    second: cara_33
+  - first:
+      213: -6255226520504018811
+    second: cara_34
+  - first:
+      213: -5922996260250640534
+    second: cara_35
+  - first:
+      213: 5246589303051439737
+    second: cara_36
+  - first:
+      213: -1171902584380439788
+    second: cara_37
+  - first:
+      213: -1092410351828236135
+    second: cara_38
+  - first:
+      213: 730024280165682806
+    second: cara_39
+  - first:
+      213: -3364011903143380223
+    second: cara_40
+  - first:
+      213: 2050744041003772368
+    second: cara_41
+  - first:
+      213: 5377139024535452568
+    second: cara_42
+  - first:
+      213: -6619602765076125300
+    second: cara_43
+  - first:
+      213: 3232255526225421806
+    second: cara_44
+  - first:
+      213: 847800653474194476
+    second: cara_45
+  - first:
+      213: -7748925517144286447
+    second: cara_46
+  - first:
+      213: -1001864389426374886
+    second: cara_47
+  - first:
+      213: -6613438243697462457
+    second: cara_48
+  - first:
+      213: -6000412116346408265
+    second: cara_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: cara_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 87
+        width: 209
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceeda8c0f2b64e500800000000000000
+      internalID: 424582114697731820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cara_3
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 97
+        width: 209
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85eafc7a088824bb0800000000000000
+      internalID: -4953246554001527208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cara_6
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 101
+        width: 209
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de4e7453b26280ea0800000000000000
+      internalID: -5906428944277052179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4a0a54b93c905a64fbce3e26a02d7a22
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      cara_0: 424582114697731820
+      cara_1: -4606091228285611295
+      cara_10: 8902560801218178820
+      cara_11: 3103166215356238993
+      cara_12: -833881382041887440
+      cara_13: -3940631112927060994
+      cara_14: 6477886438452519485
+      cara_15: -4732018500339465696
+      cara_16: 5581605795603400781
+      cara_17: 2114950925836076001
+      cara_18: 8501731835487958499
+      cara_19: 1718500168889919923
+      cara_2: -8865206294045612008
+      cara_20: -8653373371635195090
+      cara_21: -1900036602426749668
+      cara_22: -7094804957754801479
+      cara_23: -585856089752067486
+      cara_24: 303599667888384163
+      cara_25: -161147014741204478
+      cara_26: 5445861827325220785
+      cara_27: 5314096819645689617
+      cara_28: -8057270536860020343
+      cara_29: 5381868224821725216
+      cara_3: -4953246554001527208
+      cara_30: -7579273984522158434
+      cara_31: 6497332342244745370
+      cara_32: 1048442541891780150
+      cara_33: 2682438582057537966
+      cara_34: -6255226520504018811
+      cara_35: -5922996260250640534
+      cara_36: 5246589303051439737
+      cara_37: -1171902584380439788
+      cara_38: -1092410351828236135
+      cara_39: 730024280165682806
+      cara_4: 5996214899755668391
+      cara_40: -3364011903143380223
+      cara_41: 2050744041003772368
+      cara_42: 5377139024535452568
+      cara_43: -6619602765076125300
+      cara_44: 3232255526225421806
+      cara_45: 847800653474194476
+      cara_46: -7748925517144286447
+      cara_47: -1001864389426374886
+      cara_48: -6613438243697462457
+      cara_49: -6000412116346408265
+      cara_5: -6376197604767582900
+      cara_6: -5906428944277052179
+      cara_7: -5013587035818365781
+      cara_8: -3777427760219333183
+      cara_9: -8248915576227407002
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

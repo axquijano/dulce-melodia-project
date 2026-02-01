@@ -7,9 +7,15 @@ public class MainMenu : MonoBehaviour
         SceneLoader.Instance.LoadScene("UserSelect");
     }
 
-    public void GoToActivityMap()
+    public void ExitGame()
     {
-        SceneLoader.Instance.LoadScene("MapActivity");
+        #if UNITY_ANDROID
+            Application.Quit();
+        #elif UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 
 }

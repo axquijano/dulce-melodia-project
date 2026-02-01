@@ -13,9 +13,19 @@ MonoBehaviour:
   m_Name: Sequence_Tutorial
   m_EditorClassIdentifier: 
   notes:
-  - {fileID: 11400000, guid: a7ca43287352c2946ad4faca47d16044, type: 2}
-  - {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
-  - {fileID: 11400000, guid: 2327e3e271ce8a44fa2559bc948e38bf, type: 2}
-  - {fileID: 11400000, guid: 6f8ece7bc9d1b594eb7b485e8a50cce2, type: 2}
-  - {fileID: 11400000, guid: 1e226832999828942af67d972b105c86, type: 2}
-  - {fileID: 11400000, guid: 3b036c10512f43c4e8b9436bc0d1a2dc, type: 2}
+  - note: {fileID: 11400000, guid: a7ca43287352c2946ad4faca47d16044, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: 4f3fd8294ea526849a2dc819b5eb9811, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: 1e226832999828942af67d972b105c86, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: 7a057d9355ff4a54593234db2406498d, type: 2}
+    showColor: 1
+    showLetter: 1
+  - note: {fileID: 11400000, guid: ddc11c1becdfbab44add564d97ec0f88, type: 2}
+    showColor: 1
+    showLetter: 1
+  allowedMistakes: 3

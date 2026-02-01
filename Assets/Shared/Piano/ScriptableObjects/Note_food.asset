@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4c22a0c4003634b8acc3f67b7555cc, type: 3}
+  m_Name: Note_food
+  m_EditorClassIdentifier: 
+  noteName: 
+  sound: {fileID: 0}
+  imagen: {fileID: 9044672386136310270, guid: e076c5eacb51b564ab3da55a7b41f60b, type: 3}
+  color: {r: 0.22352943, g: 0.227451, b: 0.22352943, a: 1}
+  imagenStar: {fileID: 0}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb58c107ebadec44a8fd2ff7dc0a3aae, type: 3}
+  m_Name: confenti
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: -7176896013221781797, guid: 74603eea370f6dc40919d1578fcc072a, type: 3}
+  - {fileID: 9149668296573811937, guid: 74603eea370f6dc40919d1578fcc072a, type: 3}
+  - {fileID: -4562719295012424968, guid: 74603eea370f6dc40919d1578fcc072a, type: 3}
+  - {fileID: -6744470860044340531, guid: 74603eea370f6dc40919d1578fcc072a, type: 3}
+  - {fileID: -4694184348362795032, guid: 74603eea370f6dc40919d1578fcc072a, type: 3}
+  animationSpeed: 0.1

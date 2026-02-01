@@ -76,7 +76,7 @@ public class FeedbackManager : MonoBehaviour
 
     void UpdateUI()
     {
-        progressBar.UpdateProgressBar(mistakes);
+         progressBar.UpdateProgressBar(mistakes); 
         /* hitsText.text = hits.ToString(); */
        /*  mistakesText.text = mistakes.ToString(); */
     }
