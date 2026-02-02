@@ -6,36 +6,20 @@ public class MapActivityUI : MonoBehaviour
     public ActivitiesDatabase activitiesDatabase;
 
     [Header("Prefabs")]
-    public GameObject levelButtonPrefab;
+    public GameObject activityButtonPrefab;
 
     [Header("Containers")]
-    public Transform levelsContainer;
-
-    private ChildProfile profile;
+    public Transform container;
 
     void Start()
     {
-        profile = ProfilesManager.Instance.currentProfile;
-        GenerateActivityButtons();
-    }
+        ChildProfile profile = ProfilesManager.Instance.currentProfile;
 
-    void GenerateActivityButtons()
-    {
-        //Limpiar el contenedor para poner los nuevos elementos
-        foreach (Transform t in levelsContainer)
-            Destroy(t.gameObject);
-
-        // Recorremos la base de datos de actividades
         for (int i = 0; i < activitiesDatabase.activities.Count; i++)
         {
-            ActivityDefinition def = activitiesDatabase.activities[i];
-            //Instanciar un boton para cada actividad
-            GameObject btn = Instantiate(levelButtonPrefab, levelsContainer);
-        
-            ActivityItemButton item = btn.GetComponent<ActivityItemButton>();
-
-            // Config bloquear/desbloquear la actividad
-            item.Setup(def, i, profile);
+            GameObject btn = Instantiate(activityButtonPrefab, container);
+            btn.GetComponent<ActivityItemButton>()
+               .Setup(activitiesDatabase.activities[i], i, profile);
         }
     }
 

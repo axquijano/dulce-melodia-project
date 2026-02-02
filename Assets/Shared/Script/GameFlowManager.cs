@@ -8,7 +8,7 @@ public class GameFlowManager : MonoBehaviour
     public int selectedLevel;
     public ActivitiesDatabase database;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance != null)
         {
@@ -18,37 +18,41 @@ public class GameFlowManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        // Reconstruir estado con PlayerPrefs si ya existía
-        if (PlayerPrefs.HasKey("CurrentActivity"))
-        {
-            int a = PlayerPrefs.GetInt("CurrentActivity");
-            int l = PlayerPrefs.GetInt("CurrentLevel");
-
-            selectedActivity = database.activities[a];
-            selectedLevel = l;
-        }
-    }
-
-    public bool IsLastLevel()
-    {
-        return selectedLevel == selectedActivity.levels.Count - 1;
-    }
-
-    public int GetLevel (){
-        return selectedLevel;
     }
 
     public void SelectActivity(int activityIndex)
     {
         selectedActivity = database.activities[activityIndex];
-        SceneLoader.Instance.LoadScene("MapLevel");
+        PlayerPrefs.SetInt("CurrentActivity", activityIndex);
+
+        ActivityEntry activity =
+            ProfilesManager.Instance.currentProfile.activities[activityIndex];
+
+        // Tutorial
+        if (!activity.value.tutorialSeen)
+        {
+            PlayerPrefs.SetInt("CurrentLevel", 0);
+            PlayerPrefs.Save();
+            SceneLoader.Instance.LoadScene(selectedActivity.tutorialSceneName);
+            return;
+        }
+
+        // Nivel correcto
+        selectedLevel = GetCurrentLevelIndex(activity);
+        PlayerPrefs.SetInt("CurrentLevel", selectedLevel);
+        PlayerPrefs.Save();
+
+        SceneLoader.Instance.LoadScene(selectedActivity.gameplaySceneName);
     }
 
-    public void SelectLevel(int levelIndex)
+    public int GetCurrentLevelIndex(ActivityEntry activity)
     {
-        selectedLevel = levelIndex;
-        SceneLoader.Instance.LoadScene(selectedActivity.gameplaySceneName);
+        for (int i = 0; i < activity.value.levels.Count; i++)
+        {
+            if (!activity.value.levels[i].CompletedAtLeastOnce())
+                return i;
+        }
+        return 0;
     }
 
     public LevelSequence GetCurrentLevelSequence()
@@ -56,8 +60,9 @@ public class GameFlowManager : MonoBehaviour
         return selectedActivity.levels[selectedLevel];
     }
 
-    public LevelSettings GetCurrentLevelSettings()
+    public bool IsLastLevel()
     {
-        return selectedActivity.levelSettings[selectedLevel];
+        return selectedLevel >= selectedActivity.levels.Count - 1;
     }
+
 }

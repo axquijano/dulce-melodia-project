@@ -1,4 +1,4 @@
-using UnityEngine;
+/* using UnityEngine;
 using System.Collections;
 
 public class ActivityMemory : MonoBehaviour
@@ -217,7 +217,7 @@ public class ActivityMemory : MonoBehaviour
             else
                 ActivityConnector.Instance.OnWin();
         }
-    } */
+    } 
 
     IEnumerator HandleRepeatEnd()
     {
@@ -376,3 +376,4 @@ public class ActivityMemory : MonoBehaviour
         StartPlayerRepeat();
     }
 }
+ */

@@ -27,7 +27,7 @@ public class BalloonControllerUI : MonoBehaviour
 
     public RectTransform parentPanel;
 
-    private bool isDead = false;
+    private bool isDead = false;/*  */
 
 
     void Awake()
@@ -72,7 +72,7 @@ public class BalloonControllerUI : MonoBehaviour
         if (balloonTop.y > worldLimitY)
         {
             isDead = true;
-            manager.RegisterBalloonMiss(this);
+          /*   manager.RegisterBalloonMiss(this); */
             Destroy(gameObject);
         }
     }
