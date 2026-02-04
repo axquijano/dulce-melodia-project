@@ -27,6 +27,7 @@ public class BalloonControllerUI : MonoBehaviour
 
     public RectTransform parentPanel;
 
+    private bool wasMissRegistered = false;
     private bool isDead = false;/*  */
 
 
@@ -38,51 +39,33 @@ public class BalloonControllerUI : MonoBehaviour
             originalColor = balloonImage.color;
     }
 
-    /* void Update()
-    {
-        if (isDead) return; 
-        float limitY = parentPanel.rect.height * 0.5f;
-        rect.anchoredPosition += new Vector2(0, speed * Time.deltaTime);
-        float halfHeight  = rect.rect.height * 0.5f ;
-
-        if (rect.anchoredPosition.y - halfHeight  > limitY)
-        {
-            isDead = true;
-            manager.RegisterBalloonMiss(this);
-            Destroy(gameObject);
-        }
-    } */
-
     void Update()
     {
-        if (isDead) return;
-
-        rect.anchoredPosition += new Vector2(0, speed * Time.deltaTime);
+        rect.anchoredPosition += Vector2.up * speed * Time.deltaTime;
 
         float halfHeight = rect.rect.height * 0.5f;
 
-        // Límite superior en coordenadas del mundo
         Vector3[] corners = new Vector3[4];
         parentPanel.GetWorldCorners(corners);
         float worldLimitY = corners[1].y;
 
-        // Parte superior del globo
         Vector3 balloonTop = rect.TransformPoint(new Vector3(0, halfHeight, 0));
 
-        if (balloonTop.y > worldLimitY)
+        // Globo perdido (solo una vez)
+        if (!wasMissRegistered && balloonTop.y > worldLimitY)
         {
-            isDead = true;
-          /*   manager.RegisterBalloonMiss(this); */
+            wasMissRegistered = true;
+            isDead = true; // ya no es tocable
+
+            SetMissedVisual();        
+            manager.RegisterBalloonMiss(this);
+        }
+
+        if (balloonTop.y > worldLimitY + 200f)
+        {
             Destroy(gameObject);
         }
     }
-
-
-   /*  public void Pop()
-    {
-        ActivityTwoManager.Instance.RegisterBalloonHit(noteData);
-        Destroy(gameObject);
-    } */
 
     public void Pop()
     {
@@ -126,6 +109,15 @@ public class BalloonControllerUI : MonoBehaviour
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;
+    }
+
+    void SetMissedVisual()
+    {
+        if (balloonImage != null)
+            balloonImage.color = Color.gray;
+
+        if (letter != null)
+            letter.gameObject.SetActive(false);
     }
 
 }

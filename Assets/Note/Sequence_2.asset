@@ -34,4 +34,7 @@ MonoBehaviour:
   - note: {fileID: 11400000, guid: 3b036c10512f43c4e8b9436bc0d1a2dc, type: 2}
     showColor: 1
     showLetter: 1
+  - note: {fileID: 11400000, guid: a7ca43287352c2946ad4faca47d16044, type: 2}
+    showColor: 1
+    showLetter: 1
   allowedMistakes: 2

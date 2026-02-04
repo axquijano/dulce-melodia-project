@@ -57,7 +57,6 @@ public class ActivityOneManager : MonoBehaviour
     }
 
     
-
     void GenerateBubbles()
     {
         foreach (var data in sequence.notes)
@@ -65,8 +64,21 @@ public class ActivityOneManager : MonoBehaviour
             var b = Instantiate(bubblePrefab, bubbleContainer);
             b.GetComponent<NoteBubble>().Setup(data);
         }
-        bubbleContainer.GetChild(0).GetComponent<NoteBubble>().SetImagenColor();
+
+        int count = bubbleContainer.childCount;
+
+        if (count > 0)
+        {
+            bubbleContainer.GetChild(0)
+                .GetComponent<NoteBubble>()
+                .SetImagenColor();
+
+            bubbleContainer.GetChild(count-1)
+                .GetComponent<NoteBubble>()
+                .SetImagenColor();
+        }
     }
+
 
     void PositionFrogAt(int index)
     {
