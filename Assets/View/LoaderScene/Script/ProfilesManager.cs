@@ -63,9 +63,9 @@ public class ProfilesManager : MonoBehaviour
         SaveProfiles();
     }
 
-    public void CreateProfile(string name)
+    public void CreateProfile(string name, StudentAvatarData avatar)
     {
-        ChildProfile profile = new ChildProfile(name);
+        ChildProfile profile = new ChildProfile(name, avatar.avatarName);
 
         for (int i = 0; i < db.activities.Count; i++)
         {
@@ -77,7 +77,7 @@ public class ProfilesManager : MonoBehaviour
                 unlocked = false,
                 value = new ActivityData
                 {
-                    tutorialSeen = false,
+                    tutorialSeen = true,
                     levels = new List<LevelData>()
                 }
             };
@@ -88,7 +88,6 @@ public class ProfilesManager : MonoBehaviour
             profile.activities.Add(entry);
         }
 
-        // La primera actividad empieza desbloqueada
         profile.activities[0].unlocked = true;
 
         wrapper.profiles.Add(profile);

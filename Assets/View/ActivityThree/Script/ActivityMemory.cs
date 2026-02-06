@@ -1,4 +1,4 @@
-/* using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ActivityMemory : MonoBehaviour
@@ -30,19 +30,31 @@ public class ActivityMemory : MonoBehaviour
     public AudioSource audioSource;
 
     // ---------------------------------------------------------
+    // RULES
+    // ---------------------------------------------------------
+    [Header("Rules")]
+    public int maxMistakesPerRepeat = 3;
+
+    // ---------------------------------------------------------
     // STATE
     // ---------------------------------------------------------
     int currentSection = 0;
     int currentRepeat = 0;
     int playerNoteIndex = 0;
     int totalNotes = 0;
+    int mistakesThisRepeat = 0;
 
     bool waitingForInput = false;
 
     enum LevelPhase { None, AutoPlay, PlayerRepeat }
     LevelPhase phase = LevelPhase.None;
 
-    bool isLevel2 => GameFlowManager.Instance.GetLevel() == 1;
+    // ---------------------------------------------------------
+    // LEVEL FLAGS
+    // ---------------------------------------------------------
+    bool isIntroLevel => GameFlowManager.Instance.selectedLevel == 0; // Nivel 1
+    bool isMemoryLevel => GameFlowManager.Instance.selectedLevel == 1; // Nivel 2
+
     bool isFirstAttempt => currentRepeat == 0;
     bool isSecondAttempt => currentRepeat == 1;
 
@@ -66,24 +78,18 @@ public class ActivityMemory : MonoBehaviour
 
         var section = songData.sections[sectionIndex];
 
-        // Fila 1
         foreach (var timed in section.row1)
         {
-            bool ghost = timed.isGhost;
-
             Instantiate(starPrefab, row1Container)
                 .GetComponent<NoteStar>()
-                .Setup(timed.note, ghost);
+                .Setup(timed.note, timed.isGhost);
         }
 
-        // Fila 2
         foreach (var timed in section.row2)
         {
-            bool ghost = timed.isGhost;
-
             Instantiate(starPrefab, row2Container)
                 .GetComponent<NoteStar>()
-                .Setup(timed.note, ghost);
+                .Setup(timed.note, timed.isGhost);
         }
     }
 
@@ -101,9 +107,9 @@ public class ActivityMemory : MonoBehaviour
         yield return StartCoroutine(PlayReferenceAudio());
 
         yield return new WaitForSeconds(0.5f);
-        TTSManager.Instance.Speak("Ahora tú. Toca las notas.");
+        TTSManager.Instance.Speak("Ahora tú.");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
 
         currentRepeat = 0;
         StartPlayerRepeat();
@@ -154,11 +160,13 @@ public class ActivityMemory : MonoBehaviour
         phase = LevelPhase.PlayerRepeat;
         waitingForInput = true;
         playerNoteIndex = 0;
+        mistakesThisRepeat = 0;
 
-        totalNotes = songData.sections[currentSection].row1.Length +
-                     songData.sections[currentSection].row2.Length;
+        totalNotes =
+            songData.sections[currentSection].row1.Length +
+            songData.sections[currentSection].row2.Length;
 
-        if (isLevel2 && isSecondAttempt)
+        if (isMemoryLevel && isSecondAttempt)
             ShowGhosts();
 
         HighlightStar(playerNoteIndex);
@@ -175,6 +183,8 @@ public class ActivityMemory : MonoBehaviour
         if (pressed.noteName == expected.note.noteName)
         {
             FeedbackManager.Instance.RegisterHit();
+            ActivityConnector.Instance.RegisterHit();
+
             PaintStar(playerNoteIndex);
             playerNoteIndex++;
 
@@ -192,50 +202,39 @@ public class ActivityMemory : MonoBehaviour
         else
         {
             FeedbackManager.Instance.RegisterMistake();
+
+            if (isMemoryLevel)
+            {
+                ActivityConnector.Instance.RegisterMistake();
+                mistakesThisRepeat++;
+
+                if (mistakesThisRepeat >= maxMistakesPerRepeat)
+                {
+                    waitingForInput = false;
+                    StartCoroutine(HandleRepeatFail());
+                }
+            }
         }
     }
 
     // ---------------------------------------------------------
     // REPETICIONES
     // ---------------------------------------------------------
-    /* IEnumerator HandleRepeatEnd()
-    {
-        currentRepeat++;
-        yield return new WaitForSeconds(0.8f);
-
-        if (currentRepeat < 2)
-        {
-            ClearStars();
-            StartPlayerRepeat();
-        }
-        else
-        {
-            currentSection++;
-
-            if (currentSection < sections.Length)
-                StartCoroutine(StartSection());
-            else
-                ActivityConnector.Instance.OnWin();
-        }
-    } 
-
     IEnumerator HandleRepeatEnd()
     {
         currentRepeat++;
         yield return new WaitForSeconds(0.8f);
 
-        // 🔹 NIVEL 2: al terminar el primer intento, mostrar fantasmas
-        if (isLevel2 && currentRepeat == 1)
+        if (isMemoryLevel && currentRepeat == 1)
         {
             ClearStars();
-            ShowGhosts(); // 👻 aparecen los ?
-            yield return new WaitForSeconds(0.6f); // pequeño tiempo visual
+            ShowGhosts();
+            yield return new WaitForSeconds(0.6f);
         }
 
         if (currentRepeat < 2)
         {
-            // ⚠️ NO limpiar otra vez si ya mostramos fantasmas
-            if (!(isLevel2 && currentRepeat == 1))
+            if (!(isMemoryLevel && currentRepeat == 1))
                 ClearStars();
 
             StartPlayerRepeat();
@@ -248,6 +247,24 @@ public class ActivityMemory : MonoBehaviour
                 StartCoroutine(StartSection());
             else
                 ActivityConnector.Instance.OnWin();
+        }
+    }
+
+    IEnumerator HandleRepeatFail()
+    {
+        DisableAllKeys();
+        yield return new WaitForSeconds(0.8f);
+
+        currentRepeat++;
+
+        if (currentRepeat < 2)
+        {
+            ClearStars();
+            StartPlayerRepeat();
+        }
+        else
+        {
+            ActivityConnector.Instance.OnLose();
         }
     }
 
@@ -309,7 +326,6 @@ public class ActivityMemory : MonoBehaviour
             t.GetComponent<NoteStar>().SetGhostVisible(true);
     }
 
-
     // ---------------------------------------------------------
     // TECLADO
     // ---------------------------------------------------------
@@ -317,7 +333,7 @@ public class ActivityMemory : MonoBehaviour
     {
         var expected = GetExpectedNote(playerNoteIndex);
 
-        bool allowKeyboardHelp = !isLevel2 && isFirstAttempt;
+        bool allowKeyboardHelp = isIntroLevel && isFirstAttempt;
 
         foreach (var key in pianoKeys)
         {
@@ -376,4 +392,3 @@ public class ActivityMemory : MonoBehaviour
         StartPlayerRepeat();
     }
 }
- */

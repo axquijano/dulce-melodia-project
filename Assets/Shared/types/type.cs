@@ -46,11 +46,13 @@ public class ActivityEntry
 public class ChildProfile
 {
     public string childName;
+    public string avatarId;
     public List<ActivityEntry> activities = new List<ActivityEntry>();
 
-    public ChildProfile(string name)
+    public ChildProfile(string name, string avatarId)
     {
-        childName = name;
+        this.childName = name;
+        this.avatarId = avatarId;
         activities = new List<ActivityEntry>();
     }
 }

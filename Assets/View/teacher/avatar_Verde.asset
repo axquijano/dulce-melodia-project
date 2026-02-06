@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09958aff6dd691f4a9e1a4d1b3bc32e6, type: 3}
+  m_Name: avatar_Verde
+  m_EditorClassIdentifier: 
+  avatarName: verde
+  avatarSprite: {fileID: 7345560961787692923, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
+  happySprite: {fileID: -5001425556480925647, guid: 8f15b06f6b1f25348ab914f8cd0fe93f, type: 3}
+  sadSprite: {fileID: 0}
+  celebrationSprite: {fileID: 0}
+  mainColor: {r: 0, g: 0, b: 0, a: 0}
