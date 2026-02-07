@@ -31,6 +31,17 @@ public class ActivityData
 {
     public bool tutorialSeen;
     public List<LevelData> levels = new List<LevelData>();
+    public int GetCurrentLevelIndex()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            if (!levels[i].CompletedAtLeastOnce())
+                return i;
+        }
+
+        return -1;
+    }
+
 }
 
 [System.Serializable]

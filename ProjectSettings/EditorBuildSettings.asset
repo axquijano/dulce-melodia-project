@@ -47,6 +47,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/View/teacher/CreateStudentScene.unity
     guid: 3d9f20e4c552e0a4cbcd08de65a50912
+  - enabled: 1
+    path: Assets/View/teacher/StudentStatsScene.unity
+    guid: 9cc1fbc0ae146cf419d5a0d136c5b770
+  - enabled: 1
+    path: Assets/View/teacher/StudentListScene.unity
+    guid: 1b773badb265c354abaf46a015da71c3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

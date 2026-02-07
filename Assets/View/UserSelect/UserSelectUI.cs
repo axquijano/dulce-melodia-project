@@ -13,14 +13,29 @@ public class UserSelectUI : MonoBehaviour
     [Header("Avatars")]
     public StudentAvatarDatabase avatarDatabase;
 
+    [Header("Empty State")]
+    public GameObject emptyStatePanel;
+    public GameObject cardsPanel; // CardContainer + flechas
+
+
     private List<ChildProfile> profiles;
     private int currentPage = 0;
 
     void Start()
     {
         profiles = ProfilesManager.Instance.GetAllProfiles();
-        RefreshPage();
+
+        if (profiles == null || profiles.Count == 0)
+        {
+            ShowEmptyState();
+        }
+        else
+        {
+            ShowCards();
+            RefreshPage();
+        }
     }
+
 
     void RefreshPage()
     {
@@ -69,4 +84,24 @@ public class UserSelectUI : MonoBehaviour
     {
         SceneLoader.Instance.LoadScene("MainMenu");
     }
+
+    void ShowEmptyState()
+    {
+        emptyStatePanel.SetActive(true);
+        cardsPanel.SetActive(false);
+    }
+
+    void ShowCards()
+    {
+        emptyStatePanel.SetActive(false);
+        cardsPanel.SetActive(true);
+    }
+
+    public void GoToCreateStudent()
+    {
+        SceneLoader.Instance.LoadScene("CreateStudentScene");
+    }
+
+
+
 }

@@ -13,25 +13,32 @@ public class CreateStudentController : MonoBehaviour
     public Image previewAvatarImage;
     public TMP_Text previewNameText;
 
+    [Header("Avatar Placeholder")]
+    public Sprite defaultAvatarSprite; // silueta del monstruo
+
     [Header("Avatar Grid")]
     public Transform avatarGrid;
     public GameObject avatarItemPrefab;
-    public List<StudentAvatarData> avatars;
+
+    [Header("Avatar Database")]
+    public StudentAvatarDatabase avatarDatabase;
 
     [Header("Message")]
     public TMP_Text msgWarning;
+
     // Avatar seleccionado
     private StudentAvatarData selectedAvatar;
 
-    // Referencias a los items del grid (para marcar selección)
-    //TODO : usar la base de datos 
+    // Referencias a los items del grid (selección visual)
     private List<AvatarItemUI> avatarItems = new List<AvatarItemUI>();
 
     void Start()
     {
-        LoadAvatars();
         previewNameText.text = "";
-        previewAvatarImage.sprite = null;
+        previewAvatarImage.sprite = defaultAvatarSprite;
+        selectedAvatar = null;
+
+        LoadAvatars();
     }
 
     // Se llama cuando escriben el nombre
@@ -41,10 +48,16 @@ public class CreateStudentController : MonoBehaviour
         msgWarning.text = "";
     }
 
-    // Cargar avatares dinámicamente en el grid
+    // Cargar avatares dinámicamente desde la base de datos
     void LoadAvatars()
     {
-        foreach (var avatar in avatars)
+        // Limpieza por si se recarga la escena
+        foreach (Transform t in avatarGrid)
+            Destroy(t.gameObject);
+
+        avatarItems.Clear();
+
+        foreach (var avatar in avatarDatabase.avatars)
         {
             GameObject item = Instantiate(avatarItemPrefab, avatarGrid);
             AvatarItemUI ui = item.GetComponent<AvatarItemUI>();
@@ -65,6 +78,7 @@ public class CreateStudentController : MonoBehaviour
         {
             item.SetSelected(item.AvatarData == avatar);
         }
+
         msgWarning.text = "";
     }
 
@@ -73,14 +87,11 @@ public class CreateStudentController : MonoBehaviour
     {
         if (string.IsNullOrEmpty(nameInput.text) || selectedAvatar == null)
         {
-            Debug.Log("Falta nombre o avatar");
             msgWarning.text = "Falta nombre o avatar";
             return;
         }
 
-        ProfilesManager.Instance.CreateProfile( nameInput.text,selectedAvatar );
-
-        //TODO: revisar esta linea para despues 
+        ProfilesManager.Instance.CreateProfile(nameInput.text, selectedAvatar);
         ProfilesManager.Instance.SetCurrentProfile(nameInput.text);
 
         Debug.Log("Estudiante guardado correctamente");
