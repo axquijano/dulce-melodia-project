@@ -1,44 +1,63 @@
 using UnityEngine;
+using TMPro;
 
 public class ResultUI : MonoBehaviour
 {
+    [Header("Panels")]
     public GameObject winPanel;
     public GameObject losePanel;
-   /*  public TMPro.TMP_Text hitsText;
-    public TMPro.TMP_Text mistakesText;
-    public TMPro.TMP_Text timeText; */
+
+    [Header("Win UI")]
+    public TMP_Text hitsTextWin;
+    public TMP_Text timeTextWin;
+    public TMP_Text mistakesTextWin;
+
+    [Header("Lose UI")]
+    public TMP_Text hitsTextLose;
+    public TMP_Text timeTextLose;
+    public TMP_Text mistakesTextLose;
 
     void Start()
     {
-        if (ActivityConnector.Instance.LevelWon)
+        var connector = ActivityConnector.Instance;
+        if (connector == null)
         {
-            winPanel.SetActive(true);
-            losePanel.SetActive(false);
+            Debug.LogError("ActivityConnector no existe.");
+            return;
+        }
+
+        bool won = connector.LevelWon;
+
+        winPanel.SetActive(won);
+        losePanel.SetActive(!won);
+
+        int hits = connector.Hits;
+        int mistakes = connector.Mistakes;
+        float time = connector.ElapsedTime;
+
+        if (won)
+        {
+            hitsTextWin.text = hits.ToString();
+            mistakesTextWin.text = mistakes.ToString();
+            timeTextWin.text = FormatTime(time);
         }
         else
         {
-            losePanel.SetActive(true);
-            winPanel.SetActive(false);
+            hitsTextLose.text = hits.ToString();
+            mistakesTextLose.text = mistakes.ToString();
+            timeTextLose.text = FormatTime(time);
         }
-
-      /*   hitsText.text = ActivityConnector.Instance.hits.ToString();
-        mistakesText.text = ActivityConnector.Instance.mistakes.ToString();
-        timeText.text = ActivityConnector.Instance.time.ToString("F2"); */
     }
 
-    public void BackToMap()
+    string FormatTime(float t)
     {
-        ActivityConnector.Instance.BackToMap();
+        int min = Mathf.FloorToInt(t / 60f);
+        int sec = Mathf.FloorToInt(t % 60f);
+        return $"{min:00}:{sec:00}";
     }
 
-    public void RetryLevel()
+    public void ContinuePlaying()
     {
-        ActivityConnector.Instance.RetryLevel();
+        ActivityConnector.Instance.ContinuePlaying();
     }
-
-    public void GoToMenu()
-    {
-        SceneLoader.Instance.LoadScene("MapActivity");
-    }
-
 }

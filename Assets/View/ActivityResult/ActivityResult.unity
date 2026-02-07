@@ -1340,7 +1340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &627793409
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1563,7 +1563,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1151156155}
         m_TargetAssemblyTypeName: ResultUI, Assembly-CSharp
-        m_MethodName: BackToMap
+        m_MethodName: ContinuePlaying
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2007,7 +2007,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1151156154}
   - component: {fileID: 1151156155}
-  - component: {fileID: 1151156156}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -2044,21 +2043,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winPanel: {fileID: 60725431}
   losePanel: {fileID: 627793408}
---- !u!114 &1151156156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151156152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eb266c2c184aa043ab6bbd3a440beb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitsText: {fileID: 1014947356}
-  timeText: {fileID: 841522490}
-  mistakesText: {fileID: 383740064}
+  hitsTextWin: {fileID: 1014947356}
+  timeTextWin: {fileID: 841522490}
+  mistakesTextWin: {fileID: 383740064}
   hitsTextLose: {fileID: 1590255262}
   timeTextLose: {fileID: 2060036999}
   mistakesTextLose: {fileID: 6252456}
@@ -2146,7 +2133,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1151156155}
         m_TargetAssemblyTypeName: ResultUI, Assembly-CSharp
-        m_MethodName: BackToMap
+        m_MethodName: ContinuePlaying
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

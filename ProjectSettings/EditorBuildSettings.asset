@@ -33,10 +33,10 @@ EditorBuildSettings:
     path: Assets/View/ActivityTwo/ActivityTwo.unity
     guid: bd055a12fbb938d40801cff9a174e873
   - enabled: 1
-    path: Assets/View/ActivityThree/ActivityThree.unity
+    path: Assets/View/ActivityThree/Space_Memory.unity
     guid: 50f4e7b8243de9d49bb700ea091c4edf
   - enabled: 1
-    path: Assets/View/ActivityThree/ActivityThree_Music.unity
+    path: Assets/View/ActivityThree/Space_Rhythm.unity
     guid: 70d133d2e41600444aafd7f4022893c9
   - enabled: 1
     path: Assets/View/MapEmotions/MapEmotions.unity

@@ -15,4 +15,6 @@ public class ActivityDefinition : ScriptableObject
     public string tutorialSceneName; // Nombre del tutorial
     public List<LevelSequence> levels;  // N niveles
     public List<LevelSettings> levelSettings; // Configuraciones por nivel
+    [Header("Special Level Scenes (optional)")]
+    public string thirdLevelSceneName; //para la tercera actividad
 }
