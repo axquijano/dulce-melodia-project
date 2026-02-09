@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb767b96017570243bc9956003122742, type: 3}
   m_Name: HelpConfig
   m_EditorClassIdentifier: 
-  delayBeforeHelp: 3
-  helpEnabled: 1
+  delayBeforeHelp: 0.5
+  helpEnabled: 0

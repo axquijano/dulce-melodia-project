@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Collections;
 using System;
+using TMPro;
 
 
 public class ActivityOneManager : MonoBehaviour
@@ -23,11 +24,26 @@ public class ActivityOneManager : MonoBehaviour
     private RectTransform frog;
     
     public string childName;
+
+    private int mistakesOnCurrentNote = 0;
+
+    [Header("Mistake Feedback UI")]
+    public Image avatarImage;
+    public TMP_Text mistakeText;
+
+    [Header("Avatar")]
+    public StudentAvatarDatabase avatarDatabase;
+    private StudentAvatarData currentAvatar;
+
+
     
     void Start()
     {
         ActivityConnector.Instance.StartLevel();
         childName = ProfilesManager.Instance.currentProfile.childName;
+        currentAvatar = avatarDatabase.GetById(ProfilesManager.Instance.currentProfile.avatarId);
+        avatarImage.gameObject.SetActive(false);
+        mistakeText.gameObject.SetActive(false);
         loadSequence();
         GenerateBubbles();
         CreateFrog();      
@@ -110,7 +126,7 @@ public class ActivityOneManager : MonoBehaviour
 
         helpRoutine = StartCoroutine(HelpTimer());
 
-        for (int i = 1; i < bubbleContainer.childCount; i++)
+        for (int i = 1; i < bubbleContainer.childCount-1; i++)
         {
             bubbleContainer.GetChild(i)
                 .GetComponent<NoteBubble>()
@@ -147,15 +163,29 @@ public class ActivityOneManager : MonoBehaviour
         if (helpRoutine != null)
             StopCoroutine(helpRoutine);
 
+        avatarImage.gameObject.SetActive(false);
+        mistakeText.gameObject.SetActive(false);
+
         // ✔ Correcta
         if (pressedNote.noteName == sequence.notes[currentIndex].note.noteName)
         {
+            mistakesOnCurrentNote = 0; // 🔄 reset
+
             ActivityConnector.Instance.RegisterHit(); 
-            PositionFrogAt(currentIndex);
             FeedbackManager.Instance.RegisterHit();
+
+            PositionFrogAt(currentIndex);
             currentIndex++;
 
-            if (currentIndex >= sequence.notes.Length -1 )
+            // 🎉 Estímulo visual
+            var feedback = frog.GetComponentInChildren<VisualFeedback>(true);
+            if (feedback != null)
+                feedback.ShowNextReward();
+
+            // 🎙️ Voz positiva
+            TTSManager.Instance.Speak("Muy bien");
+
+            if (currentIndex >= sequence.notes.Length - 1)
             {
                 ActivityConnector.Instance.OnWin(); 
                 return;
@@ -165,11 +195,29 @@ public class ActivityOneManager : MonoBehaviour
         }
         else
         {
-            // ❌ Incorrecta
             ActivityConnector.Instance.RegisterMistake();
-            FeedbackManager.Instance.RegisterMistake(); 
-            ShowHelpForCurrentKey();
+            FeedbackManager.Instance.RegisterMistake();
+
+            mistakesOnCurrentNote++;
+
+            // Mostrar mensaje + avatar
+            avatarImage.gameObject.SetActive(true);
+            avatarImage.sprite = currentAvatar.sadSprite;
+
+            mistakeText.gameObject.SetActive(true);
+            mistakeText.text = $"{childName}, vamos a intentarlo de nuevo";
+
+            TTSManager.Instance.Speak(
+                $"{childName}, vamos a intentarlo de nuevo"
+            );
+
+            // 👉 SOLO en el segundo error se da ayuda visual
+            if (mistakesOnCurrentNote >= 2)
+            {
+                ShowHelpForCurrentKey();
+            }
         }
+
 
         // ❌ Condición de derrota
         if (ActivityConnector.Instance.Mistakes >= sequence.allowedMistakes)
