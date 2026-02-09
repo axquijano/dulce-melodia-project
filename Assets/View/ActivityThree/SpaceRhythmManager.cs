@@ -4,6 +4,9 @@ public class SpaceRhythmManager : MonoBehaviour
 {
     public static SpaceRhythmManager Instance;
 
+    [Header("Audio")]
+    public AudioSource audioSource; 
+
     [Header("Piano")]
     public PianoKey[] pianoKeys;
 
@@ -35,39 +38,38 @@ public class SpaceRhythmManager : MonoBehaviour
         }
     }
 
-    void OnKeyPressed(NoteData pressedNote)
+     void OnKeyPressed(NoteData pressedNote)
     {
         NoteStar pending = GetPendingNote();
 
-        // 🎹 tecla libre (no hay nota esperando)
         if (pending == null)
-        {
-            // el sonido ya lo maneja PianoKey
             return;
-        }
 
-        // ✅ nota correcta
         if (pending.noteData == pressedNote)
         {
-            pending.Consume(); // libera la cinta
-        }
-        else
-        {
-            // ❌ incorrecta → no pasa nada
-            // la cinta sigue detenida
+            PlayTimedNoteSound(pending.timedNote);
+            pending.Consume(); // 🔓 libera la cinta
         }
     }
 
     NoteStar GetPendingNote()
     {
-        NoteStar[] notes = FindObjectsOfType<NoteStar>();
-
-        foreach (var note in notes)
+        foreach (var note in FindObjectsOfType<NoteStar>())
         {
             if (note.IsPending)
                 return note;
         }
-
         return null;
+    }
+
+    void PlayTimedNoteSound(TimedNote timedNote)
+    {
+        AudioClip clip =
+            timedNote.overrideSound != null
+            ? timedNote.overrideSound
+            : timedNote.note.sound;
+
+        if (clip != null)
+            audioSource.PlayOneShot(clip);
     }
 }

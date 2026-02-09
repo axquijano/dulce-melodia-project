@@ -52,7 +52,7 @@ public class SpaceRhythmBuilder : MonoBehaviour
 
         // ⭐ Inicializamos NoteStar
         NoteStar noteStar = obj.GetComponent<NoteStar>();
-        noteStar.Setup(timedNote.note, false);
+        noteStar.Setup(timedNote);
     }
 
     RectTransform GetLane(string noteName)
