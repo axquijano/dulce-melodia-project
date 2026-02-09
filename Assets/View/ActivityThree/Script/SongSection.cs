@@ -6,6 +6,7 @@ public class TimedNote
     public NoteData note;
     public float time;   // segundo exacto en el audio
     public bool isGhost;
+    public AudioClip overrideSound; // grave / agudo / especial (opcional)
 
 }
 

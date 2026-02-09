@@ -7,34 +7,73 @@ public class NoteStar : MonoBehaviour
     [Header("UI")]
     public Image bubbleImage;
     public TMP_Text label;
-    public Sprite imagenInit;
+    public Sprite imagenInit;   // estrella gris
+    public bool isPending = false; //para el nivel de ritmo
+    public bool IsPending { get; private set; }
 
-    Sprite imagenCurrent;
-    Color originalLabelColor;
+    public TimedNote timedNote;
+
+    // 🔹 Data de la nota
+    public NoteData noteData;
 
     bool isGhost;
     bool revealed = false;
+    bool isActive = false;
 
+    // --------------------------------------------------
     public void Setup(NoteData item, bool ghost)
     {
+        noteData = item;
         isGhost = ghost;
         revealed = false;
-        imagenCurrent = item.imagenStar;
+
+        label.text = noteData.noteName;
+        SetInactive();
+    }
+
+    
+
+    // --------------------------------------------------
+    // ⭐ Estado normal: bajando
+    public void SetInactive()
+    {
+        isActive = false;
+        isPending = false;
 
         bubbleImage.sprite = imagenInit;
-        originalLabelColor = label.color;
-
-        label.text = item.noteName;
-        label.color = originalLabelColor;
+        bubbleImage.color = Color.white;
+        label.color = noteData.color;
         label.enabled = true;
     }
 
-    // Se usa en autoplay y cuando es el turno del niño
+    // --------------------------------------------------
+    // ⭐ Estado activo: en HitZone
+    public void SetActive()
+    {
+        isActive = true;
+        isPending = true;
+
+        bubbleImage.sprite = noteData.imagenStar;
+        bubbleImage.color = Color.white;
+        label.color = Color.white;
+    }
+
+    // --------------------------------------------------
+    // 🔁 Llamado desde HitZoneDetector
+    public void SetActive(bool active)
+    {
+        if (active && !isActive)
+            SetActive();
+        else if (!active && isActive)
+            SetInactive();
+    }
+
+    // --------------------------------------------------
+    // EXISTENTE (ghost / otros modos)
     public void ShowColor()
     {
-
         if (label.text == "?" && !revealed) return;
-        bubbleImage.sprite = imagenCurrent;
+        bubbleImage.sprite = noteData.imagenStar;
     }
 
     public void RevealGhost(string noteName)
@@ -43,20 +82,15 @@ public class NoteStar : MonoBehaviour
 
         revealed = true;
         label.text = noteName;
-        label.color = originalLabelColor;
-        bubbleImage.sprite = imagenCurrent;
+        label.color = Color.white;
+        bubbleImage.sprite = noteData.imagenStar;
     }
 
     public void ResetToInitial()
     {
-        bubbleImage.sprite = imagenInit;
+        SetInactive();
         revealed = false;
-
-        label.enabled = true;
-        label.color = originalLabelColor;
-        /* label.text = ""; */
     }
-
 
     public void SetGhostVisible(bool visible)
     {
@@ -64,7 +98,6 @@ public class NoteStar : MonoBehaviour
 
         if (visible)
         {
-            Debug.Log("Se esta escribiendo el gost");
             revealed = false;
             label.text = "?";
             label.color = Color.black;
@@ -77,4 +110,21 @@ public class NoteStar : MonoBehaviour
         }
     }
 
+    public void EnterHitZone()
+    {
+        IsPending = true;
+        SetActive();
+    }
+
+    public void ExitHitZone()
+    {
+        IsPending = false;
+        SetInactive();
+    }
+
+    public void Consume()
+    {
+        IsPending = false;
+        Destroy(gameObject);
+    }
 }

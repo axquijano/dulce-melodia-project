@@ -1,11 +1,8 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class HitZoneDetector : MonoBehaviour
 {
     public RectTransform hitZoneRect;
-
-    private List<StarNoteUI> activeNotes = new();
 
     void Update()
     {
@@ -14,29 +11,33 @@ public class HitZoneDetector : MonoBehaviour
 
     void UpdateNotes()
     {
-        StarNoteUI[] notes = FindObjectsOfType<StarNoteUI>();
+        NoteStar[] notes = FindObjectsOfType<NoteStar>();
 
         foreach (var note in notes)
         {
-            bool inside = IsInsideHitZone(note.Rect);
+            bool inside = IsInsideHitZone(note.GetComponent<RectTransform>());
 
-            note.SetActive(inside);
+            if (inside && !note.IsPending)
+                note.EnterHitZone();
+            else if (!inside && note.IsPending)
+                note.ExitHitZone();
         }
     }
+
 
     bool IsInsideHitZone(RectTransform noteRect)
     {
         Vector3[] hitCorners = new Vector3[4];
-        Vector3[] noteCorners = new Vector3[4];
-
         hitZoneRect.GetWorldCorners(hitCorners);
-        noteRect.GetWorldCorners(noteCorners);
 
         float hitTop = hitCorners[1].y;
         float hitBottom = hitCorners[0].y;
 
-        float noteY = noteCorners[0].y;
+        // se valida que el centro de la nota esté dentro del rango vertical del hit zone
+        Vector3 noteCenter = noteRect.TransformPoint(noteRect.rect.center);
+        float noteCenterY = noteCenter.y;
 
-        return noteY <= hitTop && noteY >= hitBottom;
+        return noteCenterY <= hitTop && noteCenterY >= hitBottom;
     }
+
 }

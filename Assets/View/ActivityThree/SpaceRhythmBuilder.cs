@@ -17,7 +17,7 @@ public class SpaceRhythmBuilder : MonoBehaviour
 
     [Header("Spacing")]
     public float pixelsPerSecond = 200f;
-    public float startOffset = 800f; // qué tan arriba inicia la canción
+    public float startOffset = 800f;
 
     void Start()
     {
@@ -34,10 +34,10 @@ public class SpaceRhythmBuilder : MonoBehaviour
 
     void BuildRow(TimedNote[] notes)
     {
-        foreach (var note in notes)
+        foreach (var timedNote in notes)
         {
-            RectTransform lane = GetLane(note.note.noteName);
-            CreateNote(note, lane);
+            RectTransform lane = GetLane(timedNote.note.noteName);
+            CreateNote(timedNote, lane);
         }
     }
 
@@ -46,12 +46,13 @@ public class SpaceRhythmBuilder : MonoBehaviour
         GameObject obj = Instantiate(starNotePrefab, lane);
         RectTransform rect = obj.GetComponent<RectTransform>();
 
-        // ⬆️ lo primero empieza más arriba
+        // ⬆️ Las primeras notas quedan más arriba
         float y = startOffset + (timedNote.time * pixelsPerSecond);
         rect.anchoredPosition = new Vector2(0, y);
 
-        StarNoteUI ui = obj.GetComponent<StarNoteUI>();
-        ui.noteData = timedNote.note;
+        // ⭐ Inicializamos NoteStar
+        NoteStar noteStar = obj.GetComponent<NoteStar>();
+        noteStar.Setup(timedNote.note, false);
     }
 
     RectTransform GetLane(string noteName)
@@ -65,7 +66,7 @@ public class SpaceRhythmBuilder : MonoBehaviour
             "G" => laneG,
             "A" => laneA,
             "B" => laneB,
-            _ => laneC
+            _   => laneC
         };
     }
 }
