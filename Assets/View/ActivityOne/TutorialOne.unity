@@ -260,7 +260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &180842715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1173,7 +1173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &613943553
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1407,7 +1407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &637177253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1857,7 +1857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1303110020
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3083,12 +3083,14 @@ MonoBehaviour:
     - {fileID: 637177252}
     - {fileID: 1857372260}
     voiceDuration: 2.9
-  - message: "Ayudalo, antes de que se le acabe la energ\xEDa"
+  - message: "Ay\xFAdalo, antes de que se le acabe la energ\xEDa"
     arrowToShow:
     - {fileID: 1303110019}
     voiceDuration: 3
   tutorialText: {fileID: 1345025505}
   extraDelay: 1.5
+  avatarDatabase: {fileID: 11400000, guid: e3318608ef415ae4187ca6092be19753, type: 2}
+  avatarImage: {fileID: 1993375722}
 --- !u!224 &1668689120 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1110224090561156796, guid: 3c6d6e75ce578cc4ebb336face5594b0, type: 3}
@@ -3186,7 +3188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1857372261
 RectTransform:
   m_ObjectHideFlags: 0

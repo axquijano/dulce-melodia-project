@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
@@ -32,16 +33,55 @@ public class TutorialManager : MonoBehaviour
     private bool forcedMistakeDone = false;
     private string forcedWrongNote = "D";
 
+    [Header("Avatar")]
+    public StudentAvatarDatabase avatarDatabase;
+    public Image avatarImage; // UI Image del muñeco
+
+    private StudentAvatarData currentAvatar;
+    private string childName;
+
+
     #region UNITY
 
     void Start()
     {
+        // Perfil actual
+        var profile = ProfilesManager.Instance.currentProfile;
+        childName = profile.childName;
+
+        // Obtener avatar del niño
+        currentAvatar = avatarDatabase.GetById(profile.avatarId);
+
+        // Mostrar avatar base
+        if (currentAvatar != null && avatarImage != null)
+            avatarImage.sprite = currentAvatar.avatarSprite;
+
         InitializeBubbles();
         FeedbackManager.Instance.SetMaxMistakes(sequence.allowedMistakes);
         DisableAllKeys();
         HighlightCurrentBubble();
+        StartCoroutine(IntroGreeting());
+    }
+
+    IEnumerator IntroGreeting()
+    {
+        // Mostrar texto de saludo
+        tutorialText.text = $"Hola {childName}, me alegra verte. Vamos a aprender música juntos ";
+
+        // Avatar feliz
+        if (currentAvatar != null && avatarImage != null)
+            avatarImage.sprite = currentAvatar.happySprite;
+        TTSManager.Instance.Speak(
+            $"Hola {childName}, me alegra verte. Vamos a aprender música juntos"
+        );
+        yield return new WaitForSeconds(3.5f);
+        tutorialText.text = "";
+
+        //Comenzar con el tutorial
         ShowStep();
     }
+
+
 
     #endregion
 
@@ -101,6 +141,7 @@ public class TutorialManager : MonoBehaviour
     void HideTutorialUI()
     {
         tutorialText.text = "";
+        avatarImage.gameObject.SetActive(false);
 
         foreach (var step in steps)
             if (step.arrowToShow != null)
@@ -162,7 +203,7 @@ public class TutorialManager : MonoBehaviour
 
         if (currentIndex >= sequence.notes.Length- 1)
         {
-            FinishTutorial();
+            StartCoroutine(TutorialEnding());
             return;
         }
 
@@ -177,7 +218,7 @@ public class TutorialManager : MonoBehaviour
             ActivateOnly(forcedWrongNote);
 
             TTSManager.Instance.Speak(
-                "¿Y si tocamos otra nota que pasa?"
+                "¿Qué pasará si tocamos otra nota?"
             );
         }
         else
@@ -191,7 +232,7 @@ public class TutorialManager : MonoBehaviour
        
         FeedbackManager.Instance.RegisterMistake();
         
-        TTSManager.Instance.Speak("Se bajo la energia");
+        TTSManager.Instance.Speak("Ups… René perdió un poquito de energía. ¡Intenta de nuevo!");
 
         DisableAllKeys();
         ActivateCorrectKey();
@@ -274,5 +315,34 @@ public class TutorialManager : MonoBehaviour
             GameFlowManager.Instance.selectedActivity.gameplaySceneName
         );
     }
+
+    IEnumerator TutorialEnding()
+    {
+        tutorialGameplayActive = false;
+
+        // Desactivar teclas
+        DisableAllKeys();
+
+        // Mostrar avatar celebrando
+        if (currentAvatar != null && avatarImage != null)
+        {
+            avatarImage.gameObject.SetActive(true);
+            avatarImage.sprite = currentAvatar.celebrationSprite;
+        }
+
+        // Texto de cierre
+        tutorialText.text = $"¡Muy bien {childName}! Ayudaste a René a llegar a su comida";
+
+        // Voz
+        TTSManager.Instance.Speak(
+            $"¡Muy bien {childName}! Ayudaste a René a llegar a su comida"
+        );
+
+        // Pequeña pausa para asimilar el logro
+        yield return new WaitForSeconds(3.5f);
+
+        FinishTutorial();
+    }
+
 
 }
