@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f722ca01a3c3ca4ab099ec3e7b4678d, type: 3}
+  m_Name: medalStar
+  m_EditorClassIdentifier: 
+  activityKey: Estrellas
+  medal_1_3: {fileID: -5143654407678017186, guid: 1f04d29e8e7d56f42be3705356b03271, type: 3}
+  medal_2_3: {fileID: 286679465228771130, guid: 1f04d29e8e7d56f42be3705356b03271, type: 3}
+  medal_3_3: {fileID: -6582507514449226045, guid: 1f04d29e8e7d56f42be3705356b03271, type: 3}

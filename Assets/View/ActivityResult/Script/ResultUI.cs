@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ResultUI : MonoBehaviour
@@ -17,6 +18,19 @@ public class ResultUI : MonoBehaviour
     public TMP_Text timeTextLose;
     public TMP_Text mistakesTextLose;
 
+    [Header("Avatar Feedback")]
+    public Image avatarImage;
+
+    [Header("Avatar Data")]
+    public StudentAvatarDatabase avatarDatabase;
+
+    [Header("Medal")]
+    public Image medalImage;
+    public ActivityMedalDatabase medalDatabase;
+
+    private StudentAvatarData currentAvatar;
+    private string childName;
+
     void Start()
     {
         var connector = ActivityConnector.Instance;
@@ -25,6 +39,11 @@ public class ResultUI : MonoBehaviour
             Debug.LogError("ActivityConnector no existe.");
             return;
         }
+
+        // Perfil actual
+        var profile = ProfilesManager.Instance.currentProfile;
+        childName = profile.childName;
+        currentAvatar = avatarDatabase.GetById(profile.avatarId);
 
         bool won = connector.LevelWon;
 
@@ -40,14 +59,86 @@ public class ResultUI : MonoBehaviour
             hitsTextWin.text = hits.ToString();
             mistakesTextWin.text = mistakes.ToString();
             timeTextWin.text = FormatTime(time);
+
+            avatarImage.sprite = currentAvatar.celebrationSprite;
+
+            string text = $"¡Excelente {childName}! Lo hiciste muy bien 🎉";
+            TTSManager.Instance.Speak(text);
         }
         else
         {
             hitsTextLose.text = hits.ToString();
             mistakesTextLose.text = mistakes.ToString();
             timeTextLose.text = FormatTime(time);
+
+            avatarImage.sprite = currentAvatar.sadSprite;
+
+            string text = $"{childName}, lo intentaste. ¡Vamos a seguir practicando!";
+            TTSManager.Instance.Speak(text);
+        }
+
+        // 🏅 Mostrar medalla según progreso de la actividad
+        ShowActivityMedal();
+    }
+
+    // --------------------------------------------------
+    // MEDAL LOGIC
+    // --------------------------------------------------
+
+    void ShowActivityMedal()
+    {
+        int activityIndex = PlayerPrefs.GetInt("CurrentActivity");
+        var activity = ProfilesManager.Instance.currentProfile.activities[activityIndex];
+
+        // Obtener medalla correspondiente a la actividad
+        var medalData = medalDatabase.GetByActivityKey(activity.key);
+
+        if (medalData == null)
+        {
+            Debug.LogWarning("No se encontró medalla para la actividad: " + activity.key);
+            medalImage.gameObject.SetActive(false);
+            return;
+        }
+
+        int completedLevels = GetCompletedLevelsInActivity(activity);
+
+        if (completedLevels == 0)
+        {
+            medalImage.gameObject.SetActive(false);
+        }
+        else if (completedLevels == 1)
+        {
+            medalImage.sprite = medalData.medal_1_3;
+            medalImage.gameObject.SetActive(true);
+        }
+        else if (completedLevels == 2)
+        {
+            medalImage.sprite = medalData.medal_2_3;
+            medalImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            medalImage.sprite = medalData.medal_3_3;
+            medalImage.gameObject.SetActive(true);
         }
     }
+
+    int GetCompletedLevelsInActivity(ActivityEntry activity)
+    {
+        int completed = 0;
+
+        foreach (var level in activity.value.levels)
+        {
+            if (level.CompletedAtLeastOnce())
+                completed++;
+        }
+
+        return completed;
+    }
+
+    // --------------------------------------------------
+    // UTILS
+    // --------------------------------------------------
 
     string FormatTime(float t)
     {
