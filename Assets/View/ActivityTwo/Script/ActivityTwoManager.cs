@@ -18,7 +18,6 @@ public class ActivityTwoManager : MonoBehaviour
     void Start()
     {
         ActivityConnector.Instance.StartLevel();
-
         LoadLevelSettings();
         LinkPianoKeys();
     }
@@ -29,7 +28,6 @@ public class ActivityTwoManager : MonoBehaviour
         int levelIndex = GameFlowManager.Instance.selectedLevel;
 
         settings = activity.levelSettings[levelIndex];
-
         FeedbackManager.Instance.SetMaxMistakes(settings.allowedMistakes);
     }
 
@@ -50,7 +48,9 @@ public class ActivityTwoManager : MonoBehaviour
         }
     }
 
+    // -------------------------
     // SPAWN
+    // -------------------------
     void SpawnBalloon()
     {
         var balloon = spawner.SpawnBalloon();
@@ -74,33 +74,34 @@ public class ActivityTwoManager : MonoBehaviour
         activeBalloons.Add(balloon);
     }
 
+    // -------------------------
     // INPUT
+    // -------------------------
     void OnKeyPressed(NoteData pressedNote)
     {
         var balloon = activeBalloons.Find(b => b != null && b.noteData == pressedNote);
 
         if (balloon != null)
-        {
             RegisterHit(balloon);
-        }
         else
-        {
             RegisterMistake();
-        }
     }
 
+    // -------------------------
     // HIT / MISS
+    // -------------------------
     void RegisterHit(BalloonControllerUI balloon)
     {
         ActivityConnector.Instance.RegisterHit();
         FeedbackManager.Instance.RegisterHit();
 
-        RemoveBalloon(balloon);
+        activeBalloons.Remove(balloon);
+
+        // 🎉 feedback visual antes de destruir
+        balloon.PlayHitFeedbackAndPop();
 
         if (ActivityConnector.Instance.Hits >= settings.balloonsToWin)
-        {
             ActivityConnector.Instance.OnWin();
-        }
     }
 
     public void RegisterBalloonMiss(BalloonControllerUI balloon)
@@ -108,7 +109,8 @@ public class ActivityTwoManager : MonoBehaviour
         if (balloon == null) return;
 
         RegisterMistake();
-        RemoveBalloon(balloon);
+        activeBalloons.Remove(balloon);
+        Destroy(balloon.gameObject);
     }
 
     void RegisterMistake()
@@ -116,23 +118,7 @@ public class ActivityTwoManager : MonoBehaviour
         ActivityConnector.Instance.RegisterMistake();
         FeedbackManager.Instance.RegisterMistake();
 
-        CheckLoseCondition();
-    }
-
-    void CheckLoseCondition()
-    {
         if (ActivityConnector.Instance.Mistakes >= settings.allowedMistakes)
-        {
             ActivityConnector.Instance.OnLose();
-        }
-    }
-    
-    // CLEANUP
-    void RemoveBalloon(BalloonControllerUI balloon)
-    {
-        if (balloon == null) return;
-
-        activeBalloons.Remove(balloon);
-        balloon.Pop();
     }
 }

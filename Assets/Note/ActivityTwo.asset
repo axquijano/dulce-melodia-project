@@ -18,7 +18,7 @@ MonoBehaviour:
   pressedIcon: {fileID: -2689385719673929582, guid: ff9962d73c868414f89be3be9ddd3aad, type: 3}
   unlockedIcon: {fileID: -6253977925051982790, guid: 4769044286513d3428ebca31bdc179c7, type: 3}
   gameplaySceneName: ActivityTwo
-  tutorialSceneName: ActivityTwo
+  tutorialSceneName: 
   levels:
   - {fileID: 0}
   - {fileID: 0}
@@ -27,3 +27,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: df34b0f2eb9cb44419a762ca12fa3120, type: 2}
   - {fileID: 11400000, guid: fc9621efdb78940468a88b6b9dc39757, type: 2}
   - {fileID: 11400000, guid: 6cad75a76ac60eb47b8e340ed6670296, type: 2}
+  thirdLevelSceneName: 

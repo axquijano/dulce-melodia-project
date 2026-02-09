@@ -80,7 +80,7 @@ public class TutorialManager : MonoBehaviour
         TTSManager.Instance.Speak(
             $"Hola {childName}, me alegra verte. Vamos a aprender música juntos"
         );
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3.9f);
         tutorialText.text = "";
 
         //Comenzar con el tutorial
@@ -318,7 +318,7 @@ public class TutorialManager : MonoBehaviour
         ProfilesManager.Instance.SaveProfiles();
 
         SceneLoader.Instance.LoadScene(
-            GameFlowManager.Instance.selectedActivity.gameplaySceneName
+            "ActivityOne"
         );
     }
 

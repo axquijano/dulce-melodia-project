@@ -29,7 +29,7 @@ public class GameFlowManager : MonoBehaviour
             ProfilesManager.Instance.currentProfile.activities[activityIndex];
 
         // Tutorial
-        if (!activity.value.tutorialSeen)
+        if (!activity.value.tutorialSeen && !string.IsNullOrEmpty(selectedActivity.tutorialSceneName))
         {
             PlayerPrefs.SetInt("CurrentLevel", 0);
             PlayerPrefs.Save();
