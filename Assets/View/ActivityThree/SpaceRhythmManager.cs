@@ -54,7 +54,7 @@ public class SpaceRhythmManager : MonoBehaviour
 
     NoteStar GetPendingNote()
     {
-        foreach (var note in FindObjectsOfType<NoteStar>())
+        foreach (var note in FindObjectsByType<NoteStar>(FindObjectsSortMode.None))
         {
             if (note.IsPending)
                 return note;

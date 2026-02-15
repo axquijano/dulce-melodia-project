@@ -16,8 +16,6 @@ public class PianoKey : MonoBehaviour
     public Button keyButton;
     public Image guideCircle;
 
-    private bool pressedThisFrame = false;
-
     private Coroutine blinkRoutine;
 
     private Sprite idleSprite;

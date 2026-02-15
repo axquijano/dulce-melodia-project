@@ -15,6 +15,6 @@ MonoBehaviour:
   avatarName: Rosada
   avatarSprite: {fileID: -3735563333622970419, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
   happySprite: {fileID: -3735563333622970419, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
-  sadSprite: {fileID: 0}
-  celebrationSprite: {fileID: 0}
+  sadSprite: {fileID: -3735563333622970419, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
+  celebrationSprite: {fileID: -3735563333622970419, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
   mainColor: {r: 0, g: 0, b: 0, a: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarName: Azul
   avatarSprite: {fileID: -7233443667717978462, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
-  happySprite: {fileID: -7233443667717978462, guid: bc60047c0b431ba4c930b3fb134625a1, type: 3}
-  sadSprite: {fileID: 0}
-  celebrationSprite: {fileID: 0}
+  happySprite: {fileID: 8985398236805973342, guid: 97980e06c31509848a0d5a8727e700e4, type: 3}
+  sadSprite: {fileID: -1194476906680850194, guid: 97980e06c31509848a0d5a8727e700e4, type: 3}
+  celebrationSprite: {fileID: 7121607092975799675, guid: 97980e06c31509848a0d5a8727e700e4, type: 3}
   mainColor: {r: 0, g: 0, b: 0, a: 0}

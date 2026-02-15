@@ -11,7 +11,7 @@ public class HitZoneDetector : MonoBehaviour
 
     void UpdateNotes()
     {
-        NoteStar[] notes = FindObjectsOfType<NoteStar>();
+        NoteStar[] notes = FindObjectsByType<NoteStar>(FindObjectsSortMode.None);
 
         foreach (var note in notes)
         {

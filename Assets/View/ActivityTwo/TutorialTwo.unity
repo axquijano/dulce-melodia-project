@@ -306,6 +306,7 @@ RectTransform:
   - {fileID: 1656379063}
   - {fileID: 1175287793}
   - {fileID: 2125050648}
+  - {fileID: 331588574}
   - {fileID: 613896941}
   m_Father: {fileID: 547588966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -351,6 +352,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292679737}
+  m_CullTransparentMesh: 1
+--- !u!1 &331588573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 331588574}
+  - component: {fileID: 331588576}
+  - component: {fileID: 331588575}
+  m_Layer: 5
+  m_Name: Arrow_energy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &331588574
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331588573}
+  m_LocalRotation: {x: 0, y: 0, z: -0.17364825, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.027511, y: 1.027511, z: 1.027511}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 292679738}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -760, y: 301}
+  m_SizeDelta: {x: 163, y: 131}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &331588575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331588573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 8180256446945823853, guid: 40e8a492bb335974db48f972bdcd1eaf, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &331588576
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331588573}
   m_CullTransparentMesh: 1
 --- !u!1 &386546426
 GameObject:
@@ -1022,7 +1098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &613896941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1039,7 +1115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -206.513}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -513.7515, y: 2.0549927}
+  m_AnchoredPosition: {x: 163, y: -14}
   m_SizeDelta: {x: 163, y: 131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &613896942
@@ -1810,33 +1886,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steps:
-  - message: Este es un globo
+  - message: Este es un globo musical
     arrowToShow:
     - {fileID: 1254488408}
     voiceDuration: 0.4
     waitForAction: 0
-  - message: El globo tiene un color y una letra
+  - message: "El color y la letra del globo nos dice qu\xE9 nota es\r\n"
     arrowToShow:
     - {fileID: 1254488408}
-    voiceDuration: 0.5
+    voiceDuration: 0.9
     waitForAction: 0
-  - message: Busca el mismo color o la misma letra en el piano
+  - message: 'Toca la tecla que tenga el mismo color y la misma letra
+
+'
     arrowToShow:
-    - {fileID: 1254488408}
     - {fileID: 613896940}
-    voiceDuration: 1
-    waitForAction: 0
-  - message: Toca la tecla correcta para explotar el globo
-    arrowToShow:
     - {fileID: 1254488408}
-    - {fileID: 613896940}
-    voiceDuration: 1.2
+    voiceDuration: 0.6
     waitForAction: 1
-  - message: "\xA1Muy bien! As\xED explotas los globos"
-    arrowToShow: []
-    voiceDuration: 0.5
-    waitForAction: 0
   tutorialText: {fileID: 1794603171}
+  extraDelay: 1.5
   avatarDatabase: {fileID: 11400000, guid: e3318608ef415ae4187ca6092be19753, type: 2}
   avatarImage: {fileID: 146509293}
   demoBalloon: {fileID: 9155742670173568649}
@@ -1848,6 +1917,7 @@ MonoBehaviour:
   - {fileID: 1175287796}
   - {fileID: 1175287795}
   - {fileID: 1175287794}
+  energyArrow: {fileID: 331588573}
 --- !u!1001 &1656379062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3140,7 +3210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.9778, y: -12.7349}
+  m_AnchoredPosition: {x: -345, y: 7}
   m_SizeDelta: {x: 186.3674, y: 278.3326}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9155742670173568649
@@ -3155,10 +3225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2c354c13dd58141a052584ba6b8b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteData: {fileID: 0}
+  expectedNote: {fileID: 11400000, guid: 43ddd9be4688c2c4c9b786d7bcb261cf, type: 2}
   balloonImage: {fileID: 797211157203486304}
   letter: {fileID: 3004762940886027358}
-  feedback: {fileID: 0}
+  visualFeedback: {fileID: 750372450619728568}
+  tutorialSpeed: 120
+  parentPanel: {fileID: 2103082157}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

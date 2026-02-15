@@ -80,7 +80,7 @@ public class TutorialManager : MonoBehaviour
         TTSManager.Instance.Speak(
             $"Hola {childName}, me alegra verte. Vamos a aprender música juntos"
         );
-        yield return new WaitForSeconds(3.9f);
+        yield return new WaitForSeconds(5f);
         tutorialText.text = "";
 
         //Comenzar con el tutorial
@@ -219,18 +219,24 @@ public class TutorialManager : MonoBehaviour
         // 🔴 ERROR FORZADO EN LA TERCERA HOJA
         if (currentIndex == 2 && !forcedMistakeDone)
         {
-            Debug.Log("currentIndex == 2 && !forcedMistakeDone "+ currentIndex + " "+forcedMistakeDone );
             forcedMistakeDone = true;
-            ActivateOnly(forcedWrongNote);
-
-            TTSManager.Instance.Speak(
-                "¿Qué pasará si tocamos otra nota?"
-            );
+            StartCoroutine(ForcedMistakeSequence());
         }
         else
         {
             ActivateCorrectKey();
         }
+    }
+
+    IEnumerator ForcedMistakeSequence()
+    {
+        TTSManager.Instance.Speak($"Muy bien {childName}");
+        yield return new WaitForSeconds(2.5f);
+
+        TTSManager.Instance.Speak("¿Qué pasará si tocamos otra nota?");
+        yield return new WaitForSeconds(2f);
+
+        ActivateOnly(forcedWrongNote);
     }
 
     void HandleMistake()
