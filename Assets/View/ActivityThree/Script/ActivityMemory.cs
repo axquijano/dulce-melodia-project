@@ -66,7 +66,7 @@ public class ActivityMemory : MonoBehaviour
     void SetupAvatar()
     {
         var profile = ProfilesManager.Instance.currentProfile;
-        childName = profile.childName;
+        childName = ProfilesManager.Instance.GetCurrentProfileName();
 
         currentAvatar = avatarDatabase.GetById(profile.avatarId);
 

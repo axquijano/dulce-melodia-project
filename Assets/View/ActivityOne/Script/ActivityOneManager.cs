@@ -40,7 +40,7 @@ public class ActivityOneManager : MonoBehaviour
     void Start()
     {
         ActivityConnector.Instance.StartLevel();
-        childName = ProfilesManager.Instance.currentProfile.childName;
+        childName = ProfilesManager.Instance.GetCurrentProfileName();
         currentAvatar = avatarDatabase.GetById(ProfilesManager.Instance.currentProfile.avatarId);
         avatarImage.gameObject.SetActive(false);
         mistakeText.gameObject.SetActive(false);

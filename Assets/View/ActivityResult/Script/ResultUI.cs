@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class ResultUI : MonoBehaviour
 {
@@ -28,11 +29,31 @@ public class ResultUI : MonoBehaviour
     public Image medalImage;
     public ActivityMedalDatabase medalDatabase;
 
+    [Header("Continue Button")]
+    public Button continueButton;
+    private CanvasGroup buttonCanvasGroup;
+
+    [Header("Voice Timing")]
+    public float voiceDuration = 4f;
+
+    [Header("Blink Settings")]
+    public float blinkDuration = 3f;
+    public float blinkSpeed = 0.5f;
+
     private StudentAvatarData currentAvatar;
     private string childName;
 
     void Start()
     {
+        buttonCanvasGroup = continueButton.GetComponent<CanvasGroup>();
+
+        if (buttonCanvasGroup == null)
+            buttonCanvasGroup = continueButton.gameObject.AddComponent<CanvasGroup>();
+
+        // 🔒 Desactivar botón pero mantener visible
+        continueButton.interactable = false;
+        buttonCanvasGroup.alpha = 0.6f;
+
         var connector = ActivityConnector.Instance;
         if (connector == null)
         {
@@ -40,9 +61,8 @@ public class ResultUI : MonoBehaviour
             return;
         }
 
-        // Perfil actual
         var profile = ProfilesManager.Instance.currentProfile;
-        childName = profile.childName;
+        childName = ProfilesManager.Instance.GetCurrentProfileName();
         currentAvatar = avatarDatabase.GetById(profile.avatarId);
 
         bool won = connector.LevelWon;
@@ -50,10 +70,11 @@ public class ResultUI : MonoBehaviour
         winPanel.SetActive(won);
         losePanel.SetActive(!won);
 
-        // 🔥 AHORA TODO SALE DEL FEEDBACK MANAGER
         int hits = FeedbackManager.Instance.GetHits();
         int mistakes = FeedbackManager.Instance.GetMistakes();
         float time = FeedbackManager.Instance.GetTime();
+
+        string text;
 
         if (won)
         {
@@ -63,8 +84,7 @@ public class ResultUI : MonoBehaviour
 
             avatarImage.sprite = currentAvatar.celebrationSprite;
 
-            string text = $"¡Excelente {childName}! Lo hiciste muy bien. ¡Vamos por el siguiente nivel!";
-            TTSManager.Instance.Speak(text);
+            text = $"¡Excelente {childName}! Lo hiciste muy bien. ¡Vamos por el siguiente nivel!";
         }
         else
         {
@@ -74,16 +94,46 @@ public class ResultUI : MonoBehaviour
 
             avatarImage.sprite = currentAvatar.sadSprite;
 
-            string text = $"{childName}, lo intentaste. ¡Vamos a seguir practicando!";
-            TTSManager.Instance.Speak(text);
+            text = $"{childName}, lo intentaste. ¡Vamos a seguir practicando!";
         }
 
         ShowActivityMedal();
+
+        StartCoroutine(PlayVoiceAndEnableButton(text));
     }
 
-    // --------------------------------------------------
-    // MEDAL LOGIC
-    // --------------------------------------------------
+    IEnumerator PlayVoiceAndEnableButton(string text)
+    {
+        TTSManager.Instance.Speak(text);
+
+        // Esperar tiempo fijo
+        yield return new WaitForSeconds(voiceDuration);
+
+        // Activar botón
+        continueButton.interactable = true;
+
+        // Parpadeo suave (sin desaparecer)
+        yield return StartCoroutine(BlinkButton());
+    }
+
+    IEnumerator BlinkButton()
+    {
+        float timer = 0f;
+
+        while (timer < blinkDuration)
+        {
+            buttonCanvasGroup.alpha = 1f;
+            yield return new WaitForSeconds(blinkSpeed);
+
+            buttonCanvasGroup.alpha = 0.5f;
+            yield return new WaitForSeconds(blinkSpeed);
+
+            timer += blinkSpeed * 2f;
+        }
+
+        // Dejar completamente visible al final
+        buttonCanvasGroup.alpha = 1f;
+    }
 
     void ShowActivityMedal()
     {
@@ -133,10 +183,6 @@ public class ResultUI : MonoBehaviour
 
         return completed;
     }
-
-    // --------------------------------------------------
-    // UTILS
-    // --------------------------------------------------
 
     string FormatTime(float t)
     {

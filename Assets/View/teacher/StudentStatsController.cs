@@ -18,6 +18,8 @@ public class StudentStatsController : MonoBehaviour
     [Header("Scroll")]
     public ScrollRect detailScroll;
 
+
+    private string childName;
     void Start()
     {
         LoadStats();
@@ -27,7 +29,8 @@ public class StudentStatsController : MonoBehaviour
     void LoadStats()
     {
         var profile = ProfilesManager.Instance.currentProfile;
-        studentName.text = profile.childName;
+        childName = ProfilesManager.Instance.GetCurrentProfileName();
+        studentName.text = childName;
 
         bool enCursoAsignado = false;
 
@@ -80,6 +83,18 @@ public class StudentStatsController : MonoBehaviour
 
     public void Back()
     {
+        SceneLoader.Instance.LoadScene("StudentListScene");
+    }
+
+    public void Delete()
+    {
+         ProfilesManager.Instance.ResetProfile(childName);
+         SceneLoader.Instance.LoadScene("StudentListScene");
+    }
+
+    public void Clear()
+    {
+        ProfilesManager.Instance.ResetProgress(childName);
         SceneLoader.Instance.LoadScene("StudentListScene");
     }
 }

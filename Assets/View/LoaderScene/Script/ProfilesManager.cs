@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+
+
 public class ProfilesManager : MonoBehaviour
 {
     public static ProfilesManager Instance;
@@ -11,6 +13,9 @@ public class ProfilesManager : MonoBehaviour
 
     private string filePath;
     private ProfilesDatabase wrapper = new ProfilesDatabase();
+    public StudentAvatarDatabase avatarDatabase;
+    private const string GUEST_NAME = "Invitado";
+    private const string GUEST_AVATAR_ID = "verde";
 
     void Awake()
     {
@@ -32,22 +37,26 @@ public class ProfilesManager : MonoBehaviour
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-             // Si está vacío o inválido → crear uno nuevo
+
             if (string.IsNullOrEmpty(json))
             {
-                Debug.LogWarning("ProfilesManager: JSON vacío. Creando nuevo archivo.");
                 wrapper = new ProfilesDatabase();
-                wrapper.profiles = new List<ChildProfile>();
-                SaveProfiles();
-                return;
             }
-            wrapper = JsonUtility.FromJson<ProfilesDatabase>(json);
+            else
+            {
+                wrapper = JsonUtility.FromJson<ProfilesDatabase>(json);
+            }
         }
         else
         {
             wrapper = new ProfilesDatabase();
-            SaveProfiles();
         }
+
+        if (wrapper.profiles == null)
+            wrapper.profiles = new List<ChildProfile>();
+
+        EnsureGuestExists();
+        SaveProfiles();
     }
 
     public void SaveProfiles()
@@ -154,7 +163,9 @@ public class ProfilesManager : MonoBehaviour
         // 2. Limpiar wrapper en memoria
         wrapper = new ProfilesDatabase();
         wrapper.profiles = new List<ChildProfile>();
-        currentProfile = null;
+
+        wrapper.profiles.Add(CreateGuestProfile());
+
 
         // 3. Limpiar PlayerPrefs
         PlayerPrefs.DeleteAll();
@@ -166,5 +177,85 @@ public class ProfilesManager : MonoBehaviour
         Debug.Log("Datos reiniciados completamente");
     }
 
+    public bool IsCurrentProfileGuest()
+    {
+        return currentProfile != null && currentProfile.childName == "Invitado";
+    }
+
+    private ChildProfile CreateGuestProfile()
+    {
+        ChildProfile guest = new ChildProfile(GUEST_NAME, GUEST_AVATAR_ID);
+
+        for (int i = 0; i < db.activities.Count; i++)
+        {
+            ActivityDefinition def = db.activities[i];
+
+            ActivityEntry entry = new ActivityEntry
+            {
+                key = def.activityName,
+                unlocked = true, // 🔥 TODAS desbloqueadas
+                value = new ActivityData
+                {
+                    tutorialSeen = true, // opcional
+                    levels = new List<LevelData>()
+                }
+            };
+
+            for (int l = 0; l < def.levels.Count; l++)
+            {
+                LevelData level = new LevelData();
+                entry.value.levels.Add(level);
+            }
+
+            guest.activities.Add(entry);
+        }
+
+        return guest;
+    }
+
+    private void EnsureGuestExists()
+    {
+        var guest = wrapper.profiles.Find(p => p.childName == GUEST_NAME);
+
+        if (guest == null)
+        {
+            Debug.Log("Creando perfil Invitado...");
+            wrapper.profiles.Add(CreateGuestProfile());
+        }
+    }
+
+    public void ResetProfile(string name)
+    {
+        if (name == GUEST_NAME)
+            return; // 🔥 Nunca borrar invitado
+
+        var profile = wrapper.profiles.Find(p => p.childName == name);
+
+        if (profile != null)
+        {
+            wrapper.profiles.Remove(profile);
+            SaveProfiles();
+            Debug.Log($"Perfil {name} eliminado");
+        }
+    }
+
+    public void ResetProgress(string name)
+    {
+        var profile = wrapper.profiles.Find(p => p.childName == name);
+
+        if (profile == null || name == GUEST_NAME)
+            return;
+
+        wrapper.profiles.Remove(profile);
+        CreateProfile(name, avatarDatabase.GetById(profile.avatarId));
+        SaveProfiles();
+    }
+
+    public string GetCurrentProfileName()
+    {
+        return (currentProfile != null && !IsCurrentProfileGuest())
+            ? currentProfile.childName
+            : "";
+    }
 
 }

@@ -47,7 +47,7 @@ public class TutorialManager : MonoBehaviour
     {
         // Perfil actual
         var profile = ProfilesManager.Instance.currentProfile;
-        childName = profile.childName;
+        childName = ProfilesManager.Instance.GetCurrentProfileName();;
 
         // Obtener avatar del niño
         currentAvatar = avatarDatabase.GetById(profile.avatarId);

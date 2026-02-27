@@ -34,7 +34,7 @@ public class TutorialActivityTwoManager : MonoBehaviour
     void Start()
     {
         var profile = ProfilesManager.Instance.currentProfile;
-        childName = profile.childName;
+        childName = ProfilesManager.Instance.GetCurrentProfileName();
         avatar = avatarDatabase.GetById(profile.avatarId);
 
         if (avatar != null && avatarImage != null)
